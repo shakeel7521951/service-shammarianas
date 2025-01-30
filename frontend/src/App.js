@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 // import Home from './pages/Landing';
 import BlogClassic from './pages/blog-classic';
 import BlogDetails from './pages/blog-details';
@@ -23,6 +23,7 @@ import Stock from './pages/Stock.js';
 import PortfolioCreativeCarousel from './pages/portfolio-creative-carousel.js';
 // import PortfolioGallery from './pages/portfolio-gallery.js';
 import PortfolioGrid from './pages/portfolio-grid.js';
+import Footer from './components/common/Footer.jsx';
 // import PortfolioMasonry from './pages/portfolio-masonry.js';
 // import ProjectDetails from './pages/project-details.js';
 // import gsap from 'gsap';
@@ -31,48 +32,62 @@ import PortfolioGrid from './pages/portfolio-grid.js';
 
 // gsap.registerPlugin(ScrollTrigger);
 // gsap.config({ trialWarn: false });
-function App() {
-  return (
-    <Router>
-      <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/blog-classic" element={<BlogClassic />} />
-        <Route path="/blog-details" element={<BlogDetails />} />
-        <Route path="/blog-grid-3column" element={<BlogGrid3Columns />} />
-        <Route path="/blog-grid-sidebar" element={<BlogGridSidebar />} />
-        {/* <Route path="/home-creative-agency" element={<HomeCreativeAgency />} /> */}
-        {/* <Route path="/home-digital-agency" element={<HomeDigitalAgency />} /> */}
-        <Route path="/" element={<HomeMain />} />
-        {/* <Route path="/home-modern-studio" element={<HomeModernStudio />} /> */}
-        {/* <Route path="/home-personal" element={<HomePersonal />} /> */}
-        <Route path="/page-404" element={<Page404 />} />
-        <Route path="/page-about" element={<PageAbout />} />
-        <Route path="/page-contact" element={<PageContact />} />
-        <Route path="/page-FAQ" element={<PageFAQ />} />
-        <Route path='/stock' element={<Stock />}/>
-        <Route
-          path="/page-services-details"
-          element={<PageServicesDetails />}
-        />
-        <Route path="/page-services" element={<PageServices />} />
-        <Route path="/page-team" element={<PageTeam />} />
-        <Route path="/page-team-details" element={<PageTeamDetails />} />
-        {/* <Route path="/portfolio-creative" element={<PortfolioCreative />} /> */}
-        <Route
-          path="/portfolio-creative-carousel"
-          element={<PortfolioCreativeCarousel />}
-        />
-        {/* <Route path="/portfolio-gallery" element={<PortfolioGallery />} /> */}
-        <Route path="/portfolio" element={<PortfolioGrid />} />
-        {/* <Route path="/portfolio-masonry" element={<PortfolioMasonry />} /> */}
-        {/* <Route path="/project-details" element={<ProjectDetails />} /> */}
 
-        {/*        
-        {/*
-         */}
-      </Routes>
-    </Router>
-  );
+const MainLayout = () => {
+  return <Outlet />;
+};
+
+const AdminLayout = ()=>{
+  return( 
+    <>
+      <Outlet />
+      <Footer />
+    </>
+  )
+}
+
+const router = createBrowserRouter([
+  {
+    element: <MainLayout />,
+    children: [
+      // <Route path="/" element={<Home />} />
+      { path: "/", element: <HomeMain /> },
+      { path: "/blog-classic", element: <BlogClassic /> },
+      { path: "/blog-details", element: <BlogDetails /> },
+      { path: "/blog-grid-3column", element: <BlogGrid3Columns /> },
+      { path: "/blog-grid-sidebar", element: <BlogGridSidebar /> },
+      // { path: "/home-creative-agency", element: <HomeCreativeAgency /> },
+      // { path: "/home-digital-agency", element: <HomeDigitalAgency /> },
+      // { path: "/home-modern-studio", element: <HomeModernStudio /> },
+      // { path: "/home-personal", element: <HomePersonal /> },
+      { path: "/page-404", element: <Page404 /> },
+      { path: "/page-about", element: <PageAbout /> },
+      { path: "/page-contact", element: <PageContact /> },
+      { path: "/page-FAQ", element: <PageFAQ /> },
+      { path: "/stock", element: <Stock /> },
+      { path: "/page-services-details", element: <PageServicesDetails /> },
+      { path: "/page-services", element: <PageServices /> },
+      { path: "/page-team", element: <PageTeam /> },
+      { path: "/page-team-details", element: <PageTeamDetails /> },
+      // { path: "/portfolio-creative", element: <PortfolioCreative /> },
+      { path: "/portfolio-creative-carousel", element: <PortfolioCreativeCarousel /> },
+      // { path: "/portfolio-gallery", element: <PortfolioGallery /> },
+      { path: "/portfolio", element: <PortfolioGrid /> },
+      // { path: "/portfolio-masonry", element: <PortfolioMasonry /> },
+      // { path: "/project-details", element: <ProjectDetails /> }
+    ],
+  },
+  {
+    element: <AdminLayout />,
+    children: [
+      {}
+    ],
+  },
+]);
+
+
+function App() {
+  return <RouterProvider router={router} />;
 }
 
 export default App;

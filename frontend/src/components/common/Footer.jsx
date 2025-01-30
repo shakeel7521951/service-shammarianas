@@ -49,7 +49,7 @@ function Footer() {
                   <span className="ti-location-arrow"></span>
                 </button>
               </div>
-              {/* <ul className="rest social-icon d-flex align-items-center">
+              <ul className="rest social-icon d-flex align-items-center">
                 <li className="hover-this cursor-pointer">
                   <a href="https://www.facebook.com/shammarianas" target='_blank' className="hover-anim">
                     <i className="fab fa-facebook-f"></i>
@@ -75,24 +75,7 @@ function Footer() {
                   <i class="fab fa-pinterest"></i>
                   </Link>
                 </li>
-              </ul> */}
-               <div className="social-icon mt-50 hover-this">
-                <a href="https://www.facebook.com/shammarianas"  rel="noreferrer"  className='hover-this' target='_blank'>
-                  <i className="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://www.youtube.com/@ShamMarianasSM"  rel="noreferrer"  target='_blank'>
-                <i class="fab fa-youtube"></i>
-                </a>
-                <a href="https://www.behance.net/shammarianas"  rel="noreferrer"  target='_blank'>
-                <i class="fab fa-behance"></i>
-                </a>
-                <a href="https://www.instagram.com/sham_marianas" rel="noreferrer"  target='_blank'>
-                  <i className="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.pinterest.com/shammarianas"  rel="noreferrer"  target='_blank'>
-                <i class="fab fa-pinterest"></i>
-                </a>
-              </div>
+              </ul>
             </div>
           </div>
         </div>
