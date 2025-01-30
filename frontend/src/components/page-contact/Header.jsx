@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import loadBackgroudImages from '../../common/loadBackgroudImages';
 function Header() {
@@ -17,7 +17,7 @@ function Header() {
           <div className="col-12">
             <div className="text-center">
               <h1 className="text-u ls1 fz-80">
-                Blog <span className="fw-200"> Standard</span>
+                <span className='main-color'>Get In</span> <span className="fw-200"> Touch</span>
               </h1>
             </div>
           </div>

@@ -17,7 +17,7 @@ function Header() {
           <div className="col-12">
             <div className="text-center">
               <h1 className="text-u ls1 fz-80">
-                Portfolio
+                <span className='main-color'>STO</span>CK
               </h1>
             </div>
           </div>

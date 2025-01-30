@@ -157,7 +157,7 @@ function handleDropdownMouseLeave(event) {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <span className="rolling-text">Pages</span>
+                <span className="rolling-text">Home</span>
               </a>
               <ul className="dropdown-menu">
                 <li>
@@ -249,7 +249,7 @@ function handleDropdownMouseLeave(event) {
                <a
                 className="nav-link"
                 data-toggle="dropdown"
-                href="#"
+                href="/stock"
                 role="button"
                 aria-haspopup="true"
                 aria-expanded="false"

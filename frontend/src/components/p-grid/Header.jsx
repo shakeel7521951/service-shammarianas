@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import loadBackgroudImages from '../../common/loadBackgroudImages';
 function Header() {
@@ -8,7 +8,7 @@ function Header() {
   }, []);
   return (
     <header
-      className=" page-header bg-img section-padding valign"
+      className="page-header bg-img section-padding valign"
       data-background="/assets/imgs/background/bg4.jpg"
       data-overlay-dark="8"
     >
@@ -17,7 +17,7 @@ function Header() {
           <div className="col-12">
             <div className="text-center">
               <h1 className="text-u ls1 fz-80">
-                Our <span className="fw-200">Team</span>
+                <span className='main-color'>Port</span>folio
               </h1>
             </div>
           </div>

@@ -21,7 +21,6 @@
   outline: none;
   list-style: none;
 }
-
 body {
   color: #fff;
   background-color: #0f0f0f;
@@ -194,11 +193,11 @@ figure {
 }
 
 .main-color {
-  color: #fd5b38 !important;
+  color: #26DFD0 !important;
 }
 
 .main-colorbg {
-  background: #fd5b38 !important;
+  background: #26DFD0 !important;
 }
 
 .main-color2 {
@@ -5265,7 +5264,8 @@ footer.clean-footer.crev .circle-blur {
   top: 5px;
   bottom: 5px;
   left: 5px;
-  background: rgba(255, 255, 255, 0.1);
+  /* background: rgba(255, 255, 255, 0.1); */
+  background: #26DFD0;
   -webkit-transition: all 1.5s;
   -o-transition: all 1.5s;
   transition: all 1.5s;
@@ -6110,7 +6110,7 @@ footer.clean-footer.crev .circle-blur {
 
 .filtering span.active {
   opacity: 1;
-  color: #fd5b38;
+  color: #26DFD0;
 }
 
 .filtering span.text {

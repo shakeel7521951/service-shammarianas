@@ -1,11 +1,12 @@
 'use client';
-import React, { useEffect, useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import loadBackgroudImages from '../../common/loadBackgroudImages';
 function Header() {
   useEffect(() => {
     loadBackgroudImages();
   }, []);
+  
   return (
     <header
       className=" page-header bg-img section-padding valign"
@@ -17,7 +18,7 @@ function Header() {
           <div className="col-12">
             <div className="text-center">
               <h1 className="text-u ls1 fz-80">
-                About <span className="fw-200">Studio</span>
+                Our <span className="main-color">Team</span>
               </h1>
             </div>
           </div>

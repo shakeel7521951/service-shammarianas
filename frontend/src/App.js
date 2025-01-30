@@ -18,6 +18,7 @@ import PageServices from './pages/page-services.js';
 import PageServicesDetails from './pages/page-services-details.js';
 import PageTeam from './pages/page-team.js';
 import PageTeamDetails from './pages/page-team-details.js';
+import Stock from './pages/Stock.js';
 // import PortfolioCreative from './pages/portfolio-creative.js';
 import PortfolioCreativeCarousel from './pages/portfolio-creative-carousel.js';
 // import PortfolioGallery from './pages/portfolio-gallery.js';
@@ -48,6 +49,7 @@ function App() {
         <Route path="/page-about" element={<PageAbout />} />
         <Route path="/page-contact" element={<PageContact />} />
         <Route path="/page-FAQ" element={<PageFAQ />} />
+        <Route path='/stock' element={<Stock />}/>
         <Route
           path="/page-services-details"
           element={<PageServicesDetails />}
