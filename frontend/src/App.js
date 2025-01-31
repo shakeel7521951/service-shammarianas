@@ -38,6 +38,7 @@ import EditBlog from "./adminDashboard/pages/EditBlog.jsx";
 import AdminHome from "./adminDashboard/pages/AdminHome.jsx";
 import AddStock from "./adminDashboard/pages/AddStock.jsx";
 import EditStock from "./adminDashboard/pages/EditStock.jsx";
+import AdminStocks from "./adminDashboard/pages/AdminStocks.jsx";
 
 const MainLayout = () => {
   return <Outlet />;
@@ -109,8 +110,12 @@ const router = createBrowserRouter([
         element: <AddStock />,
       },
       {
-        path: "/admin/Edit-stock",
+        path: "/admin/edit-stock",
         element: <EditStock />,
+      },
+      {
+        path: "/admin/all-stock",
+        element: <AdminStocks />,
       },
     ],
   },
