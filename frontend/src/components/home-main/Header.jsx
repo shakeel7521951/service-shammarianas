@@ -16,13 +16,13 @@ function Header() {
         <div className="row">
           <div className="col-lg-11">
             <div className="caption">
-              <h1>Elevate Your
-              </h1>
+              <h2 style={{fontSize:"4rem"}}><span className='main-color'>Empowering</span> your
+              </h2>
               <div className="d-flex align-items-end">
                 <div>
-                  <h1 className="nowrap">
-                    <span className="main-color">Brand </span> With Us.
-                  </h1>
+                  <h2 style={{fontSize:'4rem'}} className="nowrap">
+                   brand to stand out.
+                  </h2>
                 </div>
                 <div>
                   <div className="text ml-30">
@@ -48,7 +48,7 @@ function Header() {
           </div>
           <div className="col-lg-6 d-flex justify-content-end order-md-1">
             <div className="info">
-              <h2 className="mb-10">12k +</h2>
+              <h2 className="mb-10">6k +</h2>
               <h6>
                 Projects completed <br />
                 <span className="main-color">successfully</span>

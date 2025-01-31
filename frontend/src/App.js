@@ -24,6 +24,9 @@ import PortfolioCreativeCarousel from './pages/portfolio-creative-carousel.js';
 // import PortfolioGallery from './pages/portfolio-gallery.js';
 import PortfolioGrid from './pages/portfolio-grid.js';
 import Footer from './components/common/Footer.jsx';
+import Login from './pages/register/Login.js';
+import Signup from './pages/register/Signup.js';
+import Services from './pages/Services.js';
 // import PortfolioMasonry from './pages/portfolio-masonry.js';
 // import ProjectDetails from './pages/project-details.js';
 // import gsap from 'gsap';
@@ -65,6 +68,7 @@ const router = createBrowserRouter([
       { path: "/page-contact", element: <PageContact /> },
       { path: "/page-FAQ", element: <PageFAQ /> },
       { path: "/stock", element: <Stock /> },
+      {path:'/services',element:<Services />},
       { path: "/page-services-details", element: <PageServicesDetails /> },
       { path: "/page-services", element: <PageServices /> },
       { path: "/page-team", element: <PageTeam /> },
@@ -76,6 +80,12 @@ const router = createBrowserRouter([
       // { path: "/portfolio-masonry", element: <PortfolioMasonry /> },
       // { path: "/project-details", element: <ProjectDetails /> }
     ],
+  },
+  {
+    path:"/login",element:<Login />
+  },
+  {
+    path:"/sign-up",element:<Signup />
   },
   {
     element: <AdminLayout />,

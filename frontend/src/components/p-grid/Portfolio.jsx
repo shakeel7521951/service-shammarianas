@@ -1,10 +1,11 @@
+
 'use client';
 import initIsotope from '../../common/initIsotope';
 import React, { useEffect } from 'react';
 
 function Portfolio() {
   return (
-    <section className="work-grid section-padding pb-0">
+    <section className="work-grid section-padding" style={{marginBottom:"35rem"}}>
       <div className="container">
         <div className="row mb-80">
           <div className="col-lg-4">

@@ -7,7 +7,6 @@ function Testimonials() {
   const swiperOptions = {
     modules: [Navigation],
     slidesPerView: 'auto',
-
     spaceBetween: 30,
     loop: true,
     breakpoints: {
@@ -24,12 +23,12 @@ function Testimonials() {
         slidesPerView: 'auto',
       },
     },
-
     navigation: {
       nextEl: '.testim-modern .swiper-button-next',
       prevEl: '.testim-modern .swiper-button-prev',
     },
   };
+
   return (
     <section className="testim-modern section-padding sub-bg bord-top-grd bord-bottom-grd">
       <div className="container">
@@ -55,27 +54,15 @@ function Testimonials() {
             </div>
           </div>
         </div>
-        <div
-          className="testim-swiper3 out-right"
-          data-carousel="swiper"
-          data-loop="true"
-          data-space="30"
-        >
-          <Swiper
-            {...swiperOptions}
-            id="content-carousel-container-unq-testim"
-            className="swiper-container"
-            data-swiper="container"
-          >
+        <div className="testim-swiper3 out-right" data-carousel="swiper" data-loop="true" data-space="30">
+          <Swiper {...swiperOptions} id="content-carousel-container-unq-testim" className="swiper-container" data-swiper="container">
             <SwiperSlide>
               <div className="item">
                 <div className="cont">
-                  <h6 className="sub-title mb-15">Design Quality</h6>
+                  <h6 className="sub-title mb-15">Outstanding Design</h6>
                   <div className="text">
                     <p>
-                      “ I have been hiring people in this space for a number of
-                      years and I have never seen this level of
-                      professionalism.”
+                      “ The attention to detail in design exceeded all our expectations. The team's creativity shines through in every project they deliver. ”
                     </p>
                   </div>
                 </div>
@@ -88,9 +75,7 @@ function Testimonials() {
                     </div>
                     <div className="ml-20">
                       <h6 className="fz-18">Haitham Al-Dukhin</h6>
-                      <span className="p-color opacity-8 fz-15 mt-5">
-                        Envato Customer
-                      </span>
+                      <span className="p-color opacity-8 fz-15 mt-5">Envato Customer</span>
                     </div>
                   </div>
                 </div>
@@ -99,12 +84,10 @@ function Testimonials() {
             <SwiperSlide>
               <div className="item">
                 <div className="cont">
-                  <h6 className="sub-title mb-15">Design Quality</h6>
+                  <h6 className="sub-title mb-15">Impressive User Experience</h6>
                   <div className="text">
                     <p>
-                      “ I have been hiring people in this space for a number of
-                      years and I have never seen this level of professionalism.
-                      ”
+                      “ Their designs don't just look good, they work seamlessly. A fantastic experience from start to finish. Highly recommend! ”
                     </p>
                   </div>
                 </div>
@@ -116,10 +99,8 @@ function Testimonials() {
                       </div>
                     </div>
                     <div className="ml-20">
-                      <h6 className="fz-18">Haitham Al-Dukhin</h6>
-                      <span className="p-color opacity-8 fz-15 mt-5">
-                        Envato Customer
-                      </span>
+                      <h6 className="fz-18">John Doe</h6>
+                      <span className="p-color opacity-8 fz-15 mt-5">CEO, Example Corp</span>
                     </div>
                   </div>
                 </div>
@@ -128,12 +109,10 @@ function Testimonials() {
             <SwiperSlide>
               <div className="item">
                 <div className="cont">
-                  <h6 className="sub-title mb-15">Design Quality</h6>
+                  <h6 className="sub-title mb-15">Excellent Service</h6>
                   <div className="text">
                     <p>
-                      “ I have been hiring people in this space for a number of
-                      years and I have never seen this level of professionalism.
-                      ”
+                      “ Their professionalism is unmatched. They helped us refine our brand, and the results speak for themselves. A true partner! ”
                     </p>
                   </div>
                 </div>
@@ -145,10 +124,8 @@ function Testimonials() {
                       </div>
                     </div>
                     <div className="ml-20">
-                      <h6 className="fz-18">Haitham Al-Dukhin</h6>
-                      <span className="p-color opacity-8 fz-15 mt-5">
-                        Envato Customer
-                      </span>
+                      <h6 className="fz-18">Sarah Lee</h6>
+                      <span className="p-color opacity-8 fz-15 mt-5">Marketing Director, Trendy Co.</span>
                     </div>
                   </div>
                 </div>

@@ -1,44 +1,45 @@
-'use client';
-import React from 'react';
-import data from '../../data/portfolios/works1';
-import { Navigation, Pagination } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
+"use client";
+import React from "react";
+import data from "../../data/portfolios/works1";
+import { Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 function Portfolio() {
-  const marquess = ['Our Portfolio']; // Replace with your actual array
+  const marquess = ["Our Portfolio"]; // Replace with your actual array
   const AllMarquess = Array(10).fill(marquess).flat();
   const swiperOptions = {
     modules: [Pagination, Navigation],
-    slidesPerView: 'auto',
+    slidesPerView: "auto",
     spaceBetween: 80,
     loop: true,
     touchRatio: 0.2,
     speed: 1500,
     pagination: {
-      el: '.work-crev .swiper-pagination',
-      type: 'progressbar',
+      el: ".work-crev .swiper-pagination",
+      type: "progressbar",
     },
 
     navigation: {
-      nextEl: '.work-crev .swiper-button-next',
-      prevEl: '.work-crev .swiper-button-prev',
+      nextEl: ".work-crev .swiper-button-next",
+      prevEl: ".work-crev .swiper-button-prev",
     },
   };
+
   return (
     <section className="work-fade section-padding sub-bg bord-top-grd bord-bottom-grd">
       <div className="container position-re">
         <div className="sec-head mb-80">
           <div className="d-flex align-items-center">
             <div>
-              <span className="sub-title main-color mb-5">Our Portfolio</span>
+              <span className="sub-title main-color mb-5">Our Stock</span>
               <h3 className="fw-600 fz-50 text-u d-rotate wow">
                 <span className="rotate-text">
-                  Selected <span className="fw-200">Works.</span>
+                  Trending <span className="fw-200">Stock.</span>
                 </span>
               </h3>
             </div>
             <div className="ml-auto vi-more">
               <a
-                href="/portfolio-gallery"
+                href="/stock"
                 className="butn butn-sm butn-bord radius-30"
               >
                 <span>View All</span>
@@ -48,15 +49,87 @@ function Portfolio() {
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-2 d-flex align-items-end">
+          <div className="container">
+            <div className="gallery row md-marg">
+              {/* Video Editing */}
+              <div className="col-lg-4 col-md-6 items design">
+                <div className="item mb-50 hoverEffect">
+                  <div className="img">
+                    <img src="/assets/imgs/works/2/1.jpg" alt="Video Editing" />
+                  </div>
+                  <div className="contentShow">
+                    <div>
+                      <span className="p-color mb-5 sub-title">
+                        Video Editing
+                      </span>
+                      <p>Engaging & Professional Edits</p>
+                    </div>
+                    <div style={{ marginLeft: "20px" }}>
+                      <a href="/project-details">
+                        <i className="ti-arrow-top-right"></i>{" "}
+                        {/* Ensure correct icon library */}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Graphic Designing */}
+              <div className="col-lg-4 col-md-6 items marketing">
+                <div className="item mb-50 hoverEffect">
+                  <div className="img">
+                    <img
+                      src="/assets/imgs/works/2/2.jpg"
+                      alt="Graphic Designing"
+                    />
+                  </div>
+                  <div className="contentShow">
+                    <div>
+                      <span className="p-color mb-5 sub-title">
+                        Graphic Design
+                      </span>
+                      <p>Creative & Impactful Designs</p>
+                    </div>
+                    <div style={{ marginLeft: "20px" }}>
+                      <a href="/project-details">
+                        <i className="ti-arrow-top-right"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Web Design */}
+              <div className="col-lg-4 col-md-6 items design">
+                <div className="item mb-50 hoverEffect">
+                  <div className="img">
+                    <img src="/assets/imgs/works/2/3.jpg" alt="Web Design" />
+                  </div>
+                  <div className="contentShow">
+                    <div>
+                      <span className="p-color mb-5 sub-title">Web Design</span>
+                      <p>Modern & User-Friendly</p>
+                    </div>
+                    <div style={{ marginLeft: "20px" }}>
+                      <a href="/project-details">
+                        <i className="ti-arrow-top-right"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* <div className="col-lg-2 d-flex align-items-end">
             <div className="text pb-100">
               <p>
                 We help our client suceed by creating identities, digital
                 experiences, and printmaterials that communicate clearly
               </p>
             </div>
-          </div>
-          <div className="col-lg-9">
+          </div> */}
+          {/* <div className="col-lg-9">
             <div className="work-swiper">
               <Swiper {...swiperOptions} className="swiper-container">
                 {data.map((item, i) => (
@@ -119,7 +192,7 @@ function Portfolio() {
                 ))}
               </Swiper>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="swiper-pagination"></div>
       </div>

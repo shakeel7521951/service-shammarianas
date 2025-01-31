@@ -116,9 +116,9 @@ export default function HomeMain() {
               <Marq />
               <Services />
               <Portfolio />
-              <Feat />
+              {/* <Feat /> */}
               <Team />
-              <Testimonials />
+              {/* <Testimonials /> */}
               <Clients />
               <Marq2 />
             </main>

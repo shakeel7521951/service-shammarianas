@@ -9,13 +9,13 @@ function Intro() {
             <div className="img md-mb80">
               <div className="row">
                 <div className="col-6">
-                  <img src="/assets/imgs/intro/i1.jpg" alt="" />
+                  <img src="/assets/imgs/intro/i1.jpg" alt="Sham Marians" />
                   <div className="img-icon">
-                    <img src="/assets/imgs/arw0.png" alt="" />
+                    <img src="/assets/imgs/arw0.png" alt="Arrow Icon" />
                   </div>
                 </div>
                 <div className="col-6 mt-40">
-                  <img src="/assets/imgs/intro/i2.jpg" alt="" />
+                  <img src="/assets/imgs/intro/i2.jpg" alt="Sham Marians Work" />
                 </div>
               </div>
             </div>
@@ -23,20 +23,19 @@ function Intro() {
           <div className="col-lg-6 valign">
             <div className="cont">
               <h3 className="mb-30">
-                Wfolio is a full-service{' '}
-                <span className="fw-200">creative studio</span> creating
-                beautiful <span className="fw-200">digital experiences</span> &
-                products.
+                Sham Marians –{' '}
+                <span className="fw-200">Empowering Businesses</span> with
+                <span className="fw-200"> Digital Innovation</span>.
               </h3>
               <p>
-                Our design services starts and ends with a best-in-class
-                experience strategy that builds brands. Open an online store and
-                become an international seller. Your customers will enjoy
-                shopping online!
+                Sham Marians is dedicated to transforming businesses through cutting-edge digital solutions. 
+                With expertise in branding, web development, and UI/UX design, we help brands establish a 
+                strong online presence and achieve remarkable growth. Our commitment is to deliver creative, 
+                high-impact solutions that drive success in the digital landscape.
               </p>
               <a href="/page-services" className="underline main-color mt-40">
                 <span className="text">
-                  Our Services <i className="ti-arrow-top-right"></i>
+                  Explore Our Services <i className="ti-arrow-top-right"></i>
                 </span>
               </a>
             </div>
