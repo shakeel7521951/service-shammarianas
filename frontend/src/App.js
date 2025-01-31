@@ -23,7 +23,6 @@ import Stock from "./pages/Stock.js";
 import PortfolioCreativeCarousel from "./pages/portfolio-creative-carousel.js";
 // import PortfolioGallery from './pages/portfolio-gallery.js';
 import PortfolioGrid from "./pages/portfolio-grid.js";
-import Footer from "./components/common/Footer.jsx";
 // import PortfolioMasonry from './pages/portfolio-masonry.js';
 // import ProjectDetails from './pages/project-details.js';
 // import gsap from 'gsap';
@@ -33,10 +32,12 @@ import Footer from "./components/common/Footer.jsx";
 // gsap.registerPlugin(ScrollTrigger);
 // gsap.config({ trialWarn: false });
 
-import AdminHome from "./adminDashboard/pages/AdminHome.jsx";
 import AdminUsers from "./adminDashboard/pages/AdminUsers.jsx";
 import AddBlog from "./adminDashboard/pages/AddBlog.jsx";
 import EditBlog from "./adminDashboard/pages/EditBlog.jsx";
+import AdminHome from "./adminDashboard/pages/AdminHome.jsx";
+import AddStock from "./adminDashboard/pages/AddStock.jsx";
+import EditStock from "./adminDashboard/pages/EditStock.jsx";
 
 const MainLayout = () => {
   return <Outlet />;
@@ -46,7 +47,6 @@ const AdminLayout = () => {
   return (
     <>
       <Outlet />
-      <Footer />
     </>
   );
 };
@@ -103,6 +103,14 @@ const router = createBrowserRouter([
       {
         path: "/admin/edit-blog",
         element: <EditBlog />,
+      },
+      {
+        path: "/admin/add-stock",
+        element: <AddStock />,
+      },
+      {
+        path: "/admin/Edit-stock",
+        element: <EditStock />,
       },
     ],
   },

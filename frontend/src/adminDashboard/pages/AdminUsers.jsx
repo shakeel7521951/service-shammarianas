@@ -50,7 +50,9 @@ const AdminUsers = () => {
   return (
     <div className="bg-[#092734] min-h-screen !p-6">
       <div className="flex flex-col gap-2 !py-2 items-center">
-        <h1 className=" text-[#51afb2] text-[20px]">Admin Users Panel</h1>
+        <h1 className=" text-[#51afb2] text-[20px]" style={{ color: "red" }}>
+          Admin Users Panel
+        </h1>
         <button
           className="bg-[#51afb2] text-[#1f4545] !px-4 !py-2 rounded hover:bg-[#3a8d90] cursor-pointer"
           onClick={() => navigate("/admin")}
