@@ -1,7 +1,7 @@
 import React from "react";
 import "./AdminFooter.css";
 
-function Footer() {
+function AdminFooter() {
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -94,4 +94,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default AdminFooter;
