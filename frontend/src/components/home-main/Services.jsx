@@ -32,7 +32,7 @@ function Services() {
   return (
     <section className="services section-padding">
       <div className="container">
-        <div className="sec-head mb-80">
+        <div className="sec-head">
           <div className="d-flex align-items-center">
             <div>
               <span className="sub-title main-color mb-5">Our Specialize</span>

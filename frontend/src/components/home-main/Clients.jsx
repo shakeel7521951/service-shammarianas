@@ -27,7 +27,7 @@ function Clients() {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-6 col-md-10">
-            <div className="sec-head text-center mb-80">
+            <div className="sec-head text-center">
               <h3>
                 We&lsquo;re proud to work with <br /> a{' '}
                 <span className="opacity-7">diverse range of companies.</span>

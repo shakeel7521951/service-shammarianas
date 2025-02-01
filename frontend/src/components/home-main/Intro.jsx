@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import companyLogo from '../../../src/assets/companyLogo.png';
 
 function Intro() {
   return (
@@ -9,20 +10,25 @@ function Intro() {
             <div className="row lg-marg align-items-center">
               <div className="col-md-6">
                 <div className="img1 sm-mb50">
-                  <img src="/assets/imgs/arw2.png" alt="" />
+                  {/* <img src="/assets/imgs/arw2.png" alt="" /> */}
+                  <img src={companyLogo} alt="" />
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="text">
                   <h3 className="mb-30">
-                  Sham Marianas{' '}
-                    {/* <span className="fw-300">individual</span>{' '} */}
-                    <span className="fw-300"> Committed to Accelerating Your Business Growth.</span>
+                    Sham Marians{" "}
+                    <span className="fw-300">
+                      Empowering Creativity & Driving Digital Success.
+                    </span>
                   </h3>
                   <p>
-                    We back the founders of new forms of network, digital
-                    organisations that harness the talents of individuals for
-                    the benefit of the collective.
+                    We specialize in innovative{" "}
+                    <span className="text-light fw-600">graphic design</span>,
+                    cutting-edge{" "}
+                    <span className="text-light fw-600">web development</span>,
+                    and strategic digital solutions to help businesses establish
+                    a powerful online presence and achieve growth.
                   </p>
 
                   <a href="/page-about" className="underline main-color mt-40">
@@ -45,7 +51,7 @@ function Intro() {
                     </div>
                     <div className="ml-auto">
                       <div className="icon-img-40">
-                        <img src="/assets/imgs/arw0.png" alt="" />
+                        <img src={companyLogo} alt="" />
                       </div>
                     </div>
                   </div>
@@ -53,12 +59,12 @@ function Intro() {
                 <div className="col-md-6">
                   <div className="item bord-thin-top pt-30 d-flex align-items-end mt-20">
                     <div>
-                      <h3 className="fw-300 mb-10">6700</h3>
+                      <h3 className="fw-300 mb-10">6478</h3>
                       <h6 className="p-color sub-title">Projects Completed</h6>
                     </div>
                     <div className="ml-auto">
                       <div className="icon-img-40">
-                        <img src="/assets/imgs/arw0.png" alt="" />
+                        <img src={companyLogo} alt="" />
                       </div>
                     </div>
                   </div>

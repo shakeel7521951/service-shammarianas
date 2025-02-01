@@ -1,5 +1,6 @@
 'use client';
 import React, { useEffect } from 'react';
+import companyLogo from '../../../src/assets/companyLogo.png';
 
 function Navbar() {
   function handleScroll() {
@@ -50,7 +51,7 @@ function handleDropdownMouseLeave(event) {
     <nav className="navbar navbar-expand-lg bord blur">
       <div className="container o-hidden">
         <a className="logo icon-img-100" href="/">
-          <img src="/assets/imgs/logo-light.png" alt="logo" />
+          <img src={companyLogo} alt="logo" />
         </a>
 
         <button
@@ -144,7 +145,7 @@ function handleDropdownMouseLeave(event) {
                 </div>
               </div>
             </li> */}
-            <li
+            {/* <li
               onMouseLeave={handleDropdownMouseLeave}
               onMouseMove={handleDropdownMouseMove}
               className="nav-item dropdown"
@@ -170,37 +171,53 @@ function handleDropdownMouseLeave(event) {
                     Services
                   </a>
                 </li>
-                {/* <li>
+                <li>
                   <a className="dropdown-item" href="/page-services-details">
                     Services Details
                   </a>
-                </li> */}
+                </li>
                 <li>
                   <a className="dropdown-item" href="/page-team">
                     Our Team
                   </a>
                 </li>
-                {/* <li>
+                <li>
                   <a className="dropdown-item" href="/page-team-details">
                     Team Details
                   </a>
-                </li> */}
-                {/* <li>
+                </li>
+                <li>
                   <a className="dropdown-item" href="/page-contact">
                     Contact Us
                   </a>
-                </li> */}
+                </li>
                 <li>
                   <a className="dropdown-item" href="/page-FAQ">
                     FAQS
                   </a>
                 </li>
-                {/* <li>
+                <li>
                   <a className="dropdown-item" href="/page-404">
                     Error 404
                   </a>
-                </li> */}
+                </li>
               </ul>
+            </li> */}
+             <li
+              onMouseLeave={handleDropdownMouseLeave}
+              onMouseMove={handleDropdownMouseMove}
+              className="nav-item dropdown"
+            >
+              <a
+                className="nav-link"
+                data-toggle="dropdown"
+                href="/services"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <span className="rolling-text">Services</span>
+              </a>
             </li>
             <li
               onMouseLeave={handleDropdownMouseLeave}
@@ -288,6 +305,22 @@ function handleDropdownMouseLeave(event) {
                 </a>
               </div> */}
             </li>
+            <li
+              onMouseLeave={handleDropdownMouseLeave}
+              onMouseMove={handleDropdownMouseMove}
+              className="nav-item dropdown"
+            >
+              <a
+                className="nav-link"
+                data-toggle="dropdown"
+                href="/page-about"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <span className="rolling-text">About</span>
+              </a>
+            </li>
             <li className="nav-item">
               <a className="nav-link" href="/page-contact">
                 <span className="rolling-text">Contact Us</span>
@@ -298,10 +331,10 @@ function handleDropdownMouseLeave(event) {
 
         <div className="contact-button">
           <a
-            href="/page-contact"
+            href="/login"
             className="butn butn-sm butn-bg main-colorbg radius-5"
           >
-            <span className="text">Let&apos;s contact</span>
+            <span className="text">Let&apos;s start</span>
           </a>
         </div>
       </div>

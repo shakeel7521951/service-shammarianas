@@ -71,6 +71,7 @@ const router = createBrowserRouter([
       { path: "/page-contact", element: <PageContact /> },
       { path: "/page-FAQ", element: <PageFAQ /> },
       { path: "/stock", element: <Stock /> },
+      {path:'/services',element:<Services />},
       { path: "/page-services-details", element: <PageServicesDetails /> },
       { path: "/page-services", element: <PageServices /> },
       { path: "/page-team", element: <PageTeam /> },
@@ -85,6 +86,12 @@ const router = createBrowserRouter([
       // { path: "/portfolio-masonry", element: <PortfolioMasonry /> },
       // { path: "/project-details", element: <ProjectDetails /> }
     ],
+  },
+  {
+    path:"/login",element:<Login />
+  },
+  {
+    path:"/sign-up",element:<Signup />
   },
   {
     element: <AdminLayout />,
