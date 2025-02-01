@@ -4,6 +4,7 @@ body {
   background-color: #f4f4f4;
   margin: 0;
   padding: 0;
+  background-color: #000;
 }
 
 /* Stock Management Container */
@@ -11,16 +12,16 @@ body {
   max-width: 1200px;
   margin: 40px auto;
   padding: 20px;
-  background: white;
+  background: #1f2937;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
 /* Stock Title */
-.stock-title {
+.stock-heading-title {
   font-size: 24px;
-  color: #333;
+  color: #fff;
   margin-bottom: 20px;
 }
 

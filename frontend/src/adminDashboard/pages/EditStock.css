@@ -14,7 +14,7 @@
 /* Modal Box */
 .edit-modal {
   background: white;
-  width: 90%;
+  width: 80%;
   max-width: 400px;
   padding: 20px;
   border-radius: 10px;
@@ -40,7 +40,7 @@
 /* Input & Textarea */
 .edit-form input,
 .edit-form textarea {
-  width: 100%;
+  width: 90%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
