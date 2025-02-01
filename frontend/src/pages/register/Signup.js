@@ -67,7 +67,9 @@ const Signup = () => {
                 />
               </div>
               <div className="relative">
-                <label className="text-white text-sm mb-2 block">Password</label>
+                <label className="text-white text-sm mb-2 block">
+                  Password
+                </label>
                 <input
                   value={user.password}
                   onChange={handleChange}
@@ -80,8 +82,7 @@ const Signup = () => {
                 <span
                   className="absolute right-4 top-10 text-gray-300 cursor-pointer"
                   onClick={() => setShowPassword(!showPassword)}
-                >
-                </span>
+                ></span>
               </div>
               <button
                 type="button"
@@ -93,12 +94,12 @@ const Signup = () => {
                 Sign up
               </button>
               <p className="text-sm text-center text-gray-300">
-                Already have an account? 
+                Already have an account?
                 <Link
-                  onClick={() => navigate("/login")}
+                  onClick={() => navigate("/log-in")}
                   className="text-blue-400 ms-2 font-semibold hover:underline ml-1 cursor-pointer"
                 >
-                   Sign in here
+                  Sign in here
                 </Link>
               </p>
             </form>

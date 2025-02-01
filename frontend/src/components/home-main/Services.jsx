@@ -1,8 +1,8 @@
-'use client';
-import React from 'react';
-import data from '../../data/services';
-import { Navigation } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
+"use client";
+import React from "react";
+import data from "../../data/services";
+import { Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 function Services() {
   const swiperOptions = {
     modules: [Navigation],
@@ -25,8 +25,8 @@ function Services() {
     },
 
     navigation: {
-      nextEl: '.services .swiper-button-next',
-      prevEl: '.services .swiper-button-prev',
+      nextEl: ".services .swiper-button-next",
+      prevEl: ".services .swiper-button-prev",
     },
   };
   return (

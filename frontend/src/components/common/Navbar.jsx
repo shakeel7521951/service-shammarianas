@@ -1,50 +1,49 @@
-'use client';
-import React, { useEffect } from 'react';
-import companyLogo from '../../../src/assets/companyLogo.png';
+"use client";
+import React, { useEffect } from "react";
+import companyLogo from "../../../src/assets/companyLogo.png";
 
 function Navbar() {
   function handleScroll() {
     const bodyScroll = window.scrollY;
-    const navbar = document.querySelector('.navbar');
+    const navbar = document.querySelector(".navbar");
 
-    if (bodyScroll > 300) navbar.classList.add('nav-scroll');
-    else navbar.classList.remove('nav-scroll');
+    if (bodyScroll > 300) navbar.classList.add("nav-scroll");
+    else navbar.classList.remove("nav-scroll");
   }
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   function handleDropdownMouseMove(event) {
-    const dropdownMenu = event.currentTarget.querySelector('.dropdown-menu');
+    const dropdownMenu = event.currentTarget.querySelector(".dropdown-menu");
     if (dropdownMenu) {
-      dropdownMenu.classList.add('show');
+      dropdownMenu.classList.add("show");
     }
   }
-  
 
-function handleDropdownMouseLeave(event) {
-  const dropdownMenu = event.currentTarget.querySelector('.dropdown-menu');
-  if (dropdownMenu) {
-    dropdownMenu.classList.remove('show');
+  function handleDropdownMouseLeave(event) {
+    const dropdownMenu = event.currentTarget.querySelector(".dropdown-menu");
+    if (dropdownMenu) {
+      dropdownMenu.classList.remove("show");
+    }
   }
-}
 
   function handleToggleNav() {
     if (
       document
-        .querySelector('.navbar .navbar-collapse')
-        .classList.contains('show')
+        .querySelector(".navbar .navbar-collapse")
+        .classList.contains("show")
     ) {
       document
-        .querySelector('.navbar .navbar-collapse')
-        .classList.remove('show');
+        .querySelector(".navbar .navbar-collapse")
+        .classList.remove("show");
     } else if (
       !document
-        .querySelector('.navbar .navbar-collapse')
-        .classList.contains('show')
+        .querySelector(".navbar .navbar-collapse")
+        .classList.contains("show")
     ) {
-      document.querySelector('.navbar .navbar-collapse').classList.add('show');
+      document.querySelector(".navbar .navbar-collapse").classList.add("show");
     }
   }
   return (
@@ -145,7 +144,7 @@ function handleDropdownMouseLeave(event) {
                 </div>
               </div>
             </li> */}
-            {/* <li
+            <li
               onMouseLeave={handleDropdownMouseLeave}
               onMouseMove={handleDropdownMouseMove}
               className="nav-item dropdown"
@@ -153,7 +152,7 @@ function handleDropdownMouseLeave(event) {
               <a
                 className="nav-link dropdown-toggle"
                 data-toggle="dropdown"
-                href="#"
+                href="/"
                 role="button"
                 aria-haspopup="true"
                 aria-expanded="false"
@@ -166,7 +165,7 @@ function handleDropdownMouseLeave(event) {
                     About Us
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a className="dropdown-item" href="/page-services">
                     Services
                   </a>
@@ -175,13 +174,13 @@ function handleDropdownMouseLeave(event) {
                   <a className="dropdown-item" href="/page-services-details">
                     Services Details
                   </a>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                   <a className="dropdown-item" href="/page-team">
                     Our Team
                   </a>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                   <a className="dropdown-item" href="/page-team-details">
                     Team Details
                   </a>
@@ -200,10 +199,10 @@ function handleDropdownMouseLeave(event) {
                   <a className="dropdown-item" href="/page-404">
                     Error 404
                   </a>
-                </li>
+                </li> */}
               </ul>
-            </li> */}
-             <li
+            </li>
+            <li
               onMouseLeave={handleDropdownMouseLeave}
               onMouseMove={handleDropdownMouseMove}
               className="nav-item dropdown"
@@ -263,7 +262,7 @@ function handleDropdownMouseLeave(event) {
               onMouseMove={handleDropdownMouseMove}
               className="nav-item dropdown"
             >
-               <a
+              <a
                 className="nav-link"
                 data-toggle="dropdown"
                 href="/stock"
@@ -273,7 +272,6 @@ function handleDropdownMouseLeave(event) {
               >
                 <span className="rolling-text">Stock</span>
               </a>
-
             </li>
             <li
               onMouseLeave={handleDropdownMouseLeave}
@@ -305,7 +303,7 @@ function handleDropdownMouseLeave(event) {
                 </a>
               </div> */}
             </li>
-            <li
+            {/* <li
               onMouseLeave={handleDropdownMouseLeave}
               onMouseMove={handleDropdownMouseMove}
               className="nav-item dropdown"
@@ -320,7 +318,7 @@ function handleDropdownMouseLeave(event) {
               >
                 <span className="rolling-text">About</span>
               </a>
-            </li>
+            </li> */}
             <li className="nav-item">
               <a className="nav-link" href="/page-contact">
                 <span className="rolling-text">Contact Us</span>
@@ -331,7 +329,7 @@ function handleDropdownMouseLeave(event) {
 
         <div className="contact-button">
           <a
-            href="/login"
+            href="/log-in"
             className="butn butn-sm butn-bg main-colorbg radius-5"
           >
             <span className="text">Let&apos;s start</span>

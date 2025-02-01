@@ -65,7 +65,7 @@ function Login() {
                   placeholder="Enter password"
                 />
               </div>
-              <div className="flex justify-between text-sm text-white">
+              {/* <div className="flex justify-between text-sm text-white">
                 <div className="flex items-center">
                   <input
                     id="remember-me"
@@ -79,7 +79,7 @@ function Login() {
                 <a href="#" className="text-blue-400 hover:underline">
                   Forgot password?
                 </a>
-              </div>
+              </div> */}
               <button
                 type="button"
                 onClick={() =>

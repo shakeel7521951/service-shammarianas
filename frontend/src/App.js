@@ -39,6 +39,9 @@ import AdminHome from "./adminDashboard/pages/AdminHome.jsx";
 import AddStock from "./adminDashboard/pages/AddStock.jsx";
 import EditStock from "./adminDashboard/pages/EditStock.jsx";
 import AdminStocks from "./adminDashboard/pages/AdminStocks.jsx";
+import Services from "./components/home-main/Services.jsx";
+import Login from "./pages/register/Login.js";
+import Signup from "./pages/register/Signup.js";
 
 const MainLayout = () => {
   return <Outlet />;
@@ -71,7 +74,7 @@ const router = createBrowserRouter([
       { path: "/page-contact", element: <PageContact /> },
       { path: "/page-FAQ", element: <PageFAQ /> },
       { path: "/stock", element: <Stock /> },
-      {path:'/services',element:<Services />},
+      { path: "/services", element: <PageServices /> },
       { path: "/page-services-details", element: <PageServicesDetails /> },
       { path: "/page-services", element: <PageServices /> },
       { path: "/page-team", element: <PageTeam /> },
@@ -88,10 +91,12 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path:"/login",element:<Login />
+    path: "/log-in",
+    element: <Login />,
   },
   {
-    path:"/sign-up",element:<Signup />
+    path: "/sign-up",
+    element: <Signup />,
   },
   {
     element: <AdminLayout />,

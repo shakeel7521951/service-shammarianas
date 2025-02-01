@@ -1,5 +1,6 @@
 import React from "react";
-import companyLogo from '../../../src/assets/companyLogo.png';
+import companyLogo from "../../../src/assets/companyLogo.png";
+import logo from "../../../src/assets/logo.png";
 
 function Intro() {
   return (
@@ -11,13 +12,13 @@ function Intro() {
               <div className="col-md-6">
                 <div className="img1 sm-mb50">
                   {/* <img src="/assets/imgs/arw2.png" alt="" /> */}
-                  <img src={companyLogo} alt="" />
+                  <img src={logo} alt="" />
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="text">
                   <h3 className="mb-30">
-                    Sham Marians{" "}
+                    Sham Marians
                     <span className="fw-300">
                       Empowering Creativity & Driving Digital Success.
                     </span>
@@ -50,8 +51,8 @@ function Intro() {
                       </h6>
                     </div>
                     <div className="ml-auto">
-                      <div className="icon-img-40">
-                        <img src={companyLogo} alt="" />
+                      <div className="icon-img-20">
+                        <img src={logo} alt="" />
                       </div>
                     </div>
                   </div>
@@ -63,8 +64,8 @@ function Intro() {
                       <h6 className="p-color sub-title">Projects Completed</h6>
                     </div>
                     <div className="ml-auto">
-                      <div className="icon-img-40">
-                        <img src={companyLogo} alt="" />
+                      <div className="icon-img-20">
+                        <img src={logo} alt="" />
                       </div>
                     </div>
                   </div>

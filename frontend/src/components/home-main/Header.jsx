@@ -1,7 +1,7 @@
-'use client';
-import React, { useEffect } from 'react';
+"use client";
+import React, { useEffect } from "react";
 
-import loadBackgroudImages from '../../common/loadBackgroudImages';
+import loadBackgroudImages from "../../common/loadBackgroudImages";
 function Header() {
   useEffect(() => {
     loadBackgroudImages();
@@ -11,17 +11,22 @@ function Header() {
       className=" main-header bg-img valign"
       data-background="/assets/imgs/background/bg5.jpg"
       data-overlay-dark="7"
+      style={{ paddingBottom: "1.8rem" }}
     >
       <div className="container ontop">
         <div className="row">
           <div className="col-lg-11">
             <div className="caption">
-              <h2 style={{fontSize:"4rem"}}><span className='main-color'>Empowering</span> your
+              <h2
+                style={{ fontSize: "5rem", marginRight: "30rem" }}
+                className="nowrap"
+              >
+                <span className="main-color">Empowering</span> your
               </h2>
               <div className="d-flex align-items-end">
                 <div>
-                  <h2 style={{fontSize:'4rem'}} className="nowrap">
-                   brand to stand out.
+                  <h2 style={{ fontSize: "5rem" }} className="nowrap">
+                    brand to stand out.
                   </h2>
                 </div>
                 <div>
@@ -46,7 +51,10 @@ function Header() {
               <img src="/assets/imgs/icon-img/arrow-down-big.png" alt="" />
             </div>
           </div>
-          <div className="col-lg-6 d-flex justify-content-end order-md-1">
+          <div
+            className="col-lg-6 d-flex justify-content-end order-md-1"
+            style={{ marginTop: "10rem" }}
+          >
             <div className="info">
               <h2 className="mb-10">6k +</h2>
               <h6>

@@ -16,11 +16,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-<<<<<<< HEAD
     "react-icons": "^5.4.0",
-=======
     "react-redux": "^9.2.0",
->>>>>>> 9b21628eacc535b8418bc5e528d980134e1a4b32
     "react-router-dom": "^6.22.0",
     "react-scripts": "5.0.1",
     "swiper": "^8.4.7",
