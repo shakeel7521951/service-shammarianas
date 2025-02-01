@@ -1,120 +1,146 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import "./EditBlog.css";
+import {
+  useGetBlogsQuery,
+  useUpdateBlogMutation,
+} from "../../features/blogsApi";
+import { useParams } from "react-router-dom";
 
-const EditBlog = ({ blogs, setBlogs }) => {
-  const { id } = useParams(); // Get blog ID from URL
-  const navigate = useNavigate();
+const EditBlog = () => {
+  const params = useParams();
+  const blogId = params.id;
+  const { data, isLoading, isError } = useGetBlogsQuery();
+  const [updateBlog, { isUpdating }] = useUpdateBlogMutation();
 
-  // Convert ID to number and find the blog
-  const blogToEdit = blogs.find((blog) => blog.id === parseInt(id));
+  const blogData = data?.blogs?.find((blog) => blog._id === blogId);
 
-  // Handle case where blog is not found
-  if (!blogToEdit) {
+  const [blog, setBlog] = useState({
+    title: "",
+    description: "",
+    file: null,
+    category: "",
+  });
+
+  useEffect(() => {
+    if (blogData) {
+      setBlog({
+        title: blogData.title || "",
+        description: blogData.body || "",
+        file: null,
+        category: blogData.category || "",
+      });
+    }
+  }, [blogData]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setBlog((prevBlog) => ({
+      ...prevBlog,
+      [name]: value,
+    }));
+  };
+
+  const handleFileChange = (e) => {
+    setBlog((prevBlog) => ({
+      ...prevBlog,
+      file: e.target.files[0],
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("title", blog.title);
+    formData.append("body", blog.description);
+    formData.append("category", blog.category);
+    if (blog.file) formData.append("file", blog.file);
+
+    try {
+      await updateBlog({ id: blogId, formData }).unwrap();
+      alert("Blog updated successfully!");
+    } catch (error) {
+      console.error("Failed to update blog:", error.message);
+      alert("Failed to update blog. Please try again.");
+    }
+  };
+
+  if (isLoading) {
+    return <div className="loader"></div>;
+  }
+
+  if (isError) {
     return (
-      <h2 className="text-center text-red-500 font-bold mt-10 text-2xl">
-        Blog not found!
-      </h2>
+      <p className="error-message">
+        Failed to load blog data. Please try again.
+      </p>
     );
   }
 
-  // Initialize state with existing blog details (use empty values if missing)
-  const [editedBlog, setEditedBlog] = useState({
-    title: blogToEdit.title || "",
-    content: blogToEdit.body || "", // Assuming "body" is the blog content
-    coverImageUrl: blogToEdit.coverImageUrl || "", // Adjusted image property
-    author: blogToEdit.createdBy?.fullName || "", // Adjusted author reference
-  });
-
-  // Update function
-  const handleUpdate = (e) => {
-    e.preventDefault();
-
-    setBlogs((prevBlogs) =>
-      prevBlogs.map((blog) =>
-        blog.id === parseInt(id) ? { ...blog, ...editedBlog } : blog
-      )
-    );
-
-    navigate("/admin"); // Redirect after update
-  };
-
   return (
-    <div className="flex flex-col items-center min-h-screen bg-[#1e3a4c] p-6">
-      <div className="bg-[#092734] border border-[#51afb2] text-white p-6 mt-6 w-full max-w-lg rounded-xl shadow-md">
-        <h2 className="text-center text-2xl mb-4 font-bold">Edit Blog</h2>
+    <div className="form-container">
+      <div className="form-card">
+        <h2>Update Blog</h2>
 
-        <form onSubmit={handleUpdate} className="flex flex-col gap-4">
-          {/* Title Input */}
-          <div>
-            <label className="block text-white font-bold mb-1">Title:</label>
+        <form onSubmit={handleSubmit} className="form">
+          <div className="input-group">
+            <label>Title:</label>
             <input
               type="text"
-              value={editedBlog.title}
-              onChange={(e) =>
-                setEditedBlog({ ...editedBlog, title: e.target.value })
-              }
-              className="w-full p-2 rounded bg-[#1c1d1e] text-white"
+              name="title"
+              value={blog.title}
+              onChange={handleChange}
               required
             />
           </div>
 
-          {/* Content Input */}
-          <div>
-            <label className="block text-white font-bold mb-1">Content:</label>
+          <div className="input-group">
+            <label>Description:</label>
             <textarea
-              value={editedBlog.content}
-              onChange={(e) =>
-                setEditedBlog({ ...editedBlog, content: e.target.value })
-              }
-              className="w-full p-2 rounded bg-[#1c1d1e] text-white"
+              name="description"
+              value={blog.description}
+              onChange={handleChange}
               rows="5"
               required
             />
           </div>
 
-          {/* Image URL Input */}
-          <div>
-            <label className="block text-white font-bold mb-1">
-              Image URL:
-            </label>
+          <div className="input-group">
+            <label>Cover Image:</label>
             <input
-              type="text"
-              value={editedBlog.coverImageUrl}
-              onChange={(e) =>
-                setEditedBlog({ ...editedBlog, coverImageUrl: e.target.value })
-              }
-              className="w-full p-2 rounded bg-[#1c1d1e] text-white"
+              type="file"
+              name="file"
+              onChange={handleFileChange}
+              accept="image/*"
             />
+            {blogData?.coverImageUrl && (
+              <img
+                src={blogData.coverImageUrl}
+                alt="Current Cover"
+                className="preview-image"
+              />
+            )}
           </div>
 
-          {/* Author Input */}
-          <div>
-            <label className="block text-white font-bold mb-1">Author:</label>
-            <input
-              type="text"
-              value={editedBlog.author}
-              onChange={(e) =>
-                setEditedBlog({ ...editedBlog, author: e.target.value })
-              }
-              className="w-full p-2 rounded bg-[#1c1d1e] text-white"
+          <div className="input-group">
+            <label>Category:</label>
+            <select
+              name="category"
+              value={blog.category}
+              onChange={handleChange}
               required
-            />
+            >
+              <option value="">Select Category</option>
+              <option value="Technology">Technology</option>
+              <option value="Health">Health</option>
+              <option value="Lifestyle">Lifestyle</option>
+              <option value="Business">Business</option>
+            </select>
           </div>
 
-          {/* Buttons */}
-          <div className="flex justify-center gap-4 mt-4">
-            <button
-              type="submit"
-              className="bg-[#51afb2] px-4 py-2 rounded hover:bg-[#3a8d90] transition"
-            >
-              Update Blog
-            </button>
-            <button
-              type="button"
-              className="bg-red-500 px-4 py-2 rounded hover:bg-red-700 transition"
-              onClick={() => navigate("/admin")}
-            >
-              Cancel
+          <div className="button-group">
+            <button type="submit" disabled={isUpdating}>
+              {isUpdating ? "Updating..." : "Update Blog"}
             </button>
           </div>
         </form>

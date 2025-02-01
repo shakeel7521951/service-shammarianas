@@ -1,153 +1,79 @@
-import Lines from "../../components/common/Lines";
-import ProgressScroll from "../../components/common/ProgressScroll";
-import Cursor from "../../components/common/cusor";
-import LoadingScreen from "../../components/common/loader";
-import Footer from "../../components/common/Footer";
-import Navbar from "../../components/common/Navbar";
-import Marq2 from "../../components/common/Marq2";
-import { Helmet } from "react-helmet";
-import Header from "../components/AdminHeader";
-import Portfolio from "../../components/p-grid/Portfolio";
-import WOW from "wowjs";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-// import { ScrollSmoother } from 'gsap-trial/ScrollSmoother';
+import React from "react";
+import "./AdminHome.css"; // Import custom CSS
+import { useNavigate } from "react-router-dom"; // Import useNavigate hook
+import { useDelBlogMutation, useGetBlogsQuery } from "../../features/blogsApi";
 
-import { useGSAP } from "@gsap/react";
-import { useEffect, useRef } from "react";
-import initIsotope from "../../common/initIsotope";
-// import PortfolioCreativeCarousel from "./portfolio-creative-carousel";
-gsap.registerPlugin(useGSAP, ScrollTrigger);
 const AdminHome = () => {
-  const main = useRef();
-  const smoother = useRef();
+  const { data, isLoading, isError } = useGetBlogsQuery();
+  const [delBlog] = useDelBlogMutation(); // ✅ Corrected
+  const navigate = useNavigate(); // Initialize the navigate function
 
-  useEffect(() => {
-    const loadScript = (src) => {
-      return new Promise((resolve, reject) => {
-        const script = document.createElement("script");
-        script.src = src;
-        script.async = true;
+  const blogs = data?.blogs || [];
 
-        script.onload = () => {
-          resolve(true);
-        };
+  const handleDel = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this blog?")) return;
 
-        script.onerror = () => {
-          reject(new Error(`Failed to load ${src}`));
-        };
-
-        document.body.appendChild(script);
-      });
-    };
-
-    // Load ScrollSmoother.min.js first
-    loadScript("/assets/js/gsap.min.js")
-      .then(() => {
-        loadScript("/assets/js/ScrollSmoother.min.js");
-      })
-      .then(() => {
-        // Once ScrollSmoother.min.js is loaded, load smoother-script.js
-        return loadScript("/assets/js/smoother-script.js");
-      })
-      .catch((error) => {
-        console.error(error.message);
-      });
-
-    // // Cleanup function
-    // return () => {
-    //   document.body.removeChild(script);
-    // };
-  }, []);
-  useEffect(() => {
-    const loadScript = (src) => {
-      return new Promise((resolve, reject) => {
-        const script = document.createElement("script");
-        script.src = src;
-        script.async = true;
-
-        script.onload = () => {
-          resolve(true);
-        };
-
-        script.onerror = () => {
-          reject(new Error(`Failed to load ${src}`));
-        };
-
-        document.body.appendChild(script);
-      });
-    };
-
-    // Load ScrollSmoother.min.js first
-    loadScript("/assets/js/isotope.pkgd.min.js")
-      .then(() => {
-        // Once ScrollSmoother.min.js is loaded, load smoother-script.js
-        initIsotope();
-      })
-      .catch((error) => {
-        console.error(error.message);
-      });
-
-    // // Cleanup function
-    // return () => {
-    //   document.body.removeChild(script);
-    // };
-  }, []);
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      new WOW.WOW({
-        animateClass: "animated",
-        offset: 100,
-      }).init();
+    try {
+      await delBlog(id).unwrap();
+      alert("Blog deleted successfully!");
+    } catch (error) {
+      console.error("Failed to delete blog:", error);
+      alert("Failed to delete blog. Please try again.");
     }
-  }, []);
-  return (
-    <>
-      <Helmet>
-        <title>webfolio</title>
-        <link rel="icon" href="/assets/imgs/favicon.ico" />
-        <link rel="shortcut icon" href="/assets/imgs/favicon.ico" />
-        <link rel="stylesheet" type="text/css" href="/assets/css/plugins.css" />
-        <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+  };
 
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
-        />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700&display=swap"
-        />
-        <script src="/assets/js/ScrollTrigger.min.js" defer />
-        <script src="/assets/js/ScrollSmoother.min.js" defer />
-        <script defer src="/assets/js/gsap.min.js"></script>
-        <script defer src="/assets/js/splitting.min.js"></script>
-        <script defer src="/assets/js/isotope.pkgd.min.js"></script>
-        <script defer src="/assets/js/plugins.js"></script>
-        <script defer src="/assets/js/TweenMax.min.js"></script>
-        <script defer src="/assets/js/charming.min.js"></script>
-        <script defer src="/assets/js/countdown.js"></script>
-      </Helmet>
-      <body>
-        <LoadingScreen />
-        <Cursor />
-        <ProgressScroll />
-        <Lines />
-        <Navbar />
-        <div id="smooth-wrapper" ref={main}>
-          <div id="smooth-content">
-            <main className="main-bg o-hidden">
-              <Header />
-              <Portfolio />
-              <Marq2 />
-            </main>
-            <Footer />
-          </div>
+  const handleEdit = (id) => {
+    navigate(`/admin/edit-blog/${id}`);
+  };
+
+  return (
+    <div className="admin-container">
+      <h2 className="admin-title">Manage Blogs</h2>
+
+      {/* Loader */}
+      {isLoading && <div className="loader"></div>}
+
+      {/* Error Handling */}
+      {isError && (
+        <p className="error-message">Failed to load blogs. Please try again.</p>
+      )}
+
+      {/* Blog List */}
+      {!isLoading && !isError && blogs.length > 0 ? (
+        <div className="blog-grid">
+          {blogs.map((blog) => (
+            <div key={blog._id} className="blog-card">
+              <img
+                src={blog.coverImageUrl}
+                alt={blog.title}
+                className="blog-image"
+              />
+              <div className="blog-content">
+                <h3 className="blog-title">{blog.title}</h3>
+                <p className="blog-description">{blog.body}</p>
+                <span className="blog-category">{blog.category}</span>
+                <div className="blog-actions">
+                  <button
+                    className="edit-btn"
+                    onClick={() => handleEdit(blog._id)} // On click navigate to the edit page
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDel(blog._id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-      </body>
-    </>
+      ) : (
+        !isLoading && <p className="no-blogs">No blogs available.</p>
+      )}
+    </div>
   );
 };
 

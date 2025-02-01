@@ -8,7 +8,6 @@ export const addBlog = async (req, res) => {
   const userId = req.id;
   const { title, body, category } = req.body;
   let file = req.file;
-
   try {
     const allowedCategories = [
       "Technology",
@@ -96,14 +95,14 @@ export const delBlog = async (req, res) => {
 
   try {
     const blog = await Blog.findOne({ _id: blogId });
-    const user = await User.findOne({ _id: userId });
+    // const user = await User.findOne({ _id: userId });
 
-    if (!user) {
-      return res.status(404).json({
-        message: "Not Logged In",
-        success: false,
-      });
-    }
+    // if (!user) {
+    //   return res.status(404).json({
+    //     message: "Not Logged In",
+    //     success: false,
+    //   });
+    // }
 
     if (!blog) {
       return res
@@ -134,16 +133,18 @@ export const delBlog = async (req, res) => {
 };
 export const updateBlog = async (req, res) => {
   const userId = req.id;
+  const file = req.file;
   const blogId = req.params.id;
   const { title, body, category } = req.body;
+  let cloudRes;
 
   try {
     const blog = await Blog.findById(blogId);
-    const user = await User.findById(userId);
+    // const user = await User.findById(userId);
 
-    if (!user) {
-      return res.status(401).json({ success: false, message: "Not Logged In" });
-    }
+    // if (!user) {
+    //   return res.status(401).json({ success: false, message: "Not Logged In" });
+    // }
 
     if (!blog) {
       return res
@@ -151,16 +152,15 @@ export const updateBlog = async (req, res) => {
         .json({ success: false, message: "Blog not found." });
     }
 
-    if (
-      user._id.toString() !== blog.createdBy.toString() &&
-      user.role !== "admin"
-    ) {
-      return res
-        .status(403)
-        .json({ success: false, message: "Access denied." });
-    }
+    // if (
+    //   user._id.toString() !== blog.createdBy.toString() &&
+    //   user.role !== "admin"
+    // ) {
+    //   return res
+    //     .status(403)
+    //     .json({ success: false, message: "Access denied." });
+    // }
 
-    // Validate category
     const allowedCategories = [
       "Technology",
       "Health",
@@ -175,7 +175,13 @@ export const updateBlog = async (req, res) => {
         .json({ success: false, message: "Invalid category." });
     }
 
-    // Update fields dynamically
+    if (file) {
+      const dataUri = getDataUri(file);
+
+      cloudRes = await cloudinary.uploader.upload(dataUri, {
+        folder: "shammarian_blogs",
+      });
+    }
     const updatedBlog = await Blog.findByIdAndUpdate(
       blogId,
       {
@@ -183,10 +189,10 @@ export const updateBlog = async (req, res) => {
           ...(title && { title }),
           ...(body && { body }),
           ...(category && { category }),
-          ...(req.file && { coverImageUrl: `/uploads/${req.file.filename}` }),
+          ...(req.file && { coverImageUrl: cloudRes.secure_url }),
         },
       },
-      { new: true, runValidators: true }
+      { new: true }
     );
 
     return res.status(200).json({

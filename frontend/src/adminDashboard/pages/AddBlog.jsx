@@ -1,113 +1,111 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import "./AddBlog.css";
+import { useAddBlogMutation } from "../../features/blogsApi";
 
-const AddBlog = ({ blogs, setBlogs }) => {
-  const navigate = useNavigate();
+const AddBlog = () => {
+  const [addBlog] = useAddBlogMutation();
 
-  const [newBlog, setNewBlog] = useState({
+  const [blog, setBlog] = useState({
     title: "",
-    content: "",
-    image: "",
-    author: "",
+    description: "",
+    file: null,
+    category: "",
   });
 
-  // Function to handle form submission
-  const handleCreateBlog = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setBlog((prevBlog) => ({
+      ...prevBlog,
+      [name]: value,
+    }));
+  };
+
+  const handleFileChange = (e) => {
+    setBlog((prevBlog) => ({
+      ...prevBlog,
+      file: e.target.files[0],
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("title", blog.title);
+    formData.append("body", blog.description);
+    formData.append("category", blog.category);
+    if (blog.file) formData.append("file", blog.file);
 
-    // Generate a unique ID for the new blog
-    const newBlogWithId = { ...newBlog, id: blogs.length + 1 };
-
-    // Update state
-    setBlogs([...blogs, newBlogWithId]);
-
-    // Navigate back to the admin panel
-    navigate("/admin");
+    try {
+      await addBlog(formData).unwrap();
+      alert("Blog added successfully!");
+      setBlog({
+        title: "",
+        description: "",
+        file: null,
+        category: "",
+      });
+    } catch (error) {
+      console.error("Failed to add blog:", error.message);
+      alert("Failed to add blog. Please try again.");
+    }
   };
 
   return (
-    <div className="main bg-[#1e3a4c] !p-4 flex flex-col items-center w-full">
-      <div className="!p-6 bg-[#092734] border border-[#51afb2] text-white mt-4 w-full md:w-[35%] mx-auto rounded-3xl shadow-md">
-        <h2 className="text-center text-xl mb-4 text-white font-bold">
-          Create New Blog
-        </h2>
-        <form onSubmit={handleCreateBlog}>
-          <div className="form-content flex flex-col gap-4">
-            <div className="mb-4">
-              <label className="block text-white font-bold" htmlFor="title">
-                Title:
-              </label>
-              <input
-                type="text"
-                value={newBlog.title}
-                id="title"
-                onChange={(e) =>
-                  setNewBlog({ ...newBlog, title: e.target.value })
-                }
-                className="w-full !p-2 rounded bg-[#1c1d1e] text-white !mt-1"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-white font-bold" htmlFor="content">
-                Content:
-              </label>
-              <textarea
-                value={newBlog.content}
-                id="content"
-                onChange={(e) =>
-                  setNewBlog({ ...newBlog, content: e.target.value })
-                }
-                className="w-full !p-2 rounded bg-[#1c1d1e] text-white !mt-1"
-                rows="5"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-white font-bold" htmlFor="url">
-                Image URL:
-              </label>
-              <input
-                type="text"
-                value={newBlog.image}
-                id="url"
-                onChange={(e) =>
-                  setNewBlog({ ...newBlog, image: e.target.value })
-                }
-                className="w-full !p-2 rounded bg-[#1c1d1e] text-white !mt-1"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-white font-bold" htmlFor="author">
-                Author Name:
-              </label>
-              <input
-                type="text"
-                id="author"
-                value={newBlog.author}
-                onChange={(e) =>
-                  setNewBlog({ ...newBlog, author: e.target.value })
-                }
-                className="w-full !p-2 rounded bg-[#1c1d1e] text-white !mt-1"
-                required
-              />
-            </div>
-            <div className="btns w-full flex gap-4 justify-center">
-              <button
-                type="submit"
-                className="bg-[#51afb2] !px-4 !py-2 rounded hover:bg-[#3a8d90] cursor-pointer"
-              >
-                Create Blog
-              </button>
-              <button
-                type="button"
-                className="ml-2 bg-red-500 !px-4 !py-2 rounded hover:bg-red-700 cursor-pointer"
-                onClick={() => navigate("/admin")}
-              >
-                Cancel
-              </button>
-            </div>
+    <div className="form-container">
+      <div className="form-card">
+        <h2>Add New Blog</h2>
+        <form onSubmit={handleSubmit} className="form">
+          <div className="input-group">
+            <label>Title:</label>
+            <input
+              type="text"
+              name="title"
+              value={blog.title}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Description:</label>
+            <textarea
+              name="description"
+              value={blog.description}
+              onChange={handleChange}
+              rows="5"
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Cover Image:</label>
+            <input
+              type="file"
+              name="file"
+              onChange={handleFileChange}
+              accept="image/*"
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Category:</label>
+            <select
+              name="category"
+              value={blog.category}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select Category</option>
+              <option value="Technology">Technology</option>
+              <option value="Health">Health</option>
+              <option value="Lifestyle">Lifestyle</option>
+              <option value="Business">Business</option>
+            </select>
+          </div>
+
+          <div className="button-group">
+            <button type="submit">Add Blog</button>
           </div>
         </form>
       </div>
