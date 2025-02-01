@@ -1,55 +1,55 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const blogsApi = createApi({
-  reducerPath: "blogsApi",
+export const stocksApi = createApi({
+  reducerPath: "stocksApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:2000/api/blog",
+    baseUrl: "http://localhost:2000/api/stock",
   }),
-  tagTypes: ["Blog"],
+  tagTypes: ["Stock"],
 
   endpoints: (builder) => ({
-    // GET Blogs
-    getBlogs: builder.query({
+    // GET stocks
+    getStocks: builder.query({
       query: () => "/all/get",
-      providesTags: ["Blog"],
+      providesTags: ["Stock"],
     }),
 
-    // ADD Blog (Handles formData)
-    addBlog: builder.mutation({
+    // ADD stock (Handles formData)
+    addStock: builder.mutation({
       query: (formData) => ({
         url: "/add",
         method: "POST",
         body: formData,
         formData: true,
       }),
-      invalidatesTags: ["Blog"],
+      invalidatesTags: ["Stock"],
     }),
 
-    // UPDATE Blog
-    updateBlog: builder.mutation({
+    // UPDATE stock
+    updateStock: builder.mutation({
       query: ({ id, formData }) => ({
         url: `/update/${id}`,
         method: "PUT",
         body: formData,
         formData: true,
       }),
-      invalidatesTags: ["Blog"],
+      invalidatesTags: ["Stock"],
     }),
 
-    // DELETE Blog
-    delBlog: builder.mutation({
+    // DELETE stock
+    delStock: builder.mutation({
       query: (id) => ({
         url: `/delete/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Blog"],
+      invalidatesTags: ["Stock"],
     }),
   }),
 });
 
 export const {
-  useGetBlogsQuery,
-  useAddBlogMutation,
-  useUpdateBlogMutation,
-  useDelBlogMutation,
-} = blogsApi;
+  useGetStocksQuery,
+  useAddStockMutation,
+  useUpdateStockMutation,
+  useDelStockMutation,
+} = stocksApi;

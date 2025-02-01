@@ -14,7 +14,7 @@ const stockRouter = express.Router();
 stockRouter.route("/add").post(singleUpload, addStock);
 stockRouter.route("/all/get").get(getAllStocks);
 stockRouter.route("/get/:id").get(getStockById);
-stockRouter.route("/update/:id").post(authenticate, singleUpload, updateStock);
+stockRouter.route("/update/:id").put(singleUpload, updateStock);
 stockRouter.route("/delete/:id").delete(deleteStock);
 
 export default stockRouter;

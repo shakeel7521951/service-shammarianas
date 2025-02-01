@@ -177,7 +177,6 @@ export const updateBlog = async (req, res) => {
 
     if (file) {
       const dataUri = getDataUri(file);
-
       cloudRes = await cloudinary.uploader.upload(dataUri, {
         folder: "shammarian_blogs",
       });

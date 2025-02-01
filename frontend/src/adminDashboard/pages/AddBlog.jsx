@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./AddBlog.css";
 import { useAddBlogMutation } from "../../features/blogsApi";
 
 const AddBlog = () => {
   const [addBlog] = useAddBlogMutation();
+  const [loading, setLoading] = useState(false);
 
   const [blog, setBlog] = useState({
     title: "",
@@ -29,6 +29,7 @@ const AddBlog = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const formData = new FormData();
     formData.append("title", blog.title);
     formData.append("body", blog.description);
@@ -47,54 +48,103 @@ const AddBlog = () => {
     } catch (error) {
       console.error("Failed to add blog:", error.message);
       alert("Failed to add blog. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="form-container">
-      <div className="form-card">
-        <h2>Add New Blog</h2>
-        <form onSubmit={handleSubmit} className="form">
-          <div className="input-group">
-            <label>Title:</label>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        backgroundColor: "#1e1e1e",
+        padding: "20px",
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: "#252537",
+          borderRadius: "12px",
+          padding: "40px",
+          boxShadow: "0 6px 15px rgba(0, 0, 0, 0.4)",
+          width: "400px",
+          maxWidth: "100%",
+          color: "#eaeaea",
+        }}
+      >
+        <h2 style={{ textAlign: "center", color: "#ff9800" }}>Add New Blog</h2>
+        <form
+          onSubmit={handleSubmit}
+          style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+        >
+          <div>
+            <label style={{ color: "#b3b3b3" }}>Title:</label>
             <input
               type="text"
               name="title"
               value={blog.title}
               onChange={handleChange}
               required
+              style={{
+                width: "100%",
+                padding: "12px",
+                backgroundColor: "#333",
+                borderRadius: "6px",
+                border: "1px solid #444",
+                color: "#f1f1f1",
+              }}
             />
           </div>
 
-          <div className="input-group">
-            <label>Description:</label>
+          <div>
+            <label style={{ color: "#b3b3b3" }}>Description:</label>
             <textarea
               name="description"
               value={blog.description}
               onChange={handleChange}
               rows="5"
               required
+              style={{
+                width: "100%",
+                padding: "12px",
+                backgroundColor: "#333",
+                borderRadius: "6px",
+                border: "1px solid #444",
+                color: "#f1f1f1",
+              }}
             />
           </div>
 
-          <div className="input-group">
-            <label>Cover Image:</label>
+          <div>
+            <label style={{ color: "#b3b3b3" }}>Cover Image:</label>
             <input
               type="file"
               name="file"
               onChange={handleFileChange}
               accept="image/*"
               required
+              style={{ color: "#b3b3b3" }}
             />
           </div>
 
-          <div className="input-group">
-            <label>Category:</label>
+          <div>
+            <label style={{ color: "#b3b3b3" }}>Category:</label>
             <select
               name="category"
               value={blog.category}
               onChange={handleChange}
               required
+              style={{
+                width: "100%",
+                padding: "12px",
+                backgroundColor: "#333",
+                borderRadius: "6px",
+                border: "1px solid #444",
+                color: "#f1f1f1",
+              }}
             >
               <option value="">Select Category</option>
               <option value="Technology">Technology</option>
@@ -104,8 +154,26 @@ const AddBlog = () => {
             </select>
           </div>
 
-          <div className="button-group">
-            <button type="submit">Add Blog</button>
+          <div>
+            <button
+              type="submit"
+              disabled={loading}
+              style={{
+                width: "100%",
+                padding: "12px",
+                borderRadius: "6px",
+                border: "none",
+                background: loading
+                  ? "#555"
+                  : "linear-gradient(135deg, #ff9800, #ff5722)",
+                color: "#fff",
+                fontSize: "16px",
+                cursor: loading ? "not-allowed" : "pointer",
+                transition: "all 0.3s ease",
+              }}
+            >
+              {loading ? "Submitting..." : "Add Blog"}
+            </button>
           </div>
         </form>
       </div>

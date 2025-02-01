@@ -35,13 +35,16 @@ import PortfolioGrid from "./pages/portfolio-grid.js";
 import AdminUsers from "./adminDashboard/pages/AdminUsers.jsx";
 import AddBlog from "./adminDashboard/pages/AddBlog.jsx";
 import EditBlog from "./adminDashboard/pages/EditBlog.jsx";
-import AdminHome from "./adminDashboard/pages/AdminHome.jsx";
+import AdminBlogs from "./adminDashboard/pages/AdminBlogs.jsx";
 import AddStock from "./adminDashboard/pages/AddStock.jsx";
 import EditStock from "./adminDashboard/pages/EditStock.jsx";
 import AdminStocks from "./adminDashboard/pages/AdminStocks.jsx";
 import Services from "./components/home-main/Services.jsx";
 import Login from "./pages/register/Login.js";
 import Signup from "./pages/register/Signup.js";
+import Dashboard from "./adminDashboard/pages/Dashboard.jsx";
+import Header from "./adminDashboard/components/AdminHeader.jsx";
+import Footer from "./adminDashboard/components/AdminFooter.jsx";
 
 const MainLayout = () => {
   return <Outlet />;
@@ -50,7 +53,9 @@ const MainLayout = () => {
 const AdminLayout = () => {
   return (
     <>
+      <Header />
       <Outlet />
+      <Footer />
     </>
   );
 };
@@ -103,11 +108,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/admin/dashboard",
-        element: <AdminHome />,
+        element: <Dashboard />,
       },
       {
-        path: "/admin/users",
-        element: <AdminUsers />,
+        path: "/admin/all-blogs",
+        element: <AdminBlogs />,
       },
       {
         path: "/admin/add-blog",
@@ -126,7 +131,7 @@ const router = createBrowserRouter([
         element: <EditStock />,
       },
       {
-        path: "/admin/all-stock",
+        path: "/admin/all-stocks",
         element: <AdminStocks />,
       },
     ],
