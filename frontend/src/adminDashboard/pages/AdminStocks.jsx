@@ -85,7 +85,7 @@ const AdminStocks = () => {
       <h2 className="stock-heading-title">📦 Stock Management</h2>
       {/* Button to redirect to AddStock page */}
       <button
-        className="add-stock-btn edit-btn"
+        className="add-stocks-btn"
         onClick={() => navigate("/admin/add-stock")}
       >
         ➕ Add New Stock

@@ -46,10 +46,13 @@ const EditBlog = ({ blogs, setBlogs }) => {
         <form onSubmit={handleUpdate} className="flex flex-col gap-4">
           {/* Title Input */}
           <div>
-            <label className="block text-white font-bold mb-1">Title:</label>
+            <label className="block text-white font-bold mb-1" htmlFor="title">
+              Title:
+            </label>
             <input
               type="text"
               value={editedBlog.title}
+              id="title"
               onChange={(e) =>
                 setEditedBlog({ ...editedBlog, title: e.target.value })
               }
@@ -60,9 +63,15 @@ const EditBlog = ({ blogs, setBlogs }) => {
 
           {/* Content Input */}
           <div>
-            <label className="block text-white font-bold mb-1">Content:</label>
+            <label
+              className="block text-white font-bold mb-1"
+              htmlFor="content"
+            >
+              Content:
+            </label>
             <textarea
               value={editedBlog.content}
+              id="content"
               onChange={(e) =>
                 setEditedBlog({ ...editedBlog, content: e.target.value })
               }
@@ -74,12 +83,13 @@ const EditBlog = ({ blogs, setBlogs }) => {
 
           {/* Image URL Input */}
           <div>
-            <label className="block text-white font-bold mb-1">
+            <label className="block text-white font-bold mb-1" htmlFor="img">
               Image URL:
             </label>
             <input
               type="text"
               value={editedBlog.coverImageUrl}
+              id="img"
               onChange={(e) =>
                 setEditedBlog({ ...editedBlog, coverImageUrl: e.target.value })
               }
