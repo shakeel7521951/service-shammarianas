@@ -3,11 +3,13 @@ import background from "../../../src/assets/background.jpg";
 import svg from "../../../src/assets/loginImage.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginCss.css";
+import { useSignUpMutation } from "../../features/usersApi";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [signUp] = useSignUpMutation();
   const [user, setUser] = useState({
-    username: "",
+    fullName: "",
     email: "",
     password: "",
   });
@@ -15,6 +17,16 @@ const Signup = () => {
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      let res = await signUp(user);
+      console.log(res.data);
+      navigate("/log-in");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -31,7 +43,7 @@ const Signup = () => {
         <div className="grid md:grid-cols-2 items-center gap-6">
           {/* Signup Form */}
           <div>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="mb-8">
                 <h3 className="text-white text-3xl font-bold">
                   Create an account
@@ -42,12 +54,12 @@ const Signup = () => {
               </div>
               <div>
                 <label className="text-white text-sm mb-2 block">
-                  User name
+                  Full Name
                 </label>
                 <input
-                  value={user.username}
+                  value={user.fullName}
                   onChange={handleChange}
-                  name="username"
+                  name="fullName"
                   type="text"
                   required
                   className="w-full text-sm text-white bg-transparent border border-gray-600 p-3 rounded-lg outline-none focus:border-blue-500"
@@ -85,7 +97,7 @@ const Signup = () => {
                 ></span>
               </div>
               <button
-                type="button"
+                type="submit"
                 onClick={() =>
                   console.log(user.username, user.password, user.email)
                 }

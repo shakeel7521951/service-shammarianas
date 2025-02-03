@@ -7,6 +7,7 @@ const AddStock = () => {
     title: "",
     description: "",
     file: null,
+    price: "",
   });
 
   const navigate = useNavigate();
@@ -34,11 +35,12 @@ const AddStock = () => {
     formData.append("title", newStock.title);
     formData.append("stockDescription", newStock.description);
     formData.append("file", newStock.file);
+    formData.append("price", newStock.price);
 
     try {
       await addStock(formData).unwrap();
       console.log("New Stock Added:", newStock);
-      navigate("/admin/all-stock");
+      navigate("/admin/all-stocks");
     } catch (error) {
       console.error("Error adding stock:", error);
     }
@@ -110,6 +112,22 @@ const AddStock = () => {
             required
             style={{ color: "#b3b3b3" }}
           />
+          <textarea
+            name="price"
+            value={newStock.price}
+            onChange={handleChange}
+            placeholder="Price"
+            required
+            style={{
+              padding: "12px",
+              backgroundColor: "#333",
+              border: "1px solid #444",
+              borderRadius: "6px",
+              color: "#f1f1f1",
+              width: "100%",
+              resize: "none",
+            }}
+          />
           <div style={{ display: "flex", gap: "10px" }}>
             <button
               type="submit"
@@ -132,7 +150,7 @@ const AddStock = () => {
             </button>
             <button
               type="button"
-              onClick={() => navigate("/admin/all-stock")}
+              onClick={() => navigate("/admin/all-stocks")}
               style={{
                 flex: 1,
                 padding: "12px",

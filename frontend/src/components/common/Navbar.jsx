@@ -1,8 +1,23 @@
 "use client";
 import React, { useEffect } from "react";
 import companyLogo from "../../../src/assets/companyLogo.png";
+import { useGetUserQuery, useSignOutMutation } from "../../features/usersApi";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
+  const { data: userData } = useGetUserQuery();
+
+  const [signOut] = useSignOutMutation();
+
+  const handleLogOut = async () => {
+    try {
+      await signOut();
+      window.location.reload();
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
   function handleScroll() {
     const bodyScroll = window.scrollY;
     const navbar = document.querySelector(".navbar");
@@ -326,15 +341,22 @@ function Navbar() {
             </li>
           </ul>
         </div>
-
-        <div className="contact-button">
-          <a
-            href="/log-in"
-            className="butn butn-sm butn-bg main-colorbg radius-5"
-          >
-            <span className="text">Let&apos;s start</span>
-          </a>
-        </div>
+        {userData?.user ? (
+          <div className="contact-button" onClick={() => handleLogOut()}>
+            <a className="butn butn-sm butn-bg main-colorbg radius-5">
+              <span className="text">LogOut</span>
+            </a>
+          </div>
+        ) : (
+          <div className="contact-button">
+            <a
+              href="/log-in"
+              className="butn butn-sm butn-bg main-colorbg radius-5"
+            >
+              <span className="text">Let&apos;s start</span>
+            </a>
+          </div>
+        )}
       </div>
     </nav>
   );

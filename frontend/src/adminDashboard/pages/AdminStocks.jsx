@@ -27,14 +27,6 @@ const AdminStocks = () => {
     setEditStock(stock);
   };
 
-  const handleSave = (updatedStock, id) => {
-    setStocks((prevStocks) =>
-      prevStocks.map((stock) => (stock._id === id ? updatedStock : stock))
-    );
-
-    setEditStock(null);
-  };
-
   const handleDelete = (id) => {
     setStocks((prevStocks) => prevStocks.filter((stock) => stock._id !== id));
     delStock(id);
@@ -80,6 +72,7 @@ const AdminStocks = () => {
                 {truncateDescription(stock.stockDescription)}
               </p>
 
+              <p className="stock-description">{stock.price} $</p>
               <div className="stock-actions">
                 <button className="edit-btn" onClick={() => handleEdit(stock)}>
                   ✏️ Edit

@@ -4,6 +4,7 @@ export const stocksApi = createApi({
   reducerPath: "stocksApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:2000/api/stock",
+    credentials: "include",
   }),
   tagTypes: ["Stock"],
 

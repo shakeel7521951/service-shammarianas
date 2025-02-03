@@ -12,7 +12,7 @@ const Footer = () => {
         alignItems: "center",
         position: "relative",
         bottom: 0,
-        width: "100%",
+        width: "93%",
         boxShadow: "0 -4px 8px rgba(0, 0, 0, 0.3)",
       }}
     >

@@ -8,6 +8,7 @@ import commentRouter from "./routes/commentRoutes.js";
 import cookieParser from "cookie-parser";
 import stockRouter from "./routes/stockRoutes.js";
 import cors from "cors";
+import cartRouter from "./routes/cartRoutes.js";
 
 dotenv.config();
 
@@ -17,7 +18,12 @@ const PORT = process.env.PORT || 8000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 
 // app.use(express.static(path.resolve("./public")));
 
@@ -25,6 +31,7 @@ app.use("/api/user", userRouter);
 app.use("/api/blog", blogRouter);
 app.use("/api/comment", commentRouter);
 app.use("/api/stock", stockRouter);
+app.use("/api/cart", cartRouter);
 
 app.listen(PORT, () => {
   dbConnect();

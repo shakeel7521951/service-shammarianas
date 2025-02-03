@@ -12,7 +12,7 @@ const Header = () => {
         color: "#e0e0e0",
         position: "sticky",
         top: 0,
-        width: "100%",
+        width: "93%",
         zIndex: 1000,
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)",
       }}
@@ -22,7 +22,7 @@ const Header = () => {
           fontSize: "24px",
           fontWeight: "600",
           fontFamily: "Poppins, sans-serif",
-          color: "#ff9800", // Highlighted text color
+          color: "#ff9800",
         }}
       >
         Admin Pannel
@@ -40,7 +40,7 @@ const Header = () => {
         >
           <li>
             <a
-              href="#home"
+              href="/"
               style={{
                 color: "#e0e0e0",
                 fontSize: "16px",
@@ -56,7 +56,7 @@ const Header = () => {
           </li>
           <li>
             <a
-              href="#about"
+              href="/admin/dashboard"
               style={{
                 color: "#e0e0e0",
                 fontSize: "16px",
@@ -67,7 +67,7 @@ const Header = () => {
               onMouseOver={(e) => (e.target.style.color = "#ff9800")}
               onMouseOut={(e) => (e.target.style.color = "#e0e0e0")}
             >
-              About
+              Dashboard
             </a>
           </li>
           <li>
@@ -83,7 +83,7 @@ const Header = () => {
               onMouseOver={(e) => (e.target.style.color = "#ff9800")}
               onMouseOut={(e) => (e.target.style.color = "#e0e0e0")}
             >
-              Services
+              LogIn
             </a>
           </li>
           <li>
@@ -99,7 +99,7 @@ const Header = () => {
               onMouseOver={(e) => (e.target.style.color = "#ff9800")}
               onMouseOut={(e) => (e.target.style.color = "#e0e0e0")}
             >
-              Contact
+              Logout
             </a>
           </li>
         </ul>

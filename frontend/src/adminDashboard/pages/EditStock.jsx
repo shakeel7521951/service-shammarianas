@@ -7,6 +7,7 @@ const EditStock = ({ stock, onCancel }) => {
     title: "",
     description: "",
     image: null,
+    price: "",
   });
 
   const [updateStock, { isLoading }] = useUpdateStockMutation();
@@ -17,6 +18,7 @@ const EditStock = ({ stock, onCancel }) => {
         title: stock.title,
         description: stock.stockDescription,
         image: stock.stockImageUrl,
+        price: stock.price,
       });
     }
   }, [stock]);
@@ -36,7 +38,12 @@ const EditStock = ({ stock, onCancel }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!editedStock.title || !editedStock.description || !editedStock.image) {
+    if (
+      !editedStock.title ||
+      !editedStock.description ||
+      !editedStock.image ||
+      !editedStock.price
+    ) {
       alert("All fields are required!");
       return;
     }
@@ -44,6 +51,7 @@ const EditStock = ({ stock, onCancel }) => {
     const formData = new FormData();
     formData.append("title", editedStock.title);
     formData.append("stockDescription", editedStock.description);
+    formData.append("price", editedStock.price);
 
     if (editedStock.image instanceof File) {
       formData.append("file", editedStock.image);
@@ -77,6 +85,15 @@ const EditStock = ({ stock, onCancel }) => {
           <textarea
             name="description"
             value={editedStock.description}
+            onChange={handleChange}
+            className="edit-stock-inputs"
+            required
+          />
+          <label>Price</label>
+          <input
+            type="text"
+            name="price"
+            value={editedStock.price}
             onChange={handleChange}
             className="edit-stock-inputs"
             required

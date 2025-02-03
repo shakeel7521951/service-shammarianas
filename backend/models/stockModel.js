@@ -16,6 +16,10 @@ const stockSchema = new Schema(
       type: String,
       required: true,
     },
+    price: {
+      type: String,
+      default: "",
+    },
     // author: {
     //   type: Schema.Types.ObjectId,
     //   ref: "User",

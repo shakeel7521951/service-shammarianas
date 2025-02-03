@@ -5,7 +5,7 @@ import cloudinary from "../utils/cloudinary.js";
 export const addStock = async (req, res) => {
   const userId = req.id;
   let file = req.file;
-  const { title, stockDescription } = req.body;
+  const { title, stockDescription, price } = req.body;
 
   try {
     if (!req.file) {
@@ -22,6 +22,7 @@ export const addStock = async (req, res) => {
       title,
       stockImageUrl: cloudRes.secure_url,
       stockDescription,
+      price,
       // author: "admin",
     });
 
@@ -71,7 +72,7 @@ export const getStockById = async (req, res) => {
 export const updateStock = async (req, res) => {
   const userId = req.id;
   const { id } = req.params;
-  const { title, stockDescription } = req.body;
+  const { title, stockDescription, price } = req.body;
   let file = req.file;
   let cloudRes;
 
@@ -100,7 +101,9 @@ export const updateStock = async (req, res) => {
       });
       stock.stockImageUrl = cloudRes.secure_url;
     }
-
+    if (price) {
+      stock.price = price;
+    }
     await stock.save();
 
     return res
