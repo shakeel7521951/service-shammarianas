@@ -59,6 +59,7 @@ export const addStock = async (req, res) => {
     const newStock = await Stock.create({
       title,
       stockImageUrl: cloudRes.secure_url,
+      publicId: cloudRes.public_id,
       stockDescription,
       price,
       category,
@@ -145,7 +146,9 @@ export const updateStock = async (req, res) => {
     if (stockDescription) stock.stockDescription = stockDescription;
     if (price) {
       price = Number(price);
-      stock.price = price + 2;
+      stock.price = price;
+    } else {
+      stock.price = 0;
     }
     if (file) {
       const fileExt = path.extname(file.originalname).toLowerCase();
