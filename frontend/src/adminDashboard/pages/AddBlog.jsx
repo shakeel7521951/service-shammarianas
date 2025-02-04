@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useAddBlogMutation } from "../../features/blogsApi";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const AddBlog = () => {
+  const navigate = useNavigate();
   const [addBlog] = useAddBlogMutation();
   const [loading, setLoading] = useState(false);
 
@@ -10,6 +12,7 @@ const AddBlog = () => {
     description: "",
     file: null,
     category: "",
+    author: "",
   });
 
   const handleChange = (e) => {
@@ -34,6 +37,8 @@ const AddBlog = () => {
     formData.append("title", blog.title);
     formData.append("body", blog.description);
     formData.append("category", blog.category);
+    formData.append("author", blog.author);
+
     if (blog.file) formData.append("file", blog.file);
 
     try {
@@ -45,6 +50,7 @@ const AddBlog = () => {
         file: null,
         category: "",
       });
+      navigate("/admin/all-blogs");
     } catch (error) {
       console.error("Failed to add blog:", error.message);
       alert("Failed to add blog. Please try again.");
@@ -98,6 +104,24 @@ const AddBlog = () => {
               }}
             />
           </div>
+          <div>
+            <label style={{ color: "#b3b3b3" }}>Author:</label>
+            <input
+              type="text"
+              name="author"
+              value={blog.author}
+              onChange={handleChange}
+              required
+              style={{
+                width: "100%",
+                padding: "12px",
+                backgroundColor: "#333",
+                borderRadius: "6px",
+                border: "1px solid #444",
+                color: "#f1f1f1",
+              }}
+            />
+          </div>
 
           <div>
             <label style={{ color: "#b3b3b3" }}>Description:</label>
@@ -124,7 +148,6 @@ const AddBlog = () => {
               type="file"
               name="file"
               onChange={handleFileChange}
-              accept="image/*"
               required
               style={{ color: "#b3b3b3" }}
             />

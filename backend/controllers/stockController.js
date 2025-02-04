@@ -1,29 +1,62 @@
 import Stock from "../models/stockModel.js";
 import getDataUri from "../utils/dataUri.js";
 import cloudinary from "../utils/cloudinary.js";
+import path from "path";
 
 export const addStock = async (req, res) => {
   const userId = req.id;
-  let file = req.file;
-  const { title, stockDescription, price } = req.body;
+  const file = req.file;
+  const { title, stockDescription, price, category } = req.body;
 
   try {
-    if (!req.file) {
+    const allowedCategories = [
+      "Electronics",
+      "Fashion",
+      "Home & Kitchen",
+      "Sports",
+      "Books",
+      "Health & Beauty",
+      "Other",
+    ];
+
+    if (!allowedCategories.includes(category)) {
       return res
         .status(400)
-        .json({ success: false, message: "Stock image is required." });
+        .json({ success: false, message: "Invalid category." });
+    }
+
+    if (!file) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Stock image or video is required." });
+    }
+
+    const fileExt = path.extname(file.originalname).toLowerCase();
+    const isVideo = [".mp4", ".mov", ".avi", ".mkv"].includes(fileExt);
+    const isImage = [".jpg", ".jpeg", ".png", ".gif", ".webp"].includes(
+      fileExt
+    );
+
+    if (!isVideo && !isImage) {
+      return res.status(400).json({
+        success: false,
+        message: "Unsupported file type. Upload images or videos only.",
+      });
     }
 
     const dataUri = getDataUri(file);
+
     let cloudRes = await cloudinary.uploader.upload(dataUri, {
       folder: "shamarian_stocks",
+      resource_type: isVideo ? "video" : "image",
     });
+
     const newStock = await Stock.create({
       title,
       stockImageUrl: cloudRes.secure_url,
       stockDescription,
-      price,
-      // author: "admin",
+      price: price || null,
+      category, // ✅ Added category field
     });
 
     return res.status(201).json({ success: true, stock: newStock });
@@ -72,9 +105,8 @@ export const getStockById = async (req, res) => {
 export const updateStock = async (req, res) => {
   const userId = req.id;
   const { id } = req.params;
-  const { title, stockDescription, price } = req.body;
+  const { title, stockDescription, price, category } = req.body;
   let file = req.file;
-  let cloudRes;
 
   try {
     const stock = await Stock.findById(id);
@@ -85,25 +117,52 @@ export const updateStock = async (req, res) => {
         .json({ success: false, message: "Stock not found." });
     }
 
-    // if (stock.author == userId) {
-    //   return res.status(403).json({
-    //     success: false,
-    //     message: "Unauthorized to update this stock.",
-    //   });
-    // }
+    if (category) {
+      const allowedCategories = [
+        "Electronics",
+        "Fashion",
+        "Home & Kitchen",
+        "Sports",
+        "Books",
+        "Health & Beauty",
+        "Other",
+      ];
+      if (!allowedCategories.includes(category)) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Invalid category." });
+      }
+      stock.category = category;
+    }
 
     if (title) stock.title = title;
     if (stockDescription) stock.stockDescription = stockDescription;
+    if (price) stock.price = price;
+
     if (file) {
+      const fileExt = path.extname(file.originalname).toLowerCase();
+      const isVideo = [".mp4", ".mov", ".avi", ".mkv"].includes(fileExt);
+      const isImage = [".jpg", ".jpeg", ".png", ".gif", ".webp"].includes(
+        fileExt
+      );
+
+      if (!isVideo && !isImage) {
+        return res.status(400).json({
+          success: false,
+          message: "Unsupported file type. Upload images or videos only.",
+        });
+      }
+
       const dataUri = getDataUri(file);
-      cloudRes = await cloudinary.uploader.upload(dataUri, {
+
+      let cloudRes = await cloudinary.uploader.upload(dataUri, {
         folder: "shamarian_stocks",
+        resource_type: isVideo ? "video" : "image",
       });
+
       stock.stockImageUrl = cloudRes.secure_url;
     }
-    if (price) {
-      stock.price = price;
-    }
+
     await stock.save();
 
     return res

@@ -6,7 +6,7 @@ import cloudinary from "../utils/cloudinary.js";
 
 export const addBlog = async (req, res) => {
   const userId = req.id;
-  const { title, body, category } = req.body;
+  const { title, body, category, author } = req.body;
   let file = req.file;
   try {
     const allowedCategories = [
@@ -33,6 +33,7 @@ export const addBlog = async (req, res) => {
       category,
       createdBy: userId,
       coverImageUrl: cloudRes.secure_url,
+      author,
     });
 
     return res.status(201).json({ success: true, blog: newBlog });
@@ -69,7 +70,6 @@ export const getBlog = async (req, res) => {
 export const getAllBlogs = async (req, res) => {
   try {
     const blogs = await Blog.find()
-      .populate("createdBy", "fullName email")
       .populate({
         path: "comments",
         populate: { path: "author", select: "fullName email" },
@@ -135,7 +135,7 @@ export const updateBlog = async (req, res) => {
   const userId = req.id;
   const file = req.file;
   const blogId = req.params.id;
-  const { title, body, category } = req.body;
+  const { title, body, category, author } = req.body;
   let cloudRes;
 
   try {
@@ -188,6 +188,7 @@ export const updateBlog = async (req, res) => {
           ...(title && { title }),
           ...(body && { body }),
           ...(category && { category }),
+          ...(author && { author }),
           ...(req.file && { coverImageUrl: cloudRes.secure_url }),
         },
       },
