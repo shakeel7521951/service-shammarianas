@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import companyLogo from "../../../src/assets/companyLogo.png";
 import { useGetUserQuery, useSignOutMutation } from "../../features/usersApi";
 import { useNavigate } from "react-router-dom";
+import { FaCartPlus } from "react-icons/fa";
 import { FaRegAddressCard } from "react-icons/fa"; // Import card icon
 
 function Navbar() {
@@ -15,7 +16,7 @@ function Navbar() {
   const navbarCollapseRef = useRef(null);
 
   const handleDropDown = () => {
-    setShowDropDown(!showDropDown); 
+    setShowDropDown(!showDropDown);
   };
 
   const handleLogOut = async () => {
@@ -78,7 +79,10 @@ function Navbar() {
           </span>
         </button>
 
-        <div ref={navbarCollapseRef} className="collapse navbar-collapse justify-content-center">
+        <div
+          ref={navbarCollapseRef}
+          className="collapse navbar-collapse justify-content-center"
+        >
           <ul className="navbar-nav">
             <li
               onMouseLeave={handleDropdownMouseLeave}
@@ -126,18 +130,33 @@ function Navbar() {
 
         {userData?.user ? (
           <>
-            <div className="contact-button position-relative" onClick={handleDropDown}>
-              <a className="butn butn-sm butn-bg main-colorbg d-flex justify-content-center cursor-pointer align-items-center" style={{ width: "40px", height: "40px", borderRadius: "100%" }}>
-                {userData?.user?.firstName ? userData.user.fullName.charAt(0).toUpperCase() : "k"}
+            <div className="contact-button" onClick={()=>window.location.href = '/cart-data'}>
+              <a className="butn butn-sm d-flex justify-content-center cursor-pointer align-items-center">
+                <FaCartPlus style={{ fontSize: "35px" }} />
               </a>
             </div>
+            <div
+              className="contact-button position-relative"
+              onClick={handleDropDown}
+            >
+              <a
+                className="butn butn-sm butn-bg main-colorbg d-flex justify-content-center cursor-pointer align-items-center"
+                style={{ width: "40px", height: "40px", borderRadius: "100%" }}
+              >
+                {userData?.user?.firstName
+                  ? userData.user.fullName.charAt(0).toUpperCase()
+                  : "k"}
+              </a>
+            </div>
+
             {showDropDown && (
               <div className="profileDropDown position-absolute show mt-3">
                 <ul>
                   {userData?.user?.role === "admin" && (
                     <li className="pb-2">
                       <a onClick={handleNavigateToDashboard}>
-                        <FaRegAddressCard className=" me-2" /> Dashboard
+                        <FaRegAddressCard className=" me-2" style={{ fontSize: "30px" }} /> {/* Increased icon size */}
+                        Dashboard
                       </a>
                     </li>
                   )}
@@ -152,7 +171,10 @@ function Navbar() {
           </>
         ) : (
           <div className="contact-button">
-            <a href="/log-in" className="butn butn-sm butn-bg main-colorbg radius-5">
+            <a
+              href="/log-in"
+              className="butn butn-sm butn-bg main-colorbg radius-5"
+            >
               <span className="text">Sign In</span>
             </a>
           </div>
