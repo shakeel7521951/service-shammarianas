@@ -1,5 +1,6 @@
 "use client";
 
+import { useAddToCartMutation } from "../../features/cartApi";
 import { useGetStocksQuery } from "../../features/stocksApi";
 
 const allowedCategories = [
@@ -14,6 +15,7 @@ const allowedCategories = [
 
 function Store() {
   const { data, isLoading, error } = useGetStocksQuery();
+  const [addToCart] = useAddToCartMutation();
 
   // Ensure we have data before accessing it
   const stockData = data?.stocks || [];
@@ -25,6 +27,11 @@ function Store() {
 
   if (isLoading) return <p>Loading stocks...</p>;
   if (error) return <p>Error fetching stocks. Please try again.</p>;
+
+  const add = async (id) => {
+    await addToCart(id);
+    alert("Added Successfully");
+  };
 
   return (
     <section className="work-grid section-padding pb-0">
@@ -105,7 +112,10 @@ function Store() {
                     </a>
                   </div>
                 </div>
-                <button className="btn main-colorbg mt-2 w-100">
+                <button
+                  className="btn main-colorbg mt-2 w-100"
+                  onClick={() => add(item._id)}
+                >
                   Add to Cart
                 </button>
               </div>

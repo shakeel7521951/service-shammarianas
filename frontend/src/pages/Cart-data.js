@@ -19,7 +19,7 @@ import Header from "../components/cardData/Header";
 import CardItems from "../components/cardData/CardItems";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-const CartData =()=> {
+const CartData = () => {
   const main = useRef();
 
   useEffect(() => {
@@ -153,5 +153,5 @@ const CartData =()=> {
       </body>
     </>
   );
-}
+};
 export default CartData;

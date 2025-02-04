@@ -1,6 +1,12 @@
 import React from "react";
+import { useGetBlogsQuery } from "../../features/blogsApi";
+import { useParams } from "react-router-dom";
 
 function Blog() {
+  const params = useParams();
+  let id = params.id;
+  const { data } = useGetBlogsQuery();
+  let blog = data?.blogs?.find((blog) => blog._id === id);
   return (
     <section className="blog section-padding">
       <div className="container">
@@ -11,15 +17,10 @@ function Blog() {
                 <article>
                   <div className="text">
                     <p>
-                      <span className="spec-letter">SH</span> new report said
-                      earlier this week that Apple is working on a brand new
-                      laptop. Apple plans to release a 15-inch MacBook Air in
-                      2023, a first for the Air series. A trusted Apple insider
-                      with a proven track record confirmed that Apple is working
-                      on the larger MacBook Air.
+                      <span className="spec-letter">SH</span> {blog?.body}
                     </p>
                   </div>
-                  <div className="text">
+                  {/* <div className="text">
                     <p>
                       However, Apple might not include it in the Air series when
                       it launches it. As for the notebook’s release date, the
@@ -38,10 +39,10 @@ function Blog() {
                       an 11-inch MacBook Air, but the company discontinued that
                       model in 2017.
                     </p>
-                  </div>
+                  </div> */}
                 </article>
 
-                <div className="post-qoute mt-50">
+                {/* <div className="post-qoute mt-50">
                   <h6 className="fz-20">
                     <span className="l-block">
                       And the day came when the risk to remain tight in a bud
@@ -49,9 +50,9 @@ function Blog() {
                     </span>
                     <span className="sub-title mt-20 mb-0"> - UiCamp</span>
                   </h6>
-                </div>
+                </div> */}
 
-                <div className="mb-50 mt-50">
+                {/* <div className="mb-50 mt-50">
                   <div className="row">
                     <div className="col-sm-6">
                       <div className="iner-img sm-mb30">
@@ -64,9 +65,9 @@ function Blog() {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
-                <div className="title mb-10">
+                {/* <div className="title mb-10">
                   <h4>Apple currently sells.</h4>
                 </div>
 
@@ -78,9 +79,9 @@ function Blog() {
                     insider with a proven track record confirmed that Apple is
                     working on the larger MacBook Air.
                   </p>
-                </div>
+                </div> */}
 
-                <div className="unorder-list mb-30">
+                {/* <div className="unorder-list mb-30">
                   <h6 className="mb-15">Ordered & Unordered Lists.</h6>
                   <ul className="rest">
                     <li>Yet this above sewed flirted opened ouch</li>
@@ -89,9 +90,9 @@ function Blog() {
                       Abominable this abidin far successfully then like piquan
                     </li>
                   </ul>
-                </div>
+                </div> */}
 
-                <div className="order-list mb-30">
+                {/* <div className="order-list mb-30">
                   <h6 className="mb-15">Ordered & Unordered Lists.</h6>
                   <ul className="rest">
                     <li>
@@ -168,63 +169,63 @@ function Blog() {
                     </div>
                   </div>
                 </div>
+              </div> */}
               </div>
-            </div>
-            <div className="comments-from mt-80">
-              <div className="mb-60">
-                <h3>Leave a comment</h3>
-              </div>
-              <form id="contact-form" method="post" action="contact.php">
-                <div className="messages"></div>
+              <div className="comments-from mt-80">
+                <div className="mb-60">
+                  <h3>Leave a comment</h3>
+                </div>
+                <form id="contact-form" method="post" action="contact.php">
+                  <div className="messages"></div>
 
-                <div className="controls row">
-                  <div className="col-lg-6">
-                    <div className="form-group mb-30">
-                      <input
-                        id="form_name"
-                        type="text"
-                        name="name"
-                        placeholder="Name"
-                        required="required"
-                      />
+                  <div className="controls row">
+                    <div className="col-lg-6">
+                      <div className="form-group mb-30">
+                        <input
+                          id="form_name"
+                          type="text"
+                          name="name"
+                          placeholder="Name"
+                          required="required"
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="col-lg-6">
-                    <div className="form-group mb-30">
-                      <input
-                        id="form_email"
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        required="required"
-                      />
+                    <div className="col-lg-6">
+                      <div className="form-group mb-30">
+                        <input
+                          id="form_email"
+                          type="email"
+                          name="email"
+                          placeholder="Email"
+                          required="required"
+                        />
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="col-12">
-                    <div className="form-group">
-                      <textarea
-                        id="form_message"
-                        name="message"
-                        placeholder="Message"
-                        rows="4"
-                        required="required"
-                      ></textarea>
-                    </div>
-                    <div className="text-center">
-                      <div className="mt-30">
-                        <button type="submit">
-                          <span className="text">Post Comment</span>
-                        </button>
+                    <div className="col-12">
+                      <div className="form-group">
+                        <textarea
+                          id="form_message"
+                          name="message"
+                          placeholder="Message"
+                          rows="4"
+                          required="required"
+                        ></textarea>
+                      </div>
+                      <div className="text-center">
+                        <div className="mt-30">
+                          <button type="submit">
+                            <span className="text">Post Comment</span>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
-          </div>
-          {/* <div className="col-lg-4">
+            {/* <div className="col-lg-4">
             <div className="sidebar">
               <div className="widget">
                 <h6 className="title-widget">Search Here</h6>
@@ -355,6 +356,7 @@ function Blog() {
               </div>
             </div>
           </div> */}
+          </div>
         </div>
       </div>
     </section>

@@ -3,8 +3,8 @@ import React, { useEffect, useState, useRef } from "react";
 import companyLogo from "../../../src/assets/companyLogo.png";
 import { useGetUserQuery, useSignOutMutation } from "../../features/usersApi";
 import { useNavigate } from "react-router-dom";
-import { FaCartPlus } from "react-icons/fa";
-import { FaRegAddressCard } from "react-icons/fa"; // Import card icon
+// import { FaCartPlus } from "react-icons/fa";
+// import { FaRegAddressCard } from "react-icons/fa"; // Import card icon
 
 function Navbar() {
   const navigate = useNavigate();
@@ -130,9 +130,12 @@ function Navbar() {
 
         {userData?.user ? (
           <>
-            <div className="contact-button" onClick={()=>window.location.href = '/cart-data'}>
+            <div
+              className="contact-button"
+              onClick={() => (window.location.href = "/cart-data")}
+            >
               <a className="butn butn-sm d-flex justify-content-center cursor-pointer align-items-center">
-                <FaCartPlus style={{ fontSize: "35px" }} />
+                {/* <FaCartPlus style={{ fontSize: "35px" }} /> */}
               </a>
             </div>
             <div
@@ -143,9 +146,7 @@ function Navbar() {
                 className="butn butn-sm butn-bg main-colorbg d-flex justify-content-center cursor-pointer align-items-center"
                 style={{ width: "40px", height: "40px", borderRadius: "100%" }}
               >
-                {userData?.user?.firstName
-                  ? userData.user.fullName.charAt(0).toUpperCase()
-                  : "k"}
+                {userData?.user?.fullName.charAt(0).toUpperCase()}
               </a>
             </div>
 
@@ -155,8 +156,11 @@ function Navbar() {
                   {userData?.user?.role === "admin" && (
                     <li className="pb-2">
                       <a onClick={handleNavigateToDashboard}>
-                        <FaRegAddressCard className=" me-2" style={{ fontSize: "30px" }} /> {/* Increased icon size */}
-                        Dashboard
+                        {/* <FaRegAddressCard
+                          className=" me-2"
+                          style={{ fontSize: "30px" }}
+                        />{" "} */}
+                        Increased icon size Dashboard
                       </a>
                     </li>
                   )}

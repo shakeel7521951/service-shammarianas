@@ -1,45 +1,61 @@
 import React from "react";
+import { useGetBlogsQuery } from "../../features/blogsApi";
 
 function Blogs() {
+  const { data } = useGetBlogsQuery();
+  const formatDate = (isoString) => {
+    const date = new Date(isoString);
+
+    return date.toLocaleString("en-US", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
+  };
+  const truncateText = (text, wordLimit) => {
+    const words = text.split(" ");
+    if (words.length > wordLimit) {
+      return words.slice(0, wordLimit).join(" ") + "...";
+    }
+    return text;
+  };
   return (
     <section className="blog-main section-padding">
       <div className="container">
         <div className="row lg-marg justify-content-around">
           <div className="col-lg-8">
             <div className="md-mb80">
-              <div className="item mb-80">
-                <div className="img">
-                  <img src="/assets/imgs/blog/blog1.jpg" alt="" />
-                </div>
-                <div className="content">
-                  <div className="d-flex align-items-center mb-15">
-                    <div className="post-date">20 July 2020</div>
-                    <div className="commt opacity-7 fz-13">
-                      <span className="ti-comment-alt mr-10"></span>4 Comments
-                    </div>
+              {data?.blogs.map((item) => (
+                <div className="item mb-80">
+                  <div className="img">
+                    <img src={item.coverImageUrl} alt="" />
                   </div>
-                  <h3 className="mb-15">
-                    <a href="/blog-details">
-                      12 Tips to Leading an
-                      <span className="fw-200">Extraordinary</span>
-                      Company
+                  <div className="content">
+                    <div className="d-flex align-items-center mb-15">
+                      <div className="post-date">
+                        {formatDate(item.createdAt)}
+                      </div>
+                      <div className="commt opacity-7 fz-13">
+                        <span className="ti-comment-alt mr-10"></span>
+                        {item.comments.length}
+                      </div>
+                    </div>
+                    <h3 className="mb-15">
+                      <a href={`/blog-details/${item._id}`}>{item.title}</a>
+                    </h3>
+                    <p>{truncateText(item.body, 30)}</p>
+                    <a
+                      href={`/blog-details/${item._id}`}
+                      className="d-flex align-items-center main-color mt-40"
+                    >
+                      <span className="text mr-15">Read More</span>
+                      <span className="ti-arrow-top-right"></span>
                     </a>
-                  </h3>
-                  <p>
-                    With worldwide annual spend on digital advertising
-                    surpassing $325 billion, it’s no surprise that different
-                    approaches to online marketing.
-                  </p>
-                  <a
-                    href="/blog-details"
-                    className="d-flex align-items-center main-color mt-40"
-                  >
-                    <span className="text mr-15">Read More</span>
-                    <span className="ti-arrow-top-right"></span>
-                  </a>
+                  </div>
                 </div>
-              </div>
-              <div className="item mb-80">
+              ))}
+
+              {/* <div className="item mb-80">
                 <div className="img">
                   <img src="/assets/imgs/blog/blog2.jpg" alt="" />
                 </div>
@@ -101,7 +117,7 @@ function Blogs() {
                     <span className="ti-arrow-top-right"></span>
                   </a>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           {/* <div className="col-lg-4">

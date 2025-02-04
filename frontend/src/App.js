@@ -68,7 +68,7 @@ const router = createBrowserRouter([
       // <Route path="/" element={<Home />} />
       { path: "/", element: <HomeMain /> },
       { path: "/blog-classic", element: <BlogClassic /> },
-      { path: "/blog-details", element: <BlogDetails /> },
+      { path: "/blog-details/:id", element: <BlogDetails /> },
       { path: "/blog-grid-3column", element: <BlogGrid3Columns /> },
       { path: "/blog-grid-sidebar", element: <BlogGridSidebar /> },
       // { path: "/home-creative-agency", element: <HomeCreativeAgency /> },
