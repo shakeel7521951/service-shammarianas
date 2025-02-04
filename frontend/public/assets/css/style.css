@@ -13,6 +13,54 @@
 -----------------------------------------------------------------*/
 /* Typography
 -----------------------------------------------------------------*/
+
+/* navbar styling -------- */
+.profileDropDown {
+  width: 150px;
+  background-color: black;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(161, 152, 152, 0.1);
+  top: 50px;  /* Position it below the button */
+  right: 0;   /* Align it to the right */
+  display: none; /* Hidden by default */
+  padding: 10px;
+}
+
+.profileDropDown.show {
+  display: block;  /* Show the dropdown when it's active */
+}
+
+.profileDropDown ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profileDropDown ul li {
+  cursor: pointer;
+  padding: 8px 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.profileDropDown ul li:last-child {
+  border-bottom: none;
+}
+
+.profileDropDown ul li a {
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+/* .profileDropDown ul li a:hover {
+  background-color: #f5f5f5;
+} */
+
+.profileDropDown ul li a i {
+  margin-right: 8px;
+}
+
 * {
   margin: 0;
   padding: 0;
