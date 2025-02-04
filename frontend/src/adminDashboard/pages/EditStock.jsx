@@ -20,7 +20,7 @@ const EditStock = ({ stock, onCancel }) => {
         description: stock.stockDescription,
         image: stock.stockImageUrl,
         price: stock.price,
-        category: stock.category || "", // Set category if available
+        category: stock.category || "",
       });
     }
   }, [stock]);
@@ -37,7 +37,10 @@ const EditStock = ({ stock, onCancel }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEditedStock((prev) => ({ ...prev, [name]: value }));
+    setEditedStock((prev) => ({
+      ...prev,
+      [name]: name === "price" ? Number(value) : value,
+    }));
   };
 
   const handleFileChange = (e) => {
@@ -54,7 +57,6 @@ const EditStock = ({ stock, onCancel }) => {
       !editedStock.title ||
       !editedStock.description ||
       !editedStock.image ||
-      !editedStock.price ||
       !editedStock.category
     ) {
       alert("All fields are required!");
@@ -64,7 +66,7 @@ const EditStock = ({ stock, onCancel }) => {
     const formData = new FormData();
     formData.append("title", editedStock.title);
     formData.append("stockDescription", editedStock.description);
-    formData.append("price", editedStock.price);
+    formData.append("price", editedStock.price.toString());
     formData.append("category", editedStock.category);
 
     if (editedStock.image instanceof File) {
@@ -124,10 +126,10 @@ const EditStock = ({ stock, onCancel }) => {
           <input
             type="number"
             name="price"
+            required
             value={editedStock.price}
             onChange={handleChange}
             className="edit-stock-inputs"
-            required
           />
 
           <label>Current File</label>

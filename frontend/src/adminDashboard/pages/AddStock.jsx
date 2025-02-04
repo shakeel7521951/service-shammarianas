@@ -8,7 +8,7 @@ const AddStock = () => {
     description: "",
     file: null,
     price: "",
-    category: "", // ✅ Added category field
+    category: "",
   });
 
   const navigate = useNavigate();
@@ -22,13 +22,13 @@ const AddStock = () => {
     "Books",
     "Health & Beauty",
     "Other",
-  ]; // ✅ Predefined categories
+  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewStock((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: name === "price" ? Number(value) : value,
     }));
   };
 
@@ -46,7 +46,7 @@ const AddStock = () => {
     formData.append("title", newStock.title);
     formData.append("stockDescription", newStock.description);
     formData.append("file", newStock.file);
-    formData.append("price", newStock.price);
+    formData.append("price", newStock.price.toString());
     formData.append("category", newStock.category);
 
     try {
@@ -151,6 +151,7 @@ const AddStock = () => {
           <input
             type="number"
             name="price"
+            required
             value={newStock.price}
             onChange={handleChange}
             placeholder="Stock Price"
