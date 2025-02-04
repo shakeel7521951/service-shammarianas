@@ -6,8 +6,8 @@ import path from "path";
 export const addStock = async (req, res) => {
   const userId = req.id;
   const file = req.file;
-  const { title, stockDescription, price, category } = req.body;
-
+  const { title, stockDescription, category } = req.body;
+  let { price } = req.body;
   try {
     const allowedCategories = [
       "Electronics",
@@ -51,12 +51,17 @@ export const addStock = async (req, res) => {
       resource_type: isVideo ? "video" : "image",
     });
 
+    if (price !== undefined && price !== null && price !== "") {
+      price = Number(price);
+    } else {
+      price = 0;
+    }
     const newStock = await Stock.create({
       title,
       stockImageUrl: cloudRes.secure_url,
       stockDescription,
-      price: price || null,
-      category, // ✅ Added category field
+      price,
+      category,
     });
 
     return res.status(201).json({ success: true, stock: newStock });
@@ -105,8 +110,9 @@ export const getStockById = async (req, res) => {
 export const updateStock = async (req, res) => {
   const userId = req.id;
   const { id } = req.params;
-  const { title, stockDescription, price, category } = req.body;
+  const { title, stockDescription, category } = req.body;
   let file = req.file;
+  let { price } = req.body;
 
   try {
     const stock = await Stock.findById(id);
@@ -137,8 +143,10 @@ export const updateStock = async (req, res) => {
 
     if (title) stock.title = title;
     if (stockDescription) stock.stockDescription = stockDescription;
-    if (price) stock.price = price;
-
+    if (price) {
+      price = Number(price);
+      stock.price = price + 2;
+    }
     if (file) {
       const fileExt = path.extname(file.originalname).toLowerCase();
       const isVideo = [".mp4", ".mov", ".avi", ".mkv"].includes(fileExt);
