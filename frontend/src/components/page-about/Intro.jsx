@@ -29,7 +29,7 @@ function Intro() {
               </h3>
               <p>
                 Sham Marians is dedicated to transforming businesses through cutting-edge digital solutions. 
-                With expertise in branding, web development, and UI/UX design, we help brands establish a 
+                With expertise in branding, web development, and Video Production, we help brands establish a 
                 strong online presence and achieve remarkable growth. Our commitment is to deliver creative, 
                 high-impact solutions that drive success in the digital landscape.
               </p>

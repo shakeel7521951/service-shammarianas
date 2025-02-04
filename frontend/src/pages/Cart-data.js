@@ -6,15 +6,6 @@ import Footer from "../components/common/Footer";
 import Navbar from "../components/common/Navbar";
 import Marq2 from "../components/common/Marq2";
 import { Helmet } from "react-helmet";
-import Header from "../components/home-main/Header";
-import Intro from "../components/home-main/Intro";
-import Portfolio from "../components/home-main/Portfolio";
-import Services from "../components/home-main/Services";
-import Team from "../components/home-main/Team";
-import Testimonials from "../components/home-main/Testimonials";
-import Clients from "../components/home-main/Clients";
-import Feat from "../components/home-main/Feat";
-import Marq from "../components/home-main/Marq";
 import WOW from "wowjs";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -22,11 +13,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { useGSAP } from "@gsap/react";
 import { useEffect, useRef } from "react";
+import initIsotope from "../common/initIsotope";
+import Store from "../components/stock/Store";
+import Header from "../components/cardData/Header";
+import CardItems from "../components/cardData/CardItems";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-export default function HomeMain() {
+const CartData =()=> {
   const main = useRef();
-  const smoother = useRef();
 
   useEffect(() => {
     const loadScript = (src) => {
@@ -55,6 +49,40 @@ export default function HomeMain() {
       .then(() => {
         // Once ScrollSmoother.min.js is loaded, load smoother-script.js
         return loadScript("/assets/js/smoother-script.js");
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+
+    // // Cleanup function
+    // return () => {
+    //   document.body.removeChild(script);
+    // };
+  }, []);
+  useEffect(() => {
+    const loadScript = (src) => {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = src;
+        script.async = true;
+
+        script.onload = () => {
+          resolve(true);
+        };
+
+        script.onerror = () => {
+          reject(new Error(`Failed to load ${src}`));
+        };
+
+        document.body.appendChild(script);
+      });
+    };
+
+    // Load ScrollSmoother.min.js first
+    loadScript("/assets/js/isotope.pkgd.min.js")
+      .then(() => {
+        // Once ScrollSmoother.min.js is loaded, load smoother-script.js
+        initIsotope();
       })
       .catch((error) => {
         console.error(error.message);
@@ -115,15 +143,9 @@ export default function HomeMain() {
           <div id="smooth-content">
             <main className="main-bg o-hidden">
               <Header />
-              <Intro />
-              <Marq />
-              <Services />
-              <Portfolio />
-              {/* <Feat /> */}
-              <Team />
-              {/* <Testimonials /> */}
-              <Clients />
-              <Marq2/>
+              {/* <Portfolio /> */}
+              <CardItems />
+              {/* <Marq2 /> */}
             </main>
             <Footer />
           </div>
@@ -132,3 +154,4 @@ export default function HomeMain() {
     </>
   );
 }
+export default CartData;

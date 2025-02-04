@@ -1,14 +1,15 @@
 "use client";
 import React, { useEffect } from "react";
-
 import loadBackgroudImages from "../../common/loadBackgroudImages";
+
 function Header() {
   useEffect(() => {
     loadBackgroudImages();
   }, []);
+
   return (
     <header
-      className=" main-header bg-img valign"
+      className="main-header bg-img valign"
       data-background="/assets/imgs/background/bg5.jpg"
       data-overlay-dark="7"
       style={{ paddingBottom: "1.8rem" }}
@@ -18,28 +19,17 @@ function Header() {
           <div className="col-lg-11">
             <div className="caption">
               <h2
-                style={{ fontSize: "5rem", marginRight: "30rem" }}
-                className="nowrap"
+                className="nowrap headerText"
+                style={{
+                  fontSize: "5rem",
+                  marginRight: "30rem",
+                }}
               >
                 <span className="main-color">Empowering</span> your
               </h2>
               <div className="d-flex align-items-end">
                 <div>
-                  <h2 style={{ fontSize: "5rem" }} className="nowrap">
-                    brand to stand out.
-                  </h2>
-                </div>
-                <div>
-                  <div className="text ml-30">
-                    {/* <p>
-                      We back the founders of new forms of network, digital
-                      organisations that harness the{' '}
-                      <span className="text-light fw-600">
-                        talents of individuals
-                      </span>{' '}
-                      for the benefit of the collective.
-                    </p> */}
-                  </div>
+                  <h2 className="nowrap">brand to stand out.</h2>
                 </div>
               </div>
             </div>

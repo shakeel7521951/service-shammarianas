@@ -1,4 +1,4 @@
-"use client";
+  "use client";
 import React, { useEffect } from "react";
 import companyLogo from "../../../src/assets/companyLogo.png";
 import { useGetUserQuery, useSignOutMutation } from "../../features/usersApi";
@@ -344,7 +344,7 @@ function Navbar() {
         {userData?.user ? (
           <div className="contact-button" onClick={() => handleLogOut()}>
             <a className="butn butn-sm butn-bg main-colorbg radius-5">
-              <span className="text">LogOut</span>
+              <span className="text">Logout</span>
             </a>
           </div>
         ) : (
@@ -353,7 +353,7 @@ function Navbar() {
               href="/log-in"
               className="butn butn-sm butn-bg main-colorbg radius-5"
             >
-              <span className="text">Let&apos;s start</span>
+              <span className="text">Sign In</span>
             </a>
           </div>
         )}

@@ -30,19 +30,20 @@ function Services() {
         </div>
       </div>
       <div className="container-fluid rest">
-        <div className="serv-boxs">
+        <div className="serv-boxs flex flex-wrap mx-auto">
           {data.map((item, i) => (
             <div
               key={i}
               onClick={handleActiveSer}
-              className={`item ${i === 0 && 'active'}`}
+              className={`item ${i === 0 && 'active'} mx-auto mt-30`}
+              style={{width:"350px"}}
             >
               <div className="icon-img-60">
                 <img src={item.img} alt="" />
               </div>
               <div>
-                <div className="text mb-30">
-                  <p>{item.desc} </p>
+                <div className="text-white">
+                  <p className='text-white' style={{color:"white"}}>{item.desc}</p>
                 </div>
                 <div className="d-flex align-items-center">
                   <h6 className="sub-title">{item.title}</h6>

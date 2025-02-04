@@ -1,6 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import companyLogo from "../../../src/assets/companyLogo.png";
+// import { Link } from "react-router-dom";
+// import companyLogo from "../../../src/assets/companyLogo.png";
+import logo from "../../../src/assets/logo.png";
 
 function Footer() {
   return (
@@ -8,17 +9,17 @@ function Footer() {
       <div className="container pb-40 pt-40 ontop">
         <div className="row justify-content-between">
           <div className="col-lg-2">
-            <div className="logo icon-img-100 md-mb80">
-              <img src={companyLogo} alt="" />
+            <div className="logo md-mb80" style={{width:"60px"}}>
+              <img src={logo} alt="" />
             </div>
           </div>
           <div className="col-lg-4">
             <div className="column md-mb50">
               <h6 className="sub-title mb-30">Contact</h6>
               <h6 className="mt-30 mb-15">
-                <Link href="#0" className="main-color">
-                  info@shammarianas.com
-                </Link>
+                <a href="#0" className="main-color">
+                  hreffo@shammarianas.com
+                </a>
               </h6>
             </div>
           </div>
@@ -27,83 +28,83 @@ function Footer() {
               <h6 className="sub-title mb-30">Useful Links</h6>
               <ul className="rest fz-14 opacity-7">
                 <li className="mb-15">
-                  <Link to="/">Home</Link>
+                  <a href="/">Home</a>
                 </li>
                 <li className="mb-15">
-                  <Link to="/page-about">About</Link>
+                  <a href="/page-about">About</a>
                 </li>
                 <li className="mb-15">
-                  <Link to="/page-services">Services</Link>
+                  <a href="/page-services">Services</a>
                 </li>
                 <li className="mb-15">
-                  <Link to="/portfolio">Portfolio</Link>
+                  <a href="/portfolio">Portfolio</a>
                 </li>
                 <li className="mb-15">
-                  <Link to="/stock">Stock</Link>
+                  <a href="/stock">Stock</a>
                 </li>
                 <li className="mb-15">
-                  <Link to="/blog-grid-sidebar">Blogs</Link>
+                  <a href="/blog-grid-sidebar">Blogs</a>
                 </li>
                 <li>
-                  <Link to="/page-contact">Contact</Link>
+                  <a href="/page-contact">Contact</a>
                 </li>
               </ul>
             </div>
           </div>
           <div className="col-lg-3">
-            <div className="column subscribe-minimal">
+            <div className="column subscribe-minimal justify-content-between">
               <h6 className="sub-title mb-30">Newsletter</h6>
               <div className="form-group mb-40">
-                <input type="text" name="subscrib" placeholder="Your Email" />
-                <button>
+                <input type="text" name="subscrib" style={{paddingRight:'30px'}} placeholder="Your Email" />
+                <button style={{marginLeft:'auto',width:'fit-content'}}>
                   <span className="ti-location-arrow"></span>
                 </button>
               </div>
               <ul className="rest social-icon d-flex align-items-center">
                 <li className="hover-this cursor-pointer">
-                  <Link
-                    to="https://www.facebook.com/shammarianas"
+                  <a
+                    href="https://www.facebook.com/shammarianas"
                     target="_blank"
                     className="hover-anim"
                   >
                     <i className="fab fa-facebook-f"></i>
-                  </Link>
+                  </a>
                 </li>
                 <li className="hover-this cursor-pointer ml-10">
-                  <Link
-                    to="https://www.youtube.com/@ShamMarianasSM"
+                  <a
+                    href="https://www.youtube.com/@ShamMarianasSM"
                     target="_blank"
                     className="hover-anim"
                   >
                     <i class="fab fa-youtube"></i>
-                  </Link>
+                  </a>
                 </li>
                 <li className="hover-this cursor-pointer ml-10">
-                  <Link
-                    to="https://www.behance.net/shammarianas"
+                  <a
+                    href="https://www.behance.net/shammarianas"
                     target="_blank"
                     className="hover-anim"
                   >
                     <i class="fab fa-behance"></i>
-                  </Link>
+                  </a>
                 </li>
                 <li className="hover-this cursor-pointer ml-10">
-                  <Link
-                    to="https://www.instagram.com/sham_marianas"
+                  <a
+                    href="https://www.instagram.com/sham_marianas"
                     target="_blank"
                     className="hover-anim"
                   >
                     <i className="fab fa-instagram"></i>
-                  </Link>
+                  </a>
                 </li>
                 <li className="hover-this cursor-pointer ml-10">
-                  <Link
-                    to="https://www.pinterest.com/shammarianas"
+                  <a
+                    href="https://www.pinterest.com/shammarianas"
                     target="_blank"
                     className="hover-anim"
                   >
                     <i class="fab fa-pinterest"></i>
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </div>
