@@ -2,11 +2,14 @@ import React from 'react';
 
 function Marq() {
   const marquee = [
-    'Web Desgin',
+    'Brand itentity',
     'Web Developement',
-    'Seo eCommerce',
-    'Digital Marckting',
-    'UI/UX Desgin',
+    'Video production',
+    '3D Animtion',
+    'Social Media & Digital marketing',
+    'Print Media solution',
+    'SEO',
+    'Ecommerce solution'
   ];
   return (
     <section className="opacity-7">
@@ -58,7 +61,7 @@ function Marq() {
                 <h4 className="d-flex align-items-center">
                   <span>{item}</span>
                   <span className="icon-img-50 ml-40">
-                    <img src="/assets/imgs/star.png" alt="" />
+                    <img src="/assets/imgs/star.png" alt=""/>
                   </span>
                 </h4>
               </div>

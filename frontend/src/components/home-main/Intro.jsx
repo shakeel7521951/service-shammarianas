@@ -1,5 +1,5 @@
 import React from "react";
-import companyLogo from "../../../src/assets/companyLogo.png";
+// import companyLogo from "../../../src/assets/companyLogo.png";
 import logo from "../../../src/assets/logo.png";
 
 function Intro() {
@@ -10,9 +10,9 @@ function Intro() {
           <div className="col-lg-8 md-mb80">
             <div className="row lg-marg align-items-center">
               <div className="col-md-6">
-                <div className="img1 sm-mb50">
+                <div className="img1 sm-mb50 align-items-center justify-content-center mx-auto">
                   {/* <img src="/assets/imgs/arw2.png" alt="" /> */}
-                  <img src={logo} alt="" />
+                  <img src={logo} alt=""  style={{width:'200px',marginLeft:"40px"}}/>
                 </div>
               </div>
               <div className="col-md-6">
@@ -25,7 +25,7 @@ function Intro() {
                   </h3>
                   <p>
                     We specialize in innovative{" "}
-                    <span className="text-light fw-600">graphic design</span>,
+                    <span className="text-light fw-600">Branding</span>,
                     cutting-edge{" "}
                     <span className="text-light fw-600">web development</span>,
                     and strategic digital solutions to help businesses establish
@@ -51,7 +51,7 @@ function Intro() {
                       </h6>
                     </div>
                     <div className="ml-auto">
-                      <div className="icon-img-20">
+                      <div className="icon-img-30">
                         <img src={logo} alt="" />
                       </div>
                     </div>
@@ -64,7 +64,7 @@ function Intro() {
                       <h6 className="p-color sub-title">Projects Completed</h6>
                     </div>
                     <div className="ml-auto">
-                      <div className="icon-img-20">
+                      <div className="icon-img-30">
                         <img src={logo} alt="" />
                       </div>
                     </div>

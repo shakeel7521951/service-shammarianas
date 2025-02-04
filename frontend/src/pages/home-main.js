@@ -123,7 +123,7 @@ export default function HomeMain() {
               <Team />
               {/* <Testimonials /> */}
               <Clients />
-              <Marq2 />
+              <Marq2/>
             </main>
             <Footer />
           </div>

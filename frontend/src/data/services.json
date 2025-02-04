@@ -1,6 +1,6 @@
 [
   {
-    "title": "Digital Product Design",
+    "title": "Brand Identity",
     "img": "/assets/imgs/serv-icons/3.png",
     "desc": "Craft innovative and user-centric digital experiences that captivate audiences. From concept to execution, we shape seamless designs that drive engagement and business success.",
     "link": "/page-services-details"
@@ -12,15 +12,39 @@
     "link": "/page-services-details"
   },
   {
-    "title": "Branding Design",
+    "title": "Video Production",
     "img": "/assets/imgs/serv-icons/5.png",
-    "desc": "Establish a strong brand identity that resonates with your audience. From logos to full visual storytelling, we craft designs that leave a lasting impression.",
+    "desc": "Produce high-quality video content that effectively communicates your brand's message. From scripting to post-production, we create engaging videos that captivate your target audience.",
     "link": "/page-services-details"
   },
   {
-    "title": "UI-UX Design",
+    "title": "3D Animation",
     "img": "/assets/imgs/serv-icons/5.png",
-    "desc": "Enhance user experience with intuitive and aesthetically pleasing interfaces. We create designs that not only look stunning but also ensure seamless user interactions.",
+    "desc": "Bring your ideas to life with stunning 3D animations. We create visually compelling animations that enhance storytelling and create memorable experiences for your audience.",
+    "link": "/page-services-details"
+  },
+  {
+    "title": "Social Media & Digital Marketing",
+    "img": "/assets/imgs/serv-icons/5.png",
+    "desc": "Boost your online presence with targeted digital marketing strategies. From social media campaigns to SEO, we help your brand reach the right audience and drive conversions.",
+    "link": "/page-services-details"
+  },
+  {
+    "title": "Print Media Solution",
+    "img": "/assets/imgs/serv-icons/5.png",
+    "desc": "Create visually impactful print materials that communicate your brand message effectively. From brochures to posters, we deliver high-quality designs that leave a lasting impression.",
+    "link": "/page-services-details"
+  },
+  {
+    "title": "Search Engine Optimization",
+    "img": "/assets/imgs/serv-icons/5.png",
+    "desc": "Improve your website’s visibility and ranking with expert SEO strategies. We optimize your website to drive organic traffic and enhance your online presence.",
+    "link": "/page-services-details"
+  },
+  {
+    "title": "Ecommerce Solution",
+    "img": "/assets/imgs/serv-icons/5.png",
+    "desc": "Create a seamless shopping experience with custom eCommerce solutions. From user-friendly designs to secure payment gateways, we help you build a successful online store.",
     "link": "/page-services-details"
   }
 ]

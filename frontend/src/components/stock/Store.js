@@ -44,7 +44,7 @@ function Store() {
                   <h6>Figma Digital Agency</h6>
                 </div>
                 <div className="ml-auto">
-                  <a href="/project-details">
+                  <a href="#">
                     <span className="ti-arrow-top-right"></span>
                   </a>
                 </div>
@@ -62,7 +62,7 @@ function Store() {
                   <h6>Figma Digital Agency</h6>
                 </div>
                 <div className="ml-auto">
-                  <a href="/project-details">
+                  <a href="#">
                     <span className="ti-arrow-top-right"></span>
                   </a>
                 </div>
@@ -80,7 +80,7 @@ function Store() {
                   <h6>Figma Digital Agency</h6>
                 </div>
                 <div className="ml-auto">
-                  <a href="/project-details">
+                  <a href="#">
                     <span className="ti-arrow-top-right"></span>
                   </a>
                 </div>
@@ -98,7 +98,7 @@ function Store() {
                   <h6>Figma Digital Agency</h6>
                 </div>
                 <div className="ml-auto">
-                  <a href="/project-details">
+                  <a href="#">
                     <span className="ti-arrow-top-right"></span>
                   </a>
                 </div>
@@ -116,7 +116,7 @@ function Store() {
                   <h6>Figma Digital Agency</h6>
                 </div>
                 <div className="ml-auto">
-                  <a href="/project-details">
+                  <a href="#">
                     <span className="ti-arrow-top-right"></span>
                   </a>
                 </div>
@@ -134,7 +134,7 @@ function Store() {
                   <h6>Figma Digital Agency</h6>
                 </div>
                 <div className="ml-auto">
-                  <a href="/project-details">
+                  <a href="#">
                     <span className="ti-arrow-top-right"></span>
                   </a>
                 </div>
@@ -152,7 +152,7 @@ function Store() {
                   <h6>Figma Digital Agency</h6>
                 </div>
                 <div className="ml-auto">
-                  <a href="/project-details">
+                  <a href="#">
                     <span className="ti-arrow-top-right"></span>
                   </a>
                 </div>
@@ -170,7 +170,7 @@ function Store() {
                   <h6>Figma Digital Agency</h6>
                 </div>
                 <div className="ml-auto">
-                  <a href="/project-details">
+                  <a href="#">
                     <span className="ti-arrow-top-right"></span>
                   </a>
                 </div>
@@ -188,7 +188,7 @@ function Store() {
                   <h6>Figma Digital Agency</h6>
                 </div>
                 <div className="ml-auto">
-                  <a href="/project-details">
+                  <a href="#">
                     <span className="ti-arrow-top-right"></span>
                   </a>
                 </div>

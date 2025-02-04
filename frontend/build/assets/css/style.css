@@ -193,11 +193,11 @@ figure {
 }
 
 .main-color {
-  color: #26DFD0 !important;
+  color: #52B0B4 !important;
 }
 
 .main-colorbg {
-  background: #26DFD0 !important;
+  background: #52B0B4 !important;
 }
 
 .main-color2 {
@@ -7894,6 +7894,9 @@ footer.clean-footer.crev .circle-blur {
     display: none;
   }
   .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding-top: 15px;
     padding-bottom: 15px;
   }
@@ -7926,9 +7929,12 @@ footer.clean-footer.crev .circle-blur {
   }
   .navbar .navbar-toggler {
     font-size: 20px;
+    background: #000;
+    margin-left: 40px;
     border-radius: 0;
     padding: 0;
-    margin-right: 30px;
+    width:fit-content;
+    margin-right: 20px !important;
   }
   .navbar .navbar-toggler:focus {
     -webkit-box-shadow: none;

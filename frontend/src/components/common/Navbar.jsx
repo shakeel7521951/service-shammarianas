@@ -1,4 +1,4 @@
-"use client";
+  "use client";
 import React, { useEffect } from "react";
 import companyLogo from "../../../src/assets/companyLogo.png";
 
@@ -332,7 +332,7 @@ function Navbar() {
             href="/log-in"
             className="butn butn-sm butn-bg main-colorbg radius-5"
           >
-            <span className="text">Let&apos;s start</span>
+            <span className="text" style={{backgroundColor:"#52B0B4"}}>Sign In</span>
           </a>
         </div>
       </div>

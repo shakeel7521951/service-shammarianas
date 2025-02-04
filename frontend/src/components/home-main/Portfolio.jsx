@@ -25,8 +25,8 @@ function Portfolio() {
   };
 
   return (
-    <section className="work-fade section-padding sub-bg bord-top-grd bord-bottom-grd">
-      <div className="container position-re">
+    <section className="work-fade section-padding sub-bg bord-top-grd bord-bottom-grd mb-80">
+      <div className="container position-re ">
         <div className="sec-head mb-80">
           <div className="d-flex align-items-center">
             <div>
@@ -48,7 +48,7 @@ function Portfolio() {
             </div>
           </div>
         </div>
-        <div className="row">
+        <div className="row mb-80">
           <div className="container">
             <div className="gallery row md-marg">
               {/* Video Editing */}
@@ -65,7 +65,7 @@ function Portfolio() {
                       <p>Engaging & Professional Edits</p>
                     </div>
                     <div style={{ marginLeft: "20px" }}>
-                      <a href="/project-details">
+                      <a href="/stock">
                         <i className="ti-arrow-top-right"></i>{" "}
                         {/* Ensure correct icon library */}
                       </a>
@@ -91,7 +91,7 @@ function Portfolio() {
                       <p>Creative & Impactful Designs</p>
                     </div>
                     <div style={{ marginLeft: "20px" }}>
-                      <a href="/project-details">
+                      <a href="/stock">
                         <i className="ti-arrow-top-right"></i>
                       </a>
                     </div>
@@ -111,7 +111,7 @@ function Portfolio() {
                       <p>Modern & User-Friendly</p>
                     </div>
                     <div style={{ marginLeft: "20px" }}>
-                      <a href="/project-details">
+                      <a href="/stock">
                         <i className="ti-arrow-top-right"></i>
                       </a>
                     </div>

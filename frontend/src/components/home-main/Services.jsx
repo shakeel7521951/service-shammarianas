@@ -30,10 +30,10 @@ function Services() {
     },
   };
   return (
-    <section className="services section-padding">
+    <section className="services mt-80">
       <div className="container">
         <div className="sec-head">
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center pb-30">
             <div>
               <span className="sub-title main-color mb-5">Our Specialize</span>
               <h3 className="fw-600 fz-50 text-u d-rotate wow">
