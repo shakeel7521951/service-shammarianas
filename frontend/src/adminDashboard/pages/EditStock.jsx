@@ -1,40 +1,76 @@
 import React, { useState, useEffect } from "react";
+import { useUpdateStockMutation } from "../../features/stocksApi";
 import "./EditStock.css"; // Custom CSS file
 
-const EditStock = ({ stock, onSave, onCancel }) => {
+const EditStock = ({ stock, onCancel }) => {
   const [editedStock, setEditedStock] = useState({
     title: "",
     description: "",
-    image: "",
+    image: null,
+    price: "",
   });
 
-  // Update state when stock is available
+  const [updateStock, { isLoading }] = useUpdateStockMutation();
+
   useEffect(() => {
     if (stock) {
-      setEditedStock(stock);
+      setEditedStock({
+        title: stock.title,
+        description: stock.stockDescription,
+        image: stock.stockImageUrl,
+        price: stock.price,
+      });
     }
   }, [stock]);
 
-  // Handle input changes
   const handleChange = (e) => {
-    setEditedStock({ ...editedStock, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setEditedStock((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle form submission
-  const handleSubmit = (e) => {
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setEditedStock((prev) => ({
+      ...prev,
+      image: file || prev.image,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!editedStock.title || !editedStock.description || !editedStock.image) {
+    if (
+      !editedStock.title ||
+      !editedStock.description ||
+      !editedStock.image ||
+      !editedStock.price
+    ) {
       alert("All fields are required!");
       return;
     }
-    onSave(editedStock);
+
+    const formData = new FormData();
+    formData.append("title", editedStock.title);
+    formData.append("stockDescription", editedStock.description);
+    formData.append("price", editedStock.price);
+
+    if (editedStock.image instanceof File) {
+      formData.append("file", editedStock.image);
+    }
+
+    try {
+      await updateStock({ id: stock._id, formData }).unwrap();
+      alert("Stock updated successfully!");
+      onCancel();
+    } catch (error) {
+      alert("Failed to update stock: " + error.message);
+    }
   };
 
   return (
     <div className="edit-modal-overlay">
       <div className="edit-modal">
         <h3 className="edit-title">Edit Stock</h3>
-        <form onSubmit={handleSubmit} className="edit-form">
+        <form className="edit-form" onSubmit={handleSubmit}>
           <label>Title</label>
           <input
             type="text"
@@ -53,20 +89,51 @@ const EditStock = ({ stock, onSave, onCancel }) => {
             className="edit-stock-inputs"
             required
           />
-
-          <label>Image URL</label>
+          <label>Price</label>
           <input
             type="text"
-            name="image"
-            value={editedStock.image}
+            name="price"
+            value={editedStock.price}
             onChange={handleChange}
             className="edit-stock-inputs"
             required
           />
 
+          <label>Current Image</label>
+          {editedStock.image && !(editedStock.image instanceof File) && (
+            <div
+              style={{
+                width: "100px",
+                height: "100px",
+                border: "1px solid #ddd",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginBottom: "10px",
+                overflow: "hidden",
+                borderRadius: "5px",
+              }}
+            >
+              <img
+                src={editedStock.image}
+                alt="Current stock"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+            </div>
+          )}
+
+          <label>Upload New Image</label>
+          <input
+            type="file"
+            name="image"
+            onChange={handleFileChange}
+            className="edit-stock-inputs"
+            accept="image/*"
+          />
+
           <div className="edit-buttons">
-            <button type="submit" className="save-btn">
-              💾 Save
+            <button type="submit" className="save-btn" disabled={isLoading}>
+              {isLoading ? "Saving..." : "💾 Save"}
             </button>
             <button type="button" className="cancel-btn" onClick={onCancel}>
               ❌ Cancel

@@ -1,8 +1,11 @@
 import Stock from "../models/stockModel.js";
+import getDataUri from "../utils/dataUri.js";
+import cloudinary from "../utils/cloudinary.js";
 
 export const addStock = async (req, res) => {
   const userId = req.id;
-  const { title, stockDescription } = req.body;
+  let file = req.file;
+  const { title, stockDescription, price } = req.body;
 
   try {
     if (!req.file) {
@@ -11,11 +14,16 @@ export const addStock = async (req, res) => {
         .json({ success: false, message: "Stock image is required." });
     }
 
+    const dataUri = getDataUri(file);
+    let cloudRes = await cloudinary.uploader.upload(dataUri, {
+      folder: "shamarian_stocks",
+    });
     const newStock = await Stock.create({
       title,
-      stockImageUrl: `/uploads/${req.file.filename}`,
+      stockImageUrl: cloudRes.secure_url,
       stockDescription,
-      author: userId,
+      price,
+      // author: "admin",
     });
 
     return res.status(201).json({ success: true, stock: newStock });
@@ -29,9 +37,7 @@ export const addStock = async (req, res) => {
 
 export const getAllStocks = async (req, res) => {
   try {
-    const stocks = await Stock.find()
-      .populate("author", "fullName email")
-      .sort({ createdAt: -1 });
+    const stocks = await Stock.find().sort({ createdAt: -1 });
 
     return res.status(200).json({ success: true, stocks });
   } catch (error) {
@@ -66,7 +72,9 @@ export const getStockById = async (req, res) => {
 export const updateStock = async (req, res) => {
   const userId = req.id;
   const { id } = req.params;
-  const { title, stockDescription } = req.body;
+  const { title, stockDescription, price } = req.body;
+  let file = req.file;
+  let cloudRes;
 
   try {
     const stock = await Stock.findById(id);
@@ -77,19 +85,25 @@ export const updateStock = async (req, res) => {
         .json({ success: false, message: "Stock not found." });
     }
 
-    if (stock.author == userId) {
-      return res.status(403).json({
-        success: false,
-        message: "Unauthorized to update this stock.",
-      });
-    }
+    // if (stock.author == userId) {
+    //   return res.status(403).json({
+    //     success: false,
+    //     message: "Unauthorized to update this stock.",
+    //   });
+    // }
 
     if (title) stock.title = title;
     if (stockDescription) stock.stockDescription = stockDescription;
-    if (req.file) {
-      stock.stockImageUrl = `/uploads/${req.file.filename}`;
+    if (file) {
+      const dataUri = getDataUri(file);
+      cloudRes = await cloudinary.uploader.upload(dataUri, {
+        folder: "shamarian_stocks",
+      });
+      stock.stockImageUrl = cloudRes.secure_url;
     }
-
+    if (price) {
+      stock.price = price;
+    }
     await stock.save();
 
     return res
@@ -116,12 +130,12 @@ export const deleteStock = async (req, res) => {
         .json({ success: false, message: "Stock not found." });
     }
 
-    if (stock.author !== userId) {
-      return res.status(403).json({
-        success: false,
-        message: "Unauthorized to delete this stock.",
-      });
-    }
+    // if (stock.author !== userId) {
+    //   return res.status(403).json({
+    //     success: false,
+    //     message: "Unauthorized to delete this stock.",
+    //   });
+    // }
 
     await Stock.findByIdAndDelete(id);
 

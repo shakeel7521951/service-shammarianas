@@ -12,6 +12,7 @@
     "gsap": "^3.12.7",
     "imagesloaded": "^5.0.0",
     "isotope-layout": "^3.0.6",
+    "js-cookie": "^3.0.5",
     "matches-selector": "^1.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -4,7 +4,6 @@ import User from "../models/userModel.js";
 
 export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
-
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -37,7 +36,6 @@ export const signup = async (req, res) => {
 
 export const signin = async (req, res) => {
   const { email, password } = req.body;
-
   try {
     const user = await User.findOne({ email });
     if (!user) {
@@ -77,7 +75,34 @@ export const signin = async (req, res) => {
   }
 };
 
+export const getUser = async (req, res) => {
+  try {
+    const userId = req.id;
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "No User Logged In",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    console.error("Error fetching user:", error.message);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+};
+
 export const signout = (req, res) => {
+  const userId = req.id;
   try {
     res.clearCookie("auth_token", {
       httpOnly: true,
@@ -86,6 +111,7 @@ export const signout = (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Logout successful.",
+      userId,
     });
   } catch (error) {
     console.error("Error in signout:", error.message);

@@ -1,12 +1,12 @@
 import React from "react";
-import "./AdminHome.css"; // Import custom CSS
-import { useNavigate } from "react-router-dom"; // Import useNavigate hook
+import "./AdminBlogs.css";
+import { useNavigate } from "react-router-dom";
 import { useDelBlogMutation, useGetBlogsQuery } from "../../features/blogsApi";
 
-const AdminHome = () => {
+const AdminBlogs = () => {
   const { data, isLoading, isError } = useGetBlogsQuery();
-  const [delBlog] = useDelBlogMutation(); // ✅ Corrected
-  const navigate = useNavigate(); // Initialize the navigate function
+  const [delBlog] = useDelBlogMutation();
+  const navigate = useNavigate();
 
   const blogs = data?.blogs || [];
 
@@ -29,6 +29,12 @@ const AdminHome = () => {
   return (
     <div className="admin-container">
       <h2 className="admin-title">Manage Blogs</h2>
+      <button
+        className="add-blog-btn"
+        onClick={() => navigate("/admin/add-blog")}
+      >
+        ➕ Add New Blog
+      </button>
 
       {/* Loader */}
       {isLoading && <div className="loader"></div>}
@@ -77,4 +83,4 @@ const AdminHome = () => {
   );
 };
 
-export default AdminHome;
+export default AdminBlogs;

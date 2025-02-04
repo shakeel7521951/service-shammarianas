@@ -1,31 +1,78 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./AddStock.css";
+import { useAddStockMutation } from "../../features/stocksApi.js";
 
 const AddStock = () => {
   const [newStock, setNewStock] = useState({
     title: "",
     description: "",
-    image: "",
+    file: null,
+    price: "",
   });
+
   const navigate = useNavigate();
+  const [addStock, { isLoading }] = useAddStockMutation();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setNewStock({ ...newStock, [name]: value });
+    setNewStock((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleFileChange = (e) => {
+    setNewStock((prev) => ({
+      ...prev,
+      file: e.target.files[0],
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("New Stock Added:", newStock);
-    navigate("/admin/all-stock");
+
+    const formData = new FormData();
+    formData.append("title", newStock.title);
+    formData.append("stockDescription", newStock.description);
+    formData.append("file", newStock.file);
+    formData.append("price", newStock.price);
+
+    try {
+      await addStock(formData).unwrap();
+      console.log("New Stock Added:", newStock);
+      navigate("/admin/all-stocks");
+    } catch (error) {
+      console.error("Error adding stock:", error);
+    }
   };
 
   return (
-    <div className="add-stock-container">
-      <h2 className="add-stock-title">Add New Stock</h2>
-      <form onSubmit={handleSubmit} className="add-stock-form">
-        <div className="form-group">
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        backgroundColor: "#1e1e2f",
+        padding: "20px",
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: "#252537",
+          padding: "40px",
+          borderRadius: "12px",
+          boxShadow: "0 6px 15px rgba(0, 0, 0, 0.4)",
+          width: "400px",
+          maxWidth: "100%",
+          color: "#e0e0e0",
+        }}
+      >
+        <h2 style={{ textAlign: "center", color: "#ff9800" }}>Add New Stock</h2>
+        <form
+          onSubmit={handleSubmit}
+          style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+        >
           <input
             type="text"
             name="title"
@@ -33,34 +80,94 @@ const AddStock = () => {
             onChange={handleChange}
             placeholder="Stock Title"
             required
-            className="input-field"
+            style={{
+              padding: "12px",
+              backgroundColor: "#333",
+              border: "1px solid #444",
+              borderRadius: "6px",
+              color: "#f1f1f1",
+              width: "100%",
+            }}
           />
-        </div>
-        <div className="form-group">
           <textarea
             name="description"
             value={newStock.description}
             onChange={handleChange}
             placeholder="Stock Description"
             required
-            className="input-field"
+            style={{
+              padding: "12px",
+              backgroundColor: "#333",
+              border: "1px solid #444",
+              borderRadius: "6px",
+              color: "#f1f1f1",
+              width: "100%",
+              resize: "none",
+            }}
           />
-        </div>
-        <div className="form-group">
           <input
-            type="text"
-            name="image"
-            value={newStock.image}
-            onChange={handleChange}
-            placeholder="Image URL"
+            type="file"
+            name="file"
+            onChange={handleFileChange}
             required
-            className="input-field"
+            style={{ color: "#b3b3b3" }}
           />
-        </div>
-        <button type="submit" className="submit-btn">
-          Add Stock
-        </button>
-      </form>
+          <textarea
+            name="price"
+            value={newStock.price}
+            onChange={handleChange}
+            placeholder="Price"
+            required
+            style={{
+              padding: "12px",
+              backgroundColor: "#333",
+              border: "1px solid #444",
+              borderRadius: "6px",
+              color: "#f1f1f1",
+              width: "100%",
+              resize: "none",
+            }}
+          />
+          <div style={{ display: "flex", gap: "10px" }}>
+            <button
+              type="submit"
+              disabled={isLoading}
+              style={{
+                flex: 1,
+                padding: "12px",
+                borderRadius: "6px",
+                border: "none",
+                background: isLoading
+                  ? "#555"
+                  : "linear-gradient(135deg, #ff9800, #ff5722)",
+                color: "#fff",
+                fontSize: "16px",
+                cursor: isLoading ? "not-allowed" : "pointer",
+                transition: "all 0.3s ease",
+              }}
+            >
+              {isLoading ? "Submitting..." : "Add Stock"}
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate("/admin/all-stocks")}
+              style={{
+                flex: 1,
+                padding: "12px",
+                borderRadius: "6px",
+                border: "none",
+                background: "#ff4444",
+                color: "#fff",
+                fontSize: "16px",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+              }}
+            >
+              ❌ Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

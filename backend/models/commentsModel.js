@@ -10,11 +10,11 @@ const commentSchema = new Schema(
     },
     author: {
       type: Schema.Types.ObjectId,
-      ref: "User", // Referencing the User model
+      ref: "User",
     },
     blogId: {
       type: Schema.Types.ObjectId,
-      ref: "Blog", // Referencing the Blog model
+      ref: "Blog",
     },
   },
   { timestamps: true }

@@ -16,10 +16,14 @@ const stockSchema = new Schema(
       type: String,
       required: true,
     },
-    author: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
+    price: {
+      type: String,
+      default: "",
     },
+    // author: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "User",
+    // },
   },
   { timestamps: true }
 );

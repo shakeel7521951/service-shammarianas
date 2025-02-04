@@ -1,0 +1,25 @@
+@media (max-width: 768px) {
+  header {
+    padding: 15px 20px;
+    flex-direction: column;
+  }
+
+  nav {
+    display: none;
+    width: 100%;
+    text-align: center;
+  }
+
+  .menu-toggle {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .menu-toggle button {
+    font-size: 24px;
+    background-color: transparent;
+    color: #e0e0e0;
+    border: none;
+  }
+}

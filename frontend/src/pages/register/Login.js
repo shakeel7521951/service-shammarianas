@@ -3,11 +3,13 @@ import background from "../../../src/assets/background.jpg";
 import svg from "../../../src/assets/loginImage.jpg";
 import { useNavigate } from "react-router-dom";
 import "./LoginCss.css";
+import { useSignInMutation } from "../../features/usersApi";
 
 function Login() {
   const navigate = useNavigate();
+  const [signIn] = useSignInMutation();
   const [user, setUser] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -15,11 +17,24 @@ function Login() {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent form refresh
+    try {
+      console.log("Submitting data:", user); // ✅ Log user input
+      const response = await signIn(user).unwrap(); // ✅ Ensure correct API call
+      console.log("Login successful", response);
+
+      navigate("/");
+    } catch (err) {
+      console.error("Login failed", err?.data?.message || err.message);
+    }
+  };
+
   return (
     <div
       className="h-screen w-screen fixed top-0 left-0 flex justify-center items-center text-white"
       style={{
-        backgroundImage: `url(${background})`, // Fixed incorrect usage
+        backgroundImage: `url(${background})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -29,7 +44,9 @@ function Login() {
         <div className="grid md:grid-cols-2 items-center gap-6">
           {/* Login Form */}
           <div>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
+              {" "}
+              {/* ✅ Attach handleSubmit */}
               <div className="mb-8">
                 <h3 className="text-white text-3xl font-bold">Sign in</h3>
                 <p className="text-gray-300 text-sm mt-4 leading-relaxed">
@@ -38,17 +55,15 @@ function Login() {
                 </p>
               </div>
               <div>
-                <label className="text-white text-sm mb-2 block">
-                  User name
-                </label>
+                <label className="text-white text-sm mb-2 block">Email</label>
                 <input
-                  value={user.username}
                   onChange={handleChange}
-                  name="username"
-                  type="text"
+                  name="email"
+                  type="email" // ✅ Use correct type for validation
                   required
                   className="w-full text-sm text-white bg-transparent border border-gray-600 p-3 rounded-lg outline-none focus:border-blue-400"
-                  placeholder="Enter user name"
+                  placeholder="Enter Email"
+                  value={user.email} // ✅ Bind state
                 />
               </div>
               <div>
@@ -56,35 +71,17 @@ function Login() {
                   Password
                 </label>
                 <input
-                  value={user.password}
                   onChange={handleChange}
                   name="password"
                   type="password"
                   required
                   className="w-full text-sm text-white bg-transparent border border-gray-600 p-3 rounded-lg outline-none focus:border-blue-400"
                   placeholder="Enter password"
+                  value={user.password} // ✅ Bind state
                 />
               </div>
-              {/* <div className="flex justify-between text-sm text-white">
-                <div className="flex items-center">
-                  <input
-                    id="remember-me"
-                    type="checkbox"
-                    className="h-4 w-4 text-blue-600 border-gray-600 rounded focus:ring-blue-500"
-                  />
-                  <label htmlFor="remember-me" className="ml-2 cursor-pointer">
-                    Remember me
-                  </label>
-                </div>
-                <a href="#" className="text-blue-400 hover:underline">
-                  Forgot password?
-                </a>
-              </div> */}
               <button
-                type="button"
-                onClick={() =>
-                  console.log("Login Clicked", user.username, user.password)
-                }
+                type="submit" // ✅ Use submit instead of button
                 className="w-full py-2.5 px-4 text-sm rounded-lg bg-black text-white focus:outline-none shadow-lg hover:bg-gray-900"
               >
                 Sign in
