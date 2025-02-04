@@ -341,21 +341,10 @@ function Navbar() {
             </li>
           </ul>
         </div>
-<<<<<<< HEAD
-
-        <div className="contact-button">
-          <a
-            href="/log-in"
-            className="butn butn-sm butn-bg main-colorbg radius-5"
-          >
-            <span className="text" style={{backgroundColor:"#52B0B4"}}>Sign In</span>
-          </a>
-        </div>
-=======
         {userData?.user ? (
           <div className="contact-button" onClick={() => handleLogOut()}>
             <a className="butn butn-sm butn-bg main-colorbg radius-5">
-              <span className="text">LogOut</span>
+              <span className="text">Logout</span>
             </a>
           </div>
         ) : (
@@ -364,11 +353,10 @@ function Navbar() {
               href="/log-in"
               className="butn butn-sm butn-bg main-colorbg radius-5"
             >
-              <span className="text">Let&apos;s start</span>
+              <span className="text">Sign In</span>
             </a>
           </div>
         )}
->>>>>>> 3a1c3cfd5f6d1e8935711cdc01aa91ebce4d458d
       </div>
     </nav>
   );
