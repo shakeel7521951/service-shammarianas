@@ -8,6 +8,7 @@ const EditStock = ({ stock, onCancel }) => {
     description: "",
     image: null,
     price: "",
+    category: "",
   });
 
   const [updateStock, { isLoading }] = useUpdateStockMutation();
@@ -19,9 +20,20 @@ const EditStock = ({ stock, onCancel }) => {
         description: stock.stockDescription,
         image: stock.stockImageUrl,
         price: stock.price,
+        category: stock.category || "", // Set category if available
       });
     }
   }, [stock]);
+
+  const categories = [
+    "Electronics",
+    "Fashion",
+    "Home & Kitchen",
+    "Sports",
+    "Books",
+    "Health & Beauty",
+    "Other",
+  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,7 +54,8 @@ const EditStock = ({ stock, onCancel }) => {
       !editedStock.title ||
       !editedStock.description ||
       !editedStock.image ||
-      !editedStock.price
+      !editedStock.price ||
+      !editedStock.category
     ) {
       alert("All fields are required!");
       return;
@@ -52,6 +65,7 @@ const EditStock = ({ stock, onCancel }) => {
     formData.append("title", editedStock.title);
     formData.append("stockDescription", editedStock.description);
     formData.append("price", editedStock.price);
+    formData.append("category", editedStock.category);
 
     if (editedStock.image instanceof File) {
       formData.append("file", editedStock.image);
@@ -89,9 +103,26 @@ const EditStock = ({ stock, onCancel }) => {
             className="edit-stock-inputs"
             required
           />
+
+          <label>Category</label>
+          <select
+            name="category"
+            value={editedStock.category}
+            onChange={handleChange}
+            className="edit-stock-inputs"
+            required
+          >
+            <option value="">Select Category</option>
+            {categories.map((cat, index) => (
+              <option key={index} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+
           <label>Price</label>
           <input
-            type="text"
+            type="number"
             name="price"
             value={editedStock.price}
             onChange={handleChange}
@@ -99,26 +130,23 @@ const EditStock = ({ stock, onCancel }) => {
             required
           />
 
-          <label>Current Image</label>
+          <label>Current File</label>
           {editedStock.image && !(editedStock.image instanceof File) && (
-            <div
-              style={{
-                width: "100px",
-                height: "100px",
-                border: "1px solid #ddd",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                marginBottom: "10px",
-                overflow: "hidden",
-                borderRadius: "5px",
-              }}
-            >
-              <img
-                src={editedStock.image}
-                alt="Current stock"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
+            <div className="preview-container">
+              {/\.(mp4|webm|ogg)$/i.test(editedStock.image) ? (
+                <video
+                  src={editedStock.image}
+                  muted
+                  loop
+                  className="preview-media"
+                />
+              ) : (
+                <img
+                  src={editedStock.image}
+                  alt="Current stock"
+                  className="preview-media"
+                />
+              )}
             </div>
           )}
 

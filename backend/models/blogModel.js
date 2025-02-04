@@ -30,9 +30,9 @@ const blogSchema = new Schema(
       ], // Example categories
       default: "Other",
     },
-    createdBy: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
+    author: {
+      type: String,
+      required: true,
     },
     comments: [
       {

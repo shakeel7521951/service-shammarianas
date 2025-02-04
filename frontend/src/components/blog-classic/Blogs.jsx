@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 function Blogs() {
   return (
@@ -20,7 +20,7 @@ function Blogs() {
                   </div>
                   <h3 className="mb-15">
                     <a href="/blog-details">
-                      12 Tips to Leading an{' '}
+                      12 Tips to Leading an
                       <span className="fw-200">Extraordinary</span>
                       Company
                     </a>
@@ -52,7 +52,7 @@ function Blogs() {
                   </div>
                   <h3 className="mb-15">
                     <a href="/blog-details">
-                      Digital Marketing for{' '}
+                      Digital Marketing for{" "}
                       <span className="fw-200">Online Business.</span>
                     </a>
                   </h3>
@@ -83,7 +83,7 @@ function Blogs() {
                   </div>
                   <h3 className="mb-15">
                     <a href="/blog-details">
-                      12 Tips to Leading an{' '}
+                      12 Tips to Leading an{" "}
                       <span className="fw-200">Extraordinary</span>
                       Company
                     </a>
@@ -104,7 +104,7 @@ function Blogs() {
               </div>
             </div>
           </div>
-          <div className="col-lg-4">
+          {/* <div className="col-lg-4">
             <div className="sidebar">
               <div className="widget">
                 <h6 className="title-widget">Search Here</h6>
@@ -234,7 +234,7 @@ function Blogs() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

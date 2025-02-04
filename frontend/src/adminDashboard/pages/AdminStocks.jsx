@@ -57,35 +57,58 @@ const AdminStocks = () => {
       >
         ➕ Add New Stock
       </button>
-
       <div className="stock-grid">
         {stocks.length > 0 ? (
-          stocks.map((stock) => (
-            <div key={stock.id} className="stock-card">
-              <img
-                src={stock.stockImageUrl}
-                alt={stock.title}
-                className="stock-image"
-              />
-              <h3 className="stock-title">{stock.title}</h3>
-              <p className="stock-description">
-                {truncateDescription(stock.stockDescription)}
-              </p>
-
-              <p className="stock-description">{stock.price} $</p>
-              <div className="stock-actions">
-                <button className="edit-btn" onClick={() => handleEdit(stock)}>
-                  ✏️ Edit
-                </button>
-                <button
-                  className="delete-btn"
-                  onClick={() => handleDelete(stock._id)}
-                >
-                  ❌ Delete
-                </button>
+          stocks.map((stock) => {
+            const isVideo = stock.stockImageUrl?.match(/\.(mp4|mov|avi|mkv)$/i);
+            return (
+              <div key={stock.id} className="stock-card">
+                {isVideo ? (
+                  <video
+                    muted
+                    loop
+                    autoPlay
+                    className="stock-video"
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      maxWidth: "300px",
+                      borderRadius: "8px",
+                      objectFit: "cover",
+                    }}
+                  >
+                    <source src={stock.stockImageUrl} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                ) : (
+                  <img
+                    src={stock.stockImageUrl}
+                    alt={stock.title}
+                    className="stock-image"
+                  />
+                )}
+                <h3 className="stock-title">{stock.title}</h3>
+                <p className="stock-description">
+                  {truncateDescription(stock.stockDescription)}
+                </p>
+                <p className="stock-price">{stock.price} $</p>
+                <div className="stock-actions">
+                  <button
+                    className="edit-btn"
+                    onClick={() => handleEdit(stock)}
+                  >
+                    ✏️ Edit
+                  </button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDelete(stock._id)}
+                  >
+                    ❌ Delete
+                  </button>
+                </div>
               </div>
-            </div>
-          ))
+            );
+          })
         ) : (
           <p>No stocks available.</p>
         )}

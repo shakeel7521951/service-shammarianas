@@ -55,7 +55,7 @@ export const signin = async (req, res) => {
 
     const payload = { _id: user._id };
     const secret = process.env.JWT_SECRET || "defaultSecret";
-    const token = jwt.sign(payload, secret, { expiresIn: "1h" });
+    const token = jwt.sign(payload, secret, { expiresIn: "1d" });
 
     res.cookie("auth_token", token, {
       httpOnly: true,

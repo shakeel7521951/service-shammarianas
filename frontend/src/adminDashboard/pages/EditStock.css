@@ -5,22 +5,29 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
+  z-index: 1000;
 }
 
 /* Modal Box */
 .edit-modal {
-  background: #0f0f0f;
-  width: 80%;
-  max-width: 400px;
+  background: #252537;
+  width: 90%;
+  max-width: 420px;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
   text-align: center;
-  color: white;
+  color: #e0e0e0;
+  position: relative;
+  overflow: hidden;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Title */
@@ -28,60 +35,102 @@
   font-size: 22px;
   font-weight: bold;
   margin-bottom: 15px;
-  color: #fff;
+  color: #ff9800;
 }
 
 /* Form Styling */
 .edit-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  flex-grow: 1;
+  overflow-y: auto;
+  max-height: 65vh;
+  padding-right: 5px;
 }
 
 /* Input & Textarea */
 .edit-form input,
 .edit-form textarea {
-  background-color: #0f0f0f;
-  width: 90%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 14px;
+  background-color: #181826;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  font-size: 15px;
   outline: none;
-  color: white;
+  color: #e0e0e0;
+  transition: border 0.3s;
+}
+
+.edit-form input:focus,
+.edit-form textarea:focus {
+  border-color: #ff9800;
 }
 
 /* Buttons */
 .edit-buttons {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
   margin-top: 15px;
+}
+
+.save-btn,
+.cancel-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
 }
 
 .save-btn {
   background-color: #26dfd0;
   color: white;
-  padding: 8px 15px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: 0.3s;
 }
 
 .cancel-btn {
   background-color: #e74c3c;
   color: white;
-  padding: 8px 15px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: 0.3s;
 }
 
 .save-btn:hover {
-  background-color: #27ae60;
+  background-color: #1ec6b6;
+  transform: scale(1.02);
 }
 
 .cancel-btn:hover {
   background-color: #c0392b;
+  transform: scale(1.02);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+  .edit-modal {
+    width: 95%;
+    padding: 16px;
+  }
+
+  .edit-title {
+    font-size: 20px;
+  }
+
+  .edit-form input,
+  .edit-form textarea {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .save-btn,
+  .cancel-btn {
+    font-size: 15px;
+  }
+}
+
+/* Prevents background scrolling when modal is open */
+body.modal-open {
+  overflow: hidden;
 }

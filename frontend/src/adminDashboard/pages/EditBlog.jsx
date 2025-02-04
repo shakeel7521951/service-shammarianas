@@ -4,9 +4,10 @@ import {
   useGetBlogsQuery,
   useUpdateBlogMutation,
 } from "../../features/blogsApi";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditBlog = () => {
+  const navigate = useNavigate();
   const params = useParams();
   const blogId = params.id;
   const { data, isLoading, isError } = useGetBlogsQuery();
@@ -19,6 +20,7 @@ const EditBlog = () => {
     description: "",
     file: null,
     category: "",
+    author: "",
   });
 
   useEffect(() => {
@@ -28,6 +30,7 @@ const EditBlog = () => {
         description: blogData.body || "",
         file: null,
         category: blogData.category || "",
+        author: blogData.author || "",
       });
     }
   }, [blogData]);
@@ -54,11 +57,14 @@ const EditBlog = () => {
     formData.append("title", blog.title);
     formData.append("body", blog.description);
     formData.append("category", blog.category);
+    formData.append("author", blog.author);
+
     if (blog.file) formData.append("file", blog.file);
 
     try {
       await updateBlog({ id: blogId, formData }).unwrap();
       alert("Blog updated successfully!");
+      navigate("/admin/all-blogs");
     } catch (error) {
       console.error("Failed to update blog:", error.message);
       alert("Failed to update blog. Please try again.");
@@ -156,6 +162,42 @@ const EditBlog = () => {
             />
           </div>
 
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <label
+              style={{
+                fontFamily: "Poppins, sans-serif",
+                fontSize: "16px",
+                color: "#e0e0e0", // Light text color
+                marginBottom: "5px",
+              }}
+            >
+              Author
+            </label>
+            <input
+              type="text"
+              name="author"
+              value={blog.author}
+              onChange={handleChange}
+              required
+              style={{
+                padding: "10px",
+                fontSize: "16px",
+                border: "1px solid #444",
+                borderRadius: "4px",
+                outline: "none",
+                color: "#fff",
+                backgroundColor: "#333",
+                transition: "border-color 0.3s",
+              }}
+              onFocus={(e) => (e.target.style.borderColor = "#ff9800")}
+              onBlur={(e) => (e.target.style.borderColor = "#444")}
+            />
+          </div>
           <div
             style={{
               display: "flex",

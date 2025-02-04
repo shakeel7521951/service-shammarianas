@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 function Blog() {
   return (
@@ -11,7 +11,7 @@ function Blog() {
                 <article>
                   <div className="text">
                     <p>
-                      <span className="spec-letter">Q</span> new report said
+                      <span className="spec-letter">SH</span> new report said
                       earlier this week that Apple is working on a brand new
                       laptop. Apple plans to release a 15-inch MacBook Air in
                       2023, a first for the Air series. A trusted Apple insider
@@ -224,7 +224,7 @@ function Blog() {
               </form>
             </div>
           </div>
-          <div className="col-lg-4">
+          {/* <div className="col-lg-4">
             <div className="sidebar">
               <div className="widget">
                 <h6 className="title-widget">Search Here</h6>
@@ -354,7 +354,7 @@ function Blog() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

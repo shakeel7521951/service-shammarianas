@@ -17,13 +17,14 @@ const stockSchema = new Schema(
       required: true,
     },
     price: {
-      type: String,
-      default: "",
+      type: Number,
+      default: null,
+      min: 0,
     },
-    // author: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "User",
-    // },
+    category: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

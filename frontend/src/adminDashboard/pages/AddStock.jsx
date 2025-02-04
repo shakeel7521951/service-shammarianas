@@ -8,10 +8,21 @@ const AddStock = () => {
     description: "",
     file: null,
     price: "",
+    category: "", // ✅ Added category field
   });
 
   const navigate = useNavigate();
   const [addStock, { isLoading }] = useAddStockMutation();
+
+  const categories = [
+    "Electronics",
+    "Fashion",
+    "Home & Kitchen",
+    "Sports",
+    "Books",
+    "Health & Beauty",
+    "Other",
+  ]; // ✅ Predefined categories
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,6 +47,7 @@ const AddStock = () => {
     formData.append("stockDescription", newStock.description);
     formData.append("file", newStock.file);
     formData.append("price", newStock.price);
+    formData.append("category", newStock.category);
 
     try {
       await addStock(formData).unwrap();
@@ -105,18 +117,12 @@ const AddStock = () => {
               resize: "none",
             }}
           />
-          <input
-            type="file"
-            name="file"
-            onChange={handleFileChange}
-            required
-            style={{ color: "#b3b3b3" }}
-          />
-          <textarea
-            name="price"
-            value={newStock.price}
+
+          {/* ✅ Category Dropdown */}
+          <select
+            name="category"
+            value={newStock.category}
             onChange={handleChange}
-            placeholder="Price"
             required
             style={{
               padding: "12px",
@@ -125,7 +131,36 @@ const AddStock = () => {
               borderRadius: "6px",
               color: "#f1f1f1",
               width: "100%",
-              resize: "none",
+            }}
+          >
+            <option value="">Select Category</option>
+            {categories.map((cat, index) => (
+              <option key={index} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+
+          <input
+            type="file"
+            name="file"
+            onChange={handleFileChange}
+            required
+            style={{ color: "#b3b3b3" }}
+          />
+          <input
+            type="number"
+            name="price"
+            value={newStock.price}
+            onChange={handleChange}
+            placeholder="Stock Price"
+            style={{
+              padding: "12px",
+              backgroundColor: "#333",
+              border: "1px solid #444",
+              borderRadius: "6px",
+              color: "#f1f1f1",
+              width: "100%",
             }}
           />
           <div style={{ display: "flex", gap: "10px" }}>
