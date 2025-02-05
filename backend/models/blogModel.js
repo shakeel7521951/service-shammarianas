@@ -27,7 +27,7 @@ const blogSchema = new Schema(
         "Education",
         "Business",
         "Other",
-      ], // Example categories
+      ],
       default: "Other",
     },
     author: {

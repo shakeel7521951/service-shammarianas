@@ -9,13 +9,11 @@ export const blogsApi = createApi({
   tagTypes: ["Blog"],
 
   endpoints: (builder) => ({
-    // GET Blogs
     getBlogs: builder.query({
       query: () => "/all/get",
       providesTags: ["Blog"],
     }),
 
-    // ADD Blog (Handles formData)
     addBlog: builder.mutation({
       query: (formData) => ({
         url: "/add",
@@ -26,7 +24,6 @@ export const blogsApi = createApi({
       invalidatesTags: ["Blog"],
     }),
 
-    // UPDATE Blog
     updateBlog: builder.mutation({
       query: ({ id, formData }) => ({
         url: `/update/${id}`,
@@ -37,7 +34,6 @@ export const blogsApi = createApi({
       invalidatesTags: ["Blog"],
     }),
 
-    // DELETE Blog
     delBlog: builder.mutation({
       query: (id) => ({
         url: `/delete/${id}`,

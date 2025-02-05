@@ -1,5 +1,6 @@
 "use client";
 
+import { useAddToCartMutation } from "../../features/cartApi";
 import { useGetStocksQuery } from "../../features/stocksApi";
 
 const allowedCategories = [
@@ -14,17 +15,48 @@ const allowedCategories = [
 
 function Store() {
   const { data, isLoading, error } = useGetStocksQuery();
+  const [addToCart] = useAddToCartMutation();
 
-  // Ensure we have data before accessing it
   const stockData = data?.stocks || [];
 
-  // Function to determine if URL is an image or a video
   const isVideo = (url) => {
     return url?.match(/\.(mp4|webm|ogg)$/i);
   };
 
   if (isLoading) return <p>Loading stocks...</p>;
   if (error) return <p>Error fetching stocks. Please try again.</p>;
+
+  const add = async (id) => {
+    await addToCart(id);
+    alert("Added Successfully");
+  };
+
+  const downloadMedia = async (url, title) => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = title || "download";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error("Download failed:", error);
+      alert("Failed to download. Please try again.");
+    }
+  };
+  // Function to generate URL with watermark (for paid images)
+  const getWatermarkedUrl = (originalUrl, publicId) => {
+    // Replace with your Cloudinary watermark image public ID
+    const watermarkPublicId =
+      "WhatsApp_Image_2024-10-16_at_04.04.20_d9ef112c-removebg_zuon1c.png";
+
+    return `https://res.cloudinary.com/dhqioo6t0/image/upload/w_500,h_500,c_limit,fl_relative,g_south_east,x_10,y_10,l_${watermarkPublicId}/v1/${publicId}`;
+  };
 
   return (
     <section className="work-grid section-padding pb-0">
@@ -80,23 +112,34 @@ function Store() {
                   {isVideo(item.stockImageUrl) ? (
                     <video
                       src={item.stockImageUrl}
+                      style={{ pointerEvents: "none" }}
                       controls
                       width="100%"
                       height="auto"
                     ></video>
                   ) : (
-                    <img src={item.stockImageUrl} alt={item.title} />
+                    <img
+                      src={
+                        item.price > 0
+                          ? getWatermarkedUrl(item.stockImageUrl, item.publicId) // For paid images, apply watermark
+                          : item.stockImageUrl // For free images, display as is
+                      }
+                      style={{ pointerEvents: "none" }}
+                      alt={item.title}
+                    />
                   )}
                 </div>
+
                 <div className="cont d-flex align-items-end mt-30">
                   <div>
                     <span className="p-color mb-5 sub-title">
                       {item.category}
                     </span>
                     <h6>{item.title}</h6>
+                    <h6>{"public id " + item.publicId}</h6>
                     <p>{item.stockDescription}</p>
                     <p className="text-bold">
-                      {item.price === null ? "FREE" : `$${item.price}`}
+                      {item.price === 0 ? "FREE" : `$${item.price}`}
                     </p>
                   </div>
                   <div className="ml-auto">
@@ -105,9 +148,24 @@ function Store() {
                     </a>
                   </div>
                 </div>
-                <button className="btn main-colorbg mt-2 w-100">
-                  Add to Cart
-                </button>
+
+                {item.price > 0 ? (
+                  <button
+                    className="btn main-colorbg mt-2 w-100"
+                    onClick={() => add(item._id)}
+                  >
+                    Add to Cart
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-outline-secondary mt-2 w-100"
+                    onClick={() =>
+                      downloadMedia(item.stockImageUrl, item.title)
+                    }
+                  >
+                    Download
+                  </button>
+                )}
               </div>
             </div>
           ))}

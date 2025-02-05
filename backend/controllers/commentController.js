@@ -4,11 +4,23 @@ import User from "../models/userModel.js";
 export const addComment = async (req, res) => {
   try {
     const blogId = req.params.id;
+    const blog = await Blog.findById(blogId);
+    if (!blog) {
+      return res.status(404).json({
+        success: false,
+        message: "Blog not found.",
+      });
+    }
+
     const newComment = await Comment.create({
       content: req.body.content,
       blogId,
       author: req.id,
     });
+
+    blog.comments.push(newComment._id);
+    await blog.save();
+
     return res.status(201).json({
       success: true,
       message: "Comment added successfully.",
@@ -28,39 +40,67 @@ export const deleteComment = async (req, res) => {
   const userId = req.id;
 
   try {
-    const user = await User.findOne({ _id: userId });
-
+    const user = await User.findById(userId);
     if (!user) {
-      return res
-        .status(401)
-        .json({ success: false, message: "Unauthorized. User not found." });
-    }
-
-    if (user.role !== "admin") {
-      return res.status(403).json({
+      return res.status(401).json({
         success: false,
-        message: "Access denied. Only admins can delete comments.",
+        message: "Unauthorized. User not found.",
       });
     }
 
-    const comment = await Comment.findOne({ _id: commentId });
-
+    const comment = await Comment.findById(commentId);
     if (!comment) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Comment not found." });
+      return res.status(404).json({
+        success: false,
+        message: "Comment not found.",
+      });
     }
 
-    await Comment.deleteOne({ _id: commentId });
+    if (user.role !== "admin" && comment.author.toString() !== userId) {
+      return res.status(403).json({
+        success: false,
+        message: "Access denied. You can only delete your own comment.",
+      });
+    }
 
-    return res
-      .status(200)
-      .json({ success: true, message: "Comment deleted successfully." });
+    await Blog.findByIdAndUpdate(comment.blogId, {
+      $pull: { comments: commentId },
+    });
+
+    await Comment.findByIdAndDelete(commentId);
+
+    return res.status(200).json({
+      success: true,
+      message: "Comment deleted successfully.",
+    });
   } catch (error) {
     console.error("Error in deleting comment:", error.message);
     return res.status(500).json({
       success: false,
       message: "Failed to delete comment.",
+    });
+  }
+};
+
+export const getComment = async (req, res) => {
+  try {
+    const blogId = req.params.id;
+
+    // Fetch comments for the specific blog
+    const comments = await Comment.find({ blogId })
+      .populate("author", "name email") // Get author name and email
+      .sort({ createdAt: -1 }); // Sort comments by newest first
+
+    return res.status(200).json({
+      success: true,
+      message: "Comments fetched successfully.",
+      comments,
+    });
+  } catch (error) {
+    console.error("Error fetching comments:", error.message);
+    return res.status(500).json({
+      success: false,
+      message: "Failed to fetch comments.",
     });
   }
 };

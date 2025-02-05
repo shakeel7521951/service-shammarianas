@@ -50,7 +50,7 @@ export const getBlog = async (req, res) => {
   const blogId = req.params.id;
   try {
     const user = await User.findOne({ _id: userId });
-    const blog = await Blog.findOne({ _id: blogId }).populate("createdBy");
+    const blog = await Blog.findOne({ _id: blogId });
     const comments = await Comment.find({ blogId }).populate("author");
 
     return res.status(200).json({
