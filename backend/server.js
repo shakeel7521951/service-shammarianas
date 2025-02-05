@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser";
 import stockRouter from "./routes/stockRoutes.js";
 import cors from "cors";
 import cartRouter from "./routes/cartRoutes.js";
+import paymentRouter from "./routes/paymentRoutes.js";
 
 dotenv.config();
 
@@ -32,7 +33,6 @@ app.use("/api/blog", blogRouter);
 app.use("/api/comment", commentRouter);
 app.use("/api/stock", stockRouter);
 app.use("/api/cart", cartRouter);
-
 app.listen(PORT, () => {
   dbConnect();
   console.log(`Server is listening at http://localhost:${PORT}`);

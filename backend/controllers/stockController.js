@@ -1,6 +1,7 @@
 import Stock from "../models/stockModel.js";
 import getDataUri from "../utils/dataUri.js";
 import cloudinary from "../utils/cloudinary.js";
+import Cart from "../models/cartModel.js";
 import path from "path";
 
 export const addStock = async (req, res) => {
@@ -8,6 +9,7 @@ export const addStock = async (req, res) => {
   const file = req.file;
   const { title, stockDescription, category } = req.body;
   let { price } = req.body;
+  console.log(req.body);
   try {
     const allowedCategories = [
       "Electronics",
@@ -200,7 +202,8 @@ export const deleteStock = async (req, res) => {
         .json({ success: false, message: "Stock not found." });
     }
 
-    // if (stock.author !== userId) {
+    // If you have an author field, uncomment this for authorization
+    // if (stock.author.toString() !== userId) {
     //   return res.status(403).json({
     //     success: false,
     //     message: "Unauthorized to delete this stock.",
@@ -209,9 +212,12 @@ export const deleteStock = async (req, res) => {
 
     await Stock.findByIdAndDelete(id);
 
-    return res
-      .status(200)
-      .json({ success: true, message: "Stock deleted successfully." });
+    await Cart.deleteMany({ stockId: id });
+
+    return res.status(200).json({
+      success: true,
+      message: "Stock deleted successfully and removed from carts.",
+    });
   } catch (error) {
     console.error(error.message);
     return res

@@ -9,13 +9,11 @@ export const stocksApi = createApi({
   tagTypes: ["Stock"],
 
   endpoints: (builder) => ({
-    // GET stocks
     getStocks: builder.query({
       query: () => "/all/get",
       providesTags: ["Stock"],
     }),
 
-    // ADD stock (Handles formData)
     addStock: builder.mutation({
       query: (formData) => ({
         url: "/add",
@@ -26,7 +24,6 @@ export const stocksApi = createApi({
       invalidatesTags: ["Stock"],
     }),
 
-    // UPDATE stock
     updateStock: builder.mutation({
       query: ({ id, formData }) => ({
         url: `/update/${id}`,
@@ -37,7 +34,6 @@ export const stocksApi = createApi({
       invalidatesTags: ["Stock"],
     }),
 
-    // DELETE stock
     delStock: builder.mutation({
       query: (id) => ({
         url: `/delete/${id}`,
