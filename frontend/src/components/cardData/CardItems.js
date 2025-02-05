@@ -87,7 +87,7 @@ function CardItems() {
                     <p className="description">{item.description.split(" ").slice(0, 10).join(" ")}...</p>
                     <div className="d-flex justify-content-between align-items-center mt-15">
                       <span className="price">${item.price.toFixed(2)}</span>
-                      <button className="remove-btn main-colorbg" onClick={() => removeItem(item.id)}>
+                      <button className="remove-btn main-colorbg" style={{width:"fit-content"}} onClick={() => removeItem(item.id)}>
                         Remove
                       </button>
                     </div>
