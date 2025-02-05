@@ -165,6 +165,11 @@ function Navbar() {
                       </a>
                     </li>
                   )}
+                   <li>
+                    <a onClick={()=>window.location.href='/purchased-items'}>
+                    <i className="fas fa-history"></i> History
+                    </a>
+                  </li>
                   <li>
                     <a onClick={handleLogOut}>
                       <i className="fas fa-sign-out-alt"></i> Log Out

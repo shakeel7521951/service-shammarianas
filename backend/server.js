@@ -9,7 +9,7 @@ import cookieParser from "cookie-parser";
 import stockRouter from "./routes/stockRoutes.js";
 import cors from "cors";
 import cartRouter from "./routes/cartRoutes.js";
-import paymentRouter from "./routes/paymentRoutes.js";
+// import paymentRouter from "./routes/paymentRoutes.js";
 
 dotenv.config();
 
