@@ -6,6 +6,8 @@ import {
   useGetCartQuery,
   useRemoveFromCartMutation,
 } from "../../features/cartApi";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 
 function CardItems() {
   const { data, isLoading } = useGetCartQuery();
@@ -27,6 +29,35 @@ function CardItems() {
       );
     }
   }, [data]);
+
+  const handlePayment = async () => {
+    console.log("Payment function is running...");
+    try {
+      const stripe = await loadStripe(
+        "pk_test_51Qp2sLFRNVbhydxG8zAsORIhUy8ZS7nNCl9omwJQ7PJYSHmfyvqj6mIxk1ATxvT2sl9HyiEzdA60UndoF9mAejSM00ZF8DHsip"
+      );
+
+      if (!data?.cart || data.cart.length === 0) {
+        console.error("Cart is empty or data.cart is undefined.");
+        return;
+      }
+
+      const res = await axios.post(
+        `http://localhost:2000/api/cart/create-payment`,
+        {
+          products: cartItems,
+        }
+      );
+
+      if (res.data.sessionId) {
+        await stripe.redirectToCheckout({ sessionId: res.data.sessionId });
+      } else {
+        console.error("Stripe session ID not received.");
+      }
+    } catch (error) {
+      console.error("Error processing payment:", error);
+    }
+  };
 
   const removeItem = async (id) => {
     await removeFromCart(id);
@@ -66,13 +97,13 @@ function CardItems() {
           </div>
         </div>
 
-        <div className="row md-marg">
-          {isLoading ? (
-            <div className="col-12 text-center">
-              <h4>Loading...</h4>
-            </div>
-          ) : cartItems.length > 0 ? (
-            cartItems.map((item) => (
+        {isLoading ? (
+          <div className="col-12 text-center">
+            <h4>Loading...</h4>
+          </div>
+        ) : cartItems.length > 0 ? (
+          <div className="row md-marg">
+            {cartItems.map((item) => (
               <div key={item.id} className="col-lg-4 col-md-6 items">
                 <div className="item mb-50">
                   <div className="img">
@@ -119,7 +150,6 @@ function CardItems() {
                       <span className="price">${item.price.toFixed(2)}</span>
                       <button
                         className="remove-btn main-colorbg"
-                        style={{ width: "fit-content" }}
                         onClick={() => removeItem(item.id)}
                       >
                         Remove
@@ -128,24 +158,26 @@ function CardItems() {
                   </div>
                 </div>
               </div>
-            ))
-          ) : (
-            <div className="col-12 text-center">
-              <h4>Your cart is empty!</h4>
-            </div>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="col-12 text-center">
+            <h4>Your cart is empty!</h4>
+          </div>
+        )}
 
         {cartItems.length > 0 && (
           <div className="cart-footer shadow-lg">
             <h5>
-              Total Items :{" "}
+              Total Items:{" "}
               <span className="main-color">{cartItems.length}</span>
             </h5>
             <h3 className="mt-10 mb-30">
               Total: <span className="main-color">${totalPrice}</span>
             </h3>
-            <button className="checkout-btn">Proceed to Checkout</button>
+            <button className="checkout-btn" onClick={handlePayment}>
+              Proceed to Checkout
+            </button>
           </div>
         )}
       </div>

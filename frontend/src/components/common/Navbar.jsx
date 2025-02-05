@@ -3,8 +3,8 @@ import React, { useEffect, useState, useRef } from "react";
 import companyLogo from "../../../src/assets/companyLogo.png";
 import { useGetUserQuery, useSignOutMutation } from "../../features/usersApi";
 import { useNavigate } from "react-router-dom";
-// import { FaCartPlus } from "react-icons/fa";
-// import { FaRegAddressCard } from "react-icons/fa"; // Import card icon
+import { FaCartPlus } from "react-icons/fa";
+import { FaRegAddressCard } from "react-icons/fa"; 
 
 function Navbar() {
   const navigate = useNavigate();
@@ -23,6 +23,7 @@ function Navbar() {
     try {
       await signOut();
       window.location.reload();
+      navigate('/');
     } catch (e) {
       console.log(e.message);
     }
@@ -135,7 +136,7 @@ function Navbar() {
               onClick={() => (window.location.href = "/cart-data")}
             >
               <a className="butn butn-sm d-flex justify-content-center cursor-pointer align-items-center">
-                {/* <FaCartPlus style={{ fontSize: "35px" }} /> */}
+                 <FaCartPlus style={{ fontSize: "35px" }} />
               </a>
             </div>
             <div
