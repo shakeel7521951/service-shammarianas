@@ -6,11 +6,33 @@ import {
   useGetCartQuery,
   useRemoveFromCartMutation,
 } from "../../features/cartApi";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 
 function CardItems() {
   const { data, isLoading } = useGetCartQuery();
   const [removeFromCart] = useRemoveFromCartMutation();
   const [cartItems, setCartItems] = useState([]);
+
+  const handlePayment = async () => {
+    console.log('payment function is running ......')
+    try {
+      const stripe = await loadStripe(
+        "pk_test_51Qp2sLFRNVbhydxG8zAsORIhUy8ZS7nNCl9omwJQ7PJYSHmfyvqj6mIxk1ATxvT2sl9HyiEzdA60UndoF9mAejSM00ZF8DHsip"
+      );
+
+      const res = await axios.post(`http://localhost:2000/api/cart/create-payment`, data.cart);
+      console.log(res)
+
+      if (res.data.sessionId) {
+        await stripe.redirectToCheckout({ sessionId: res.data.sessionId });
+      } else {
+        console.error("Stripe session ID not received.");
+      }
+    } catch (error) {
+      console.error("Error processing payment:", error);
+    }
+  };
 
   useEffect(() => {
     if (data?.cart) {
@@ -98,7 +120,9 @@ function CardItems() {
             <h3 className="mt-10 mb-30">
               Total: <span className="main-color">${totalPrice}</span>
             </h3>
-            <button className="checkout-btn">Proceed to Checkout</button>
+            <button className="checkout-btn" onClick={handlePayment}>
+              Proceed to Checkout
+            </button>
           </div>
         )}
       </div>

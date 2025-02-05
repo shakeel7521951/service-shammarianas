@@ -136,7 +136,7 @@ function Navbar() {
               onClick={() => (window.location.href = "/cart-data")}
             >
               <a className="butn butn-sm d-flex justify-content-center cursor-pointer align-items-center">
-                {/* <FaCartPlus style={{ fontSize: "35px" }} /> */}
+                 <FaCartPlus style={{ fontSize: "35px" }} />
               </a>
             </div>
             <div
