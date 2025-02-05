@@ -151,6 +151,7 @@ function CardItems() {
                       <span className="price">${item.price.toFixed(2)}</span>
                       <button
                         className="remove-btn main-colorbg"
+                        style={{width:"fit-content"}}
                         onClick={() => removeItem(item.id)}
                       >
                         Remove
