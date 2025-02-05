@@ -24,7 +24,7 @@ function CardItems() {
           image: item.stockId.stockImageUrl,
           description: item.stockId.stockDescription,
           price: item.stockId.price,
-          publicId: item.stockId.publicId, // Ensure this is available
+          publicId: item.stockId.publicId,
         }))
       );
     }
@@ -34,7 +34,7 @@ function CardItems() {
     console.log("Payment function is running...");
     try {
       const stripe = await loadStripe(
-        "pk_test_51Qp2sLFRNVbhydxG8zAsORIhUy8ZS7nNCl9omwJQ7PJYSHmfyvqj6mIxk1ATxvT2sl9HyiEzdA60UndoF9mAejSM00ZF8DHsip"
+        "pk_test_51Qp3MIC1NDqhDk4ultyR7SMLLRSve1QTkDfO4FBnDkcVNtYyNaXvynzWhzJ0aB2uYg1gkBnX61vSEILCPzBYz6QF00m6mGcGfY"
       );
 
       if (!data?.cart || data.cart.length === 0) {
@@ -46,7 +46,8 @@ function CardItems() {
         `http://localhost:2000/api/cart/create-payment`,
         {
           products: cartItems,
-        }
+        },
+        { withCredentials: true }
       );
 
       if (res.data.sessionId) {

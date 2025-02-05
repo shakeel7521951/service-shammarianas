@@ -46,6 +46,7 @@ import Dashboard from "./adminDashboard/pages/Dashboard.jsx";
 import Header from "./adminDashboard/components/AdminHeader.jsx";
 import Footer from "./adminDashboard/components/AdminFooter.jsx";
 import CartData from "./pages/Cart-data.js";
+import Purchases from "./pages/Purchases.jsx";
 
 const MainLayout = () => {
   return <Outlet />;
@@ -93,6 +94,7 @@ const router = createBrowserRouter([
       },
       // { path: "/portfolio-gallery", element: <PortfolioGallery /> },
       { path: "/portfolio", element: <PortfolioGrid /> },
+      { path: "/purchases", element: <Purchases /> },
       // { path: "/portfolio-masonry", element: <PortfolioMasonry /> },
       // { path: "/project-details", element: <ProjectDetails /> }
     ],
