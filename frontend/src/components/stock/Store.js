@@ -49,13 +49,15 @@ function Store() {
       alert("Failed to download. Please try again.");
     }
   };
-  // Function to generate URL with watermark (for paid images)
-  const getWatermarkedUrl = (originalUrl, publicId) => {
-    // Replace with your Cloudinary watermark image public ID
+  const getWatermarkedUrl = (originalUrl, publicId, isVideo) => {
     const watermarkPublicId =
       "WhatsApp_Image_2024-10-16_at_04.04.20_d9ef112c-removebg_zuon1c.png";
 
-    return `https://res.cloudinary.com/dhqioo6t0/image/upload/w_500,h_500,c_limit,fl_relative,g_south_east,x_10,y_10,l_${watermarkPublicId}/v1/${publicId}`;
+    if (isVideo) {
+      return `https://res.cloudinary.com/dhqioo6t0/video/upload/l_${watermarkPublicId},w_200,g_south_east,x_10,y_10/v1/${publicId}.mp4`;
+    } else {
+      return `https://res.cloudinary.com/dhqioo6t0/image/upload/w_500,h_500,c_limit,fl_relative,g_south_east,x_10,y_10,l_${watermarkPublicId}/v1/${publicId}`;
+    }
   };
 
   return (
@@ -88,7 +90,7 @@ function Store() {
                       data-filter={`.${category}`}
                       data-count={count}
                     >
-                      {category} ({count})
+                      {category}
                     </span>
                   );
                 })}
@@ -111,9 +113,19 @@ function Store() {
                   {/* Check if stockImageUrl is a video */}
                   {isVideo(item.stockImageUrl) ? (
                     <video
-                      src={item.stockImageUrl}
+                      src={
+                        item.price > 0
+                          ? getWatermarkedUrl(
+                              item.stockImageUrl,
+                              item.publicId,
+                              true
+                            )
+                          : item.stockImageUrl
+                      }
                       style={{ pointerEvents: "none" }}
-                      controls
+                      autoPlay
+                      loop
+                      muted
                       width="100%"
                       height="auto"
                     ></video>
@@ -121,8 +133,12 @@ function Store() {
                     <img
                       src={
                         item.price > 0
-                          ? getWatermarkedUrl(item.stockImageUrl, item.publicId) // For paid images, apply watermark
-                          : item.stockImageUrl // For free images, display as is
+                          ? getWatermarkedUrl(
+                              item.stockImageUrl,
+                              item.publicId,
+                              false
+                            )
+                          : item.stockImageUrl
                       }
                       style={{ pointerEvents: "none" }}
                       alt={item.title}
@@ -136,7 +152,6 @@ function Store() {
                       {item.category}
                     </span>
                     <h6>{item.title}</h6>
-                    <h6>{"public id " + item.publicId}</h6>
                     <p>{item.stockDescription}</p>
                     <p className="text-bold">
                       {item.price === 0 ? "FREE" : `$${item.price}`}
