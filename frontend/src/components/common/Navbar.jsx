@@ -4,7 +4,7 @@ import companyLogo from "../../../src/assets/companyLogo.png";
 import { useGetUserQuery, useSignOutMutation } from "../../features/usersApi";
 import { useNavigate } from "react-router-dom";
 import { FaCartPlus } from "react-icons/fa";
-import { FaRegAddressCard } from "react-icons/fa"; // Import card icon
+import { FaRegAddressCard } from "react-icons/fa"; 
 
 function Navbar() {
   const navigate = useNavigate();
@@ -23,6 +23,7 @@ function Navbar() {
     try {
       await signOut();
       window.location.reload();
+      navigate('/');
     } catch (e) {
       console.log(e.message);
     }
