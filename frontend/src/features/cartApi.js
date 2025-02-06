@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export const cartApi = createApi({
   reducerPath: "cartApi", // Fixed: Changed to "cartApi"
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:2000/api/cart",
+    baseUrl: `${BACKEND_URL}/api/cart`,
     credentials: "include",
   }),
   tagTypes: ["Cart"],

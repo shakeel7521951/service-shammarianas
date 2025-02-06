@@ -1,9 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export const stocksApi = createApi({
   reducerPath: "stocksApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:2000/api/stock",
+    baseUrl: `${BACKEND_URL}/api/stock`,
     credentials: "include",
   }),
   tagTypes: ["Stock"],

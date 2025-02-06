@@ -13,6 +13,7 @@ function CardItems() {
   const { data, isLoading } = useGetCartQuery();
   const [removeFromCart] = useRemoveFromCartMutation();
   const [cartItems, setCartItems] = useState([]);
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
   useEffect(() => {
     if (data?.cart) {
@@ -43,7 +44,7 @@ function CardItems() {
       }
 
       const res = await axios.post(
-        `http://localhost:2000/api/cart/create-payment`,
+        `${BACKEND_URL}/api/cart/create-payment`,
         {
           products: cartItems,
         }
@@ -72,7 +73,7 @@ function CardItems() {
     const watermarkPublicId =
       "WhatsApp_Image_2024-10-16_at_04.04.20_d9ef112c-removebg_zuon1c.png";
 
-    if (!publicId) return originalUrl; // If no publicId, return the original URL
+    if (!publicId) return originalUrl; 
 
     if (isVideo) {
       return `https://res.cloudinary.com/dhqioo6t0/video/upload/l_${watermarkPublicId},w_200,g_south_east,x_10,y_10/v1/${publicId}.mp4`;

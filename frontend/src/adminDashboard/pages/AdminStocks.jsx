@@ -62,7 +62,7 @@ const AdminStocks = () => {
           stocks.map((stock) => {
             const isVideo = stock.stockImageUrl?.match(/\.(mp4|mov|avi|mkv)$/i);
             return (
-              <div key={stock.id} className="stock-card">
+              <div key={stock.id} className="stock-card" style={{maxWidth:'320px'}}>
                 {isVideo ? (
                   <video
                     muted
