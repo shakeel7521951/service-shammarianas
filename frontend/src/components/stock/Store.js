@@ -2,6 +2,7 @@
 
 import { useAddToCartMutation } from "../../features/cartApi";
 import { useGetStocksQuery } from "../../features/stocksApi";
+import { ToastContainer, toast } from "react-toastify";
 
 const allowedCategories = [
   "Electronics",
@@ -28,7 +29,7 @@ function Store() {
 
   const add = async (id) => {
     await addToCart(id);
-    alert("Added Successfully");
+    toast.success("Added to the Cart");
   };
 
   const downloadMedia = async (url, title) => {

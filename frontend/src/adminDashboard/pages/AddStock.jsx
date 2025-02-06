@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAddStockMutation } from "../../features/stocksApi.js";
+import { toast } from "react-toastify";
 
 const AddStock = () => {
   const [newStock, setNewStock] = useState({
@@ -51,10 +52,11 @@ const AddStock = () => {
 
     try {
       await addStock(formData).unwrap();
-      console.log("New Stock Added:", newStock);
+      toast.success("Stock Added Successfully");
       navigate("/admin/all-stocks");
     } catch (error) {
       console.error("Error adding stock:", error);
+      toast.error("Failed to Add Stock");
     }
   };
 

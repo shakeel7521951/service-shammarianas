@@ -47,6 +47,8 @@ import Header from "./adminDashboard/components/AdminHeader.jsx";
 import Footer from "./adminDashboard/components/AdminFooter.jsx";
 import CartData from "./pages/Cart-data.js";
 import PurchasedItems from "./pages/PurchasedItems.js";
+import AdminRoute from "./pages/protected.js";
+import LoggedIn from "./pages/already.js";
 
 const MainLayout = () => {
   return <Outlet />;
@@ -95,49 +97,84 @@ const router = createBrowserRouter([
       },
       // { path: "/portfolio-gallery", element: <PortfolioGallery /> },
       { path: "/portfolio", element: <PortfolioGrid /> },
-      { path: "/purchases", element: <Purchases /> },
       // { path: "/portfolio-masonry", element: <PortfolioMasonry /> },
       // { path: "/project-details", element: <ProjectDetails /> }
     ],
   },
   {
     path: "/log-in",
-    element: <Login />,
+    element: (
+      <LoggedIn>
+        <Login />
+      </LoggedIn>
+    ),
   },
   {
     path: "/sign-up",
-    element: <Signup />,
+    element: (
+      <LoggedIn>
+        <Signup />
+      </LoggedIn>
+    ),
   },
   {
     element: <AdminLayout />,
     children: [
       {
         path: "/admin/dashboard",
-        element: <Dashboard />,
+        element: (
+          <AdminRoute>
+            <Dashboard />
+          </AdminRoute>
+        ),
       },
       {
         path: "/admin/all-blogs",
-        element: <AdminBlogs />,
+        element: (
+          <AdminRoute>
+            <AdminBlogs />
+          </AdminRoute>
+        ),
       },
       {
         path: "/admin/add-blog",
-        element: <AddBlog />,
+        element: (
+          <AdminRoute>
+            <AddBlog />
+          </AdminRoute>
+        ),
       },
       {
         path: "/admin/edit-blog/:id",
-        element: <EditBlog />,
+        element: (
+          <AdminRoute>
+            <EditBlog />
+          </AdminRoute>
+        ),
       },
       {
         path: "/admin/add-stock",
-        element: <AddStock />,
+        element: (
+          <AdminRoute>
+            <AddStock />
+          </AdminRoute>
+        ),
       },
       {
         path: "/admin/edit-stock",
-        element: <EditStock />,
+        element: (
+          <AdminRoute>
+            <EditStock />
+          </AdminRoute>
+        ),
       },
       {
         path: "/admin/all-stocks",
-        element: <AdminStocks />,
+        element: (
+          <AdminRoute>
+            <AdminStocks />
+          </AdminRoute>
+        ),
       },
     ],
   },

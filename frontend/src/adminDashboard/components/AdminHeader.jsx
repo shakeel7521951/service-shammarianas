@@ -1,4 +1,5 @@
 import React from "react";
+import { ToastContainer } from "react-toastify";
 
 const Header = () => {
   return (
@@ -27,7 +28,7 @@ const Header = () => {
       >
         Admin Pannel
       </div>
-
+      <ToastContainer />
       <nav>
         <ul
           style={{
@@ -70,7 +71,7 @@ const Header = () => {
               Dashboard
             </a>
           </li>
-          <li>
+          {/* <li>
             <a
               href="#services"
               style={{
@@ -101,7 +102,7 @@ const Header = () => {
             >
               Logout
             </a>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </header>

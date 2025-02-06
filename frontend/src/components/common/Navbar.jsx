@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import companyLogo from "../../../src/assets/companyLogo.png";
 import { useGetUserQuery, useSignOutMutation } from "../../features/usersApi";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 // import { FaCartPlus } from "react-icons/fa";
 // import { FaRegAddressCard } from "react-icons/fa";
 
@@ -65,6 +66,8 @@ function Navbar() {
 
   return (
     <nav className="navbar navbar-expand-lg bord blur">
+      <ToastContainer />
+
       <div className="container o-hidden">
         <a className="logo icon-img-100" href="/">
           <img src={companyLogo} alt="logo" />
@@ -157,17 +160,21 @@ function Navbar() {
                   {userData?.user?.role === "admin" && (
                     <li className="pb-2">
                       <a onClick={handleNavigateToDashboard}>
-                        <FaRegAddressCard
+                        {/* <FaRegAddressCard
                           className=" me-2"
                           style={{ fontSize: "30px" }}
-                        />{" "}Dashboard
+                        />{" "}Dashboard */}
                         {/* Increased icon size Dashboard */}
                       </a>
                     </li>
                   )}
-                   <li>
-                    <a onClick={()=>window.location.href='/purchased-items'}>
-                    <i className="fas fa-history"></i> History
+                  <li>
+                    <a
+                      onClick={() =>
+                        (window.location.href = "/purchased-items")
+                      }
+                    >
+                      <i className="fas fa-history"></i> History
                     </a>
                   </li>
                   <li>

@@ -1,4 +1,4 @@
-'use-client';
+"use-client";
 import Lines from "../components/common/Lines";
 import ProgressScroll from "../components/common/ProgressScroll";
 import Cursor from "../components/common/cusor";
@@ -14,11 +14,11 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 // import { ScrollSmoother } from 'gsap-trial/ScrollSmoother';
 
 import { useGSAP } from "@gsap/react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import initIsotope from "../common/initIsotope";
 import Store from "../components/purchasedItems/Store";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
-const PurchasedItems = ()=> {
+const PurchasedItems = () => {
   const main = useRef();
 
   useEffect(() => {
@@ -100,6 +100,32 @@ const PurchasedItems = ()=> {
       }).init();
     }
   }, []);
+  const [loading, setLoading] = useState(true);
+  const [status, setStatus] = useState(null);
+
+  useEffect(() => {
+    const checkPaymentStatus = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const sessionId = urlParams.get("session_id");
+
+      if (!sessionId) return;
+
+      try {
+        const response = await fetch(
+          `http://localhost:2000/api/cart/check-payment?session_id=${sessionId}`
+        );
+
+        const data = await response.json();
+        setStatus(data.status);
+      } catch (error) {
+        console.error("Error checking payment:", error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkPaymentStatus();
+  }, []);
   return (
     <>
       <Helmet>
@@ -152,6 +178,6 @@ const PurchasedItems = ()=> {
       </body>
     </>
   );
-}
+};
 
 export default PurchasedItems;

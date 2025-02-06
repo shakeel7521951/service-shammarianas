@@ -5,6 +5,7 @@ import {
   useUpdateBlogMutation,
 } from "../../features/blogsApi";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const EditBlog = () => {
   const navigate = useNavigate();
@@ -63,11 +64,11 @@ const EditBlog = () => {
 
     try {
       await updateBlog({ id: blogId, formData }).unwrap();
-      alert("Blog updated successfully!");
+      toast.success("Blog Uppdated Succesfully");
       navigate("/admin/all-blogs");
     } catch (error) {
       console.error("Failed to update blog:", error.message);
-      alert("Failed to update blog. Please try again.");
+      toast.error("Failed To Updaate the Blog");
     }
   };
 

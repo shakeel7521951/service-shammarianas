@@ -2,6 +2,7 @@ import React from "react";
 import "./AdminBlogs.css";
 import { useNavigate } from "react-router-dom";
 import { useDelBlogMutation, useGetBlogsQuery } from "../../features/blogsApi";
+import { toast } from "react-toastify";
 
 const AdminBlogs = () => {
   const { data, isLoading, isError } = useGetBlogsQuery();
@@ -11,14 +12,12 @@ const AdminBlogs = () => {
   const blogs = data?.blogs || [];
 
   const handleDel = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this blog?")) return;
-
     try {
       await delBlog(id).unwrap();
-      alert("Blog deleted successfully!");
+      toast.success("Blog deleted successfully!");
     } catch (error) {
       console.error("Failed to delete blog:", error);
-      alert("Failed to delete blog. Please try again.");
+      toast.error("Failed to delete blog. Please try again.");
     }
   };
 

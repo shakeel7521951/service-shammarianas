@@ -8,6 +8,7 @@ import {
 } from "../../features/cartApi";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function CardItems() {
   const { data, isLoading } = useGetCartQuery();
@@ -31,7 +32,6 @@ function CardItems() {
   }, [data]);
 
   const handlePayment = async () => {
-    console.log("Payment function is running...");
     try {
       const stripe = await loadStripe(
         "pk_test_51Qp3MIC1NDqhDk4ultyR7SMLLRSve1QTkDfO4FBnDkcVNtYyNaXvynzWhzJ0aB2uYg1gkBnX61vSEILCPzBYz6QF00m6mGcGfY"
@@ -62,6 +62,7 @@ function CardItems() {
 
   const removeItem = async (id) => {
     await removeFromCart(id);
+    toast.success("Removed from the cart");
     setCartItems(cartItems.filter((item) => item.id !== id));
   };
 
@@ -151,7 +152,7 @@ function CardItems() {
                       <span className="price">${item.price.toFixed(2)}</span>
                       <button
                         className="remove-btn main-colorbg"
-                        style={{width:"fit-content"}}
+                        style={{ width: "fit-content" }}
                         onClick={() => removeItem(item.id)}
                       >
                         Remove

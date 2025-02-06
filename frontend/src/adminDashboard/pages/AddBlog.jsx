@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAddBlogMutation } from "../../features/blogsApi";
 import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AddBlog = () => {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ const AddBlog = () => {
 
     try {
       await addBlog(formData).unwrap();
-      alert("Blog added successfully!");
+      toast.success("Blog Added Successfully");
       setBlog({
         title: "",
         description: "",
@@ -53,7 +54,7 @@ const AddBlog = () => {
       navigate("/admin/all-blogs");
     } catch (error) {
       console.error("Failed to add blog:", error.message);
-      alert("Failed to add blog. Please try again.");
+      toast.error("Failed To Add Blog");
     } finally {
       setLoading(false);
     }
