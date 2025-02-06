@@ -60,6 +60,8 @@ export const signin = async (req, res) => {
     res.cookie("auth_token", token, {
       httpOnly: true,
       maxAge: 3600000 * 24,
+      secure: false,
+      sameSite: "None",
     });
 
     return res.status(200).json({
