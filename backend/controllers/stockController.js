@@ -201,14 +201,6 @@ export const deleteStock = async (req, res) => {
         .json({ success: false, message: "Stock not found." });
     }
 
-    // If you have an author field, uncomment this for authorization
-    // if (stock.author.toString() !== userId) {
-    //   return res.status(403).json({
-    //     success: false,
-    //     message: "Unauthorized to delete this stock.",
-    //   });
-    // }
-
     await Stock.findByIdAndDelete(id);
 
     await Cart.deleteMany({ stockId: id });
