@@ -5,7 +5,7 @@ const AdminRoute = ({ children }) => {
   const { data: userData, isLoading } = useGetUserQuery();
   if (!isLoading) {
     console.log(userData?.user);
-    if (!userData?.user || userData?.user?.role !== "admin") {
+    if (!userData?.user || userData?.user?.email !== "admin@gmail.com") {
       return <Navigate to="/" replace />;
     }
     return children;
