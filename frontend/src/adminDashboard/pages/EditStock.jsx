@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useUpdateStockMutation } from "../../features/stocksApi";
 import "./EditStock.css"; // Custom CSS file
+import { toast } from "react-toastify";
 
 const EditStock = ({ stock, onCancel }) => {
   const [editedStock, setEditedStock] = useState({
@@ -75,10 +76,10 @@ const EditStock = ({ stock, onCancel }) => {
 
     try {
       await updateStock({ id: stock._id, formData }).unwrap();
-      alert("Stock updated successfully!");
+      toast.success("Stock Updated Succesfully");
       onCancel();
     } catch (error) {
-      alert("Failed to update stock: " + error.message);
+      toast.success("Stock failed to Update");
     }
   };
 

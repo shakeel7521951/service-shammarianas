@@ -1,5 +1,6 @@
 import Comment from "../models/commentsModel.js";
 import User from "../models/userModel.js";
+import Blog from "../models/blogModel.js";
 
 export const addComment = async (req, res) => {
   try {
@@ -14,6 +15,7 @@ export const addComment = async (req, res) => {
 
     const newComment = await Comment.create({
       content: req.body.content,
+      name: req.body.name,
       blogId,
       author: req.id,
     });
@@ -82,25 +84,22 @@ export const deleteComment = async (req, res) => {
   }
 };
 
-export const getComment = async (req, res) => {
+export const getAllComments = async (req, res) => {
   try {
-    const blogId = req.params.id;
-
-    // Fetch comments for the specific blog
-    const comments = await Comment.find({ blogId })
-      .populate("author", "name email") // Get author name and email
-      .sort({ createdAt: -1 }); // Sort comments by newest first
+    const comments = await Comment.find()
+      .populate("author")
+      .sort({ createdAt: -1 });
 
     return res.status(200).json({
       success: true,
-      message: "Comments fetched successfully.",
+      message: "All comments fetched successfully.",
       comments,
     });
   } catch (error) {
-    console.error("Error fetching comments:", error.message);
+    console.error("Error fetching all comments:", error.message);
     return res.status(500).json({
       success: false,
-      message: "Failed to fetch comments.",
+      message: "Failed to fetch all comments.",
     });
   }
 };

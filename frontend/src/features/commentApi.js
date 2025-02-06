@@ -16,9 +16,13 @@ export const commentApi = createApi({
     }),
 
     addComment: builder.mutation({
-      query: (id) => ({
+      query: ({ id, ...commentData }) => ({
         url: `/add/${id}`,
         method: "POST",
+        body: commentData,
+        headers: {
+          "Content-Type": "application/json",
+        },
       }),
       invalidatesTags: ["Comment"],
     }),

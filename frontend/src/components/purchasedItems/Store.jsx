@@ -1,19 +1,18 @@
 "use client";
 
-import { useAddToCartMutation } from "../../features/cartApi";
-import { useGetStocksQuery } from "../../features/stocksApi";
+import { useGetPurchasesQuery } from "../../features/purchasesApi";
 
 function Store() {
-  const { data, isLoading, error } = useGetStocksQuery();
-  const [addToCart] = useAddToCartMutation();
+  const { data, isLoading, error } = useGetPurchasesQuery();
+  console.log(data);
 
-  const stockData = data?.stocks || [];
+  const stockData = data || [];
 
   const isVideo = (url) => {
     return url?.match(/\.(mp4|webm|ogg)$/i);
   };
 
-  if (isLoading) return <p>Loading stocks...</p>;
+  if (isLoading) return <p>Loading purchased items...</p>;
   if (error) return <p>Error fetching stocks. Please try again.</p>;
 
   const downloadMedia = async (url, title) => {
@@ -34,16 +33,6 @@ function Store() {
       alert("Failed to download. Please try again.");
     }
   };
-  const getWatermarkedUrl = (originalUrl, publicId, isVideo) => {
-    const watermarkPublicId =
-      "WhatsApp_Image_2024-10-16_at_04.04.20_d9ef112c-removebg_zuon1c.png";
-
-    if (isVideo) {
-      return `https://res.cloudinary.com/dhqioo6t0/video/upload/l_${watermarkPublicId},w_200,g_south_east,x_10,y_10/v1/${publicId}.mp4`;
-    } else {
-      return `https://res.cloudinary.com/dhqioo6t0/image/upload/w_500,h_500,c_limit,fl_relative,g_south_east,x_10,y_10,l_${watermarkPublicId}/v1/${publicId}`;
-    }
-  };
 
   return (
     <section className="work-grid section-padding pb-0">
@@ -51,8 +40,8 @@ function Store() {
         <div className="row mb-80">
           <div className="col-lg-4">
             <div className="sec-head">
-              <h6 className="sub-title main-color mb-10">DISCOVER OUR STOCK</h6>
-              <h3>Latest Stock</h3>
+              <h6 className="sub-title main-color mb-10">History</h6>
+              <h3>Your Purchases</h3>
             </div>
           </div>
         </div>
@@ -61,69 +50,54 @@ function Store() {
       {/* Stock Items */}
       <div className="container">
         <div className="gallery row md-marg">
-          {stockData.map((item) => (
-            <div
-              key={item._id}
-              className={`col-lg-4 col-md-6 items ${item.category}`}
-            >
-              <div className="item mb-50">
-                <div className="img">
-                  {/* Check if stockImageUrl is a video */}
-                  {isVideo(item.stockImageUrl) ? (
-                    <video
-                      src={
-                        item.price > 0
-                          ? getWatermarkedUrl(
-                              item.stockImageUrl,
-                              item.publicId,
-                              true
-                            )
-                          : item.stockImageUrl
-                      }
-                      style={{ pointerEvents: "none" }}
-                      autoPlay
-                      loop
-                      muted
-                      width="100%"
-                      height="auto"
-                    ></video>
-                  ) : (
-                    <img
-                      src={
-                        item.price > 0
-                          ? getWatermarkedUrl(
-                              item.stockImageUrl,
-                              item.publicId,
-                              false
-                            )
-                          : item.stockImageUrl
-                      }
-                      style={{ pointerEvents: "none" }}
-                      alt={item.title}
-                    />
-                  )}
-                </div>
-
-                <div className="cont d-flex align-items-end mt-30">
-                  <div>
-                    <span className="p-color mb-5 sub-title">
-                      {item.category}
-                    </span>
-                    <h6>{item.title}</h6>
-                    <p>{item.stockDescription}</p>
-                    <p className="text-bold">
-                      {item.price === 0 ? "FREE" : `$${item.price}`}
-                    </p>
+          {stockData.map((item) =>
+            item.purchasedItem.map((purchased, index) => (
+              <div
+                key={`${item._id}-${index}`}
+                className={`col-lg-4 col-md-6 items ${purchased.category}`}
+              >
+                <div className="item mb-50">
+                  <div className="img">
+                    {/* Check if stockImageUrl is a video */}
+                    {isVideo(purchased.stockImageUrl) ? (
+                      <video
+                        src={purchased.stockImageUrl}
+                        style={{ pointerEvents: "none" }}
+                        autoPlay
+                        loop
+                        muted
+                        width="100%"
+                        height="auto"
+                      ></video>
+                    ) : (
+                      <img
+                        src={purchased.stockImageUrl}
+                        style={{ pointerEvents: "none" }}
+                        alt={purchased.title}
+                      />
+                    )}
                   </div>
-                  <div className="ml-auto">
-                    <a href="#">
-                      <span className="ti-arrow-top-right"></span>
-                    </a>
+
+                  <div className="cont d-flex align-items-end mt-30">
+                    <div>
+                      <span className="p-color mb-5 sub-title">
+                        {purchased.category}
+                      </span>
+                      <h6>{purchased.title}</h6>
+                    </div>
+                    <button
+                      className="btn btn-outline-secondary mt-2 w-100"
+                      onClick={() =>
+                        downloadMedia(purchased.stockImageUrl, purchased.title)
+                      }
+                    >
+                      Download
+                    </button>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </section>

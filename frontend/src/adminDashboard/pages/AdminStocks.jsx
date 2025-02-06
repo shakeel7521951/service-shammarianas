@@ -7,6 +7,7 @@ import {
   useGetStocksQuery,
   useDelStockMutation,
 } from "../../features/stocksApi";
+import { toast } from "react-toastify";
 
 const AdminStocks = () => {
   const { data, isLoading, error } = useGetStocksQuery();
@@ -27,9 +28,10 @@ const AdminStocks = () => {
     setEditStock(stock);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     setStocks((prevStocks) => prevStocks.filter((stock) => stock._id !== id));
-    delStock(id);
+    await delStock(id);
+    toast.success("Stock Removed Successfully");
   };
 
   const truncateDescription = (description) => {

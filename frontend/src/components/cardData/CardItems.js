@@ -8,6 +8,7 @@ import {
 } from "../../features/cartApi";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function CardItems() {
   const { data, isLoading } = useGetCartQuery();
@@ -25,17 +26,16 @@ function CardItems() {
           image: item.stockId.stockImageUrl,
           description: item.stockId.stockDescription,
           price: item.stockId.price,
-          publicId: item.stockId.publicId, // Ensure this is available
+          publicId: item.stockId.publicId,
         }))
       );
     }
   }, [data]);
 
   const handlePayment = async () => {
-    console.log("Payment function is running...");
     try {
       const stripe = await loadStripe(
-        "pk_test_51Qp2sLFRNVbhydxG8zAsORIhUy8ZS7nNCl9omwJQ7PJYSHmfyvqj6mIxk1ATxvT2sl9HyiEzdA60UndoF9mAejSM00ZF8DHsip"
+        "pk_test_51Qp3MIC1NDqhDk4ultyR7SMLLRSve1QTkDfO4FBnDkcVNtYyNaXvynzWhzJ0aB2uYg1gkBnX61vSEILCPzBYz6QF00m6mGcGfY"
       );
 
       if (!data?.cart || data.cart.length === 0) {
@@ -47,7 +47,8 @@ function CardItems() {
         `${BACKEND_URL}/api/cart/create-payment`,
         {
           products: cartItems,
-        }
+        },
+        { withCredentials: true }
       );
 
       if (res.data.sessionId) {
@@ -62,6 +63,7 @@ function CardItems() {
 
   const removeItem = async (id) => {
     await removeFromCart(id);
+    toast.success("Removed from the cart");
     setCartItems(cartItems.filter((item) => item.id !== id));
   };
 
@@ -70,15 +72,14 @@ function CardItems() {
     .toFixed(2);
 
   const getWatermarkedUrl = (originalUrl, publicId, isVideo) => {
-    const watermarkPublicId =
-      "WhatsApp_Image_2024-10-16_at_04.04.20_d9ef112c-removebg_zuon1c.png";
+    const watermarkPublicId = "SM_Symbol_v9fqhu.png";
 
-    if (!publicId) return originalUrl; 
+    if (!publicId) return originalUrl;
 
     if (isVideo) {
-      return `https://res.cloudinary.com/dhqioo6t0/video/upload/l_${watermarkPublicId},w_200,g_south_east,x_10,y_10/v1/${publicId}.mp4`;
+      return `https://res.cloudinary.com/ddyg4op2x/video/upload/l_${watermarkPublicId},w_200,g_south_east,x_10,y_10/v1/${publicId}.mp4`;
     } else {
-      return `https://res.cloudinary.com/dhqioo6t0/image/upload/w_500,h_500,c_limit,fl_relative,g_south_east,x_10,y_10,l_${watermarkPublicId}/v1/${publicId}`;
+      return `https://res.cloudinary.com/ddyg4op2x/image/upload/w_500,h_500,c_limit,fl_relative,g_south_east,x_10,y_10,l_${watermarkPublicId}/v1/${publicId}`;
     }
   };
 
@@ -151,7 +152,7 @@ function CardItems() {
                       <span className="price">${item.price.toFixed(2)}</span>
                       <button
                         className="remove-btn main-colorbg"
-                        style={{width:"fit-content"}}
+                        style={{ width: "fit-content" }}
                         onClick={() => removeItem(item.id)}
                       >
                         Remove

@@ -9,7 +9,6 @@ export const addStock = async (req, res) => {
   const file = req.file;
   const { title, stockDescription, category } = req.body;
   let { price } = req.body;
-  console.log(req.body);
   try {
     const allowedCategories = [
       "Electronics",
