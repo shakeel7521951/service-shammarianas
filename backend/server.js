@@ -26,9 +26,9 @@ app.use(
   })
 );
 
-app.get("/",async(req,res)=>{
-  res.send("Shamirans project is running .....")
-})
+app.get("/", async (req, res) => {
+  res.send("Shamirans project is running .....");
+});
 
 // app.use(express.static(path.resolve("./public")));
 
