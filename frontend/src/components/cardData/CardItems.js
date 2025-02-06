@@ -53,6 +53,7 @@ function CardItems() {
 
       if (res.data.sessionId) {
         await stripe.redirectToCheckout({ sessionId: res.data.sessionId });
+        toast.success("Payment Successfull",{position:'top-center'});
       } else {
         console.error("Stripe session ID not received.");
       }

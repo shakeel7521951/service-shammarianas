@@ -4,8 +4,8 @@ import companyLogo from "../../../src/assets/companyLogo.png";
 import { useGetUserQuery, useSignOutMutation } from "../../features/usersApi";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-// import { FaCartPlus } from "react-icons/fa";
-// import { FaRegAddressCard } from "react-icons/fa";
+import { FaCartPlus } from "react-icons/fa";
+import { FaRegAddressCard } from "react-icons/fa";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -139,7 +139,7 @@ function Navbar() {
               onClick={() => (window.location.href = "/cart-data")}
             >
               <a className="butn butn-sm d-flex justify-content-center cursor-pointer align-items-center">
-                {/* <FaCartPlus style={{ fontSize: "35px" }} /> */}
+                <FaCartPlus style={{ fontSize: "35px" }} />
               </a>
             </div>
             <div
@@ -160,11 +160,11 @@ function Navbar() {
                   {userData?.user?.role === "admin" && (
                     <li className="pb-2">
                       <a onClick={handleNavigateToDashboard}>
-                        {/* <FaRegAddressCard
+                        <FaRegAddressCard
                           className=" me-2"
                           style={{ fontSize: "30px" }}
-                        />{" "}Dashboard */}
-                        {/* Increased icon size Dashboard */}
+                        />{" "}Dashboard
+                         {/* Increased icon size Dashboard */}
                       </a>
                     </li>
                   )}
