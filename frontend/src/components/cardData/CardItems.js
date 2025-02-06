@@ -71,15 +71,14 @@ function CardItems() {
     .toFixed(2);
 
   const getWatermarkedUrl = (originalUrl, publicId, isVideo) => {
-    const watermarkPublicId =
-      "WhatsApp_Image_2024-10-16_at_04.04.20_d9ef112c-removebg_zuon1c.png";
+    const watermarkPublicId = "SM_Symbol_v9fqhu.png";
 
-    if (!publicId) return originalUrl; // If no publicId, return the original URL
+    if (!publicId) return originalUrl;
 
     if (isVideo) {
-      return `https://res.cloudinary.com/dhqioo6t0/video/upload/l_${watermarkPublicId},w_200,g_south_east,x_10,y_10/v1/${publicId}.mp4`;
+      return `https://res.cloudinary.com/ddyg4op2x/video/upload/l_${watermarkPublicId},w_200,g_south_east,x_10,y_10/v1/${publicId}.mp4`;
     } else {
-      return `https://res.cloudinary.com/dhqioo6t0/image/upload/w_500,h_500,c_limit,fl_relative,g_south_east,x_10,y_10,l_${watermarkPublicId}/v1/${publicId}`;
+      return `https://res.cloudinary.com/ddyg4op2x/image/upload/w_500,h_500,c_limit,fl_relative,g_south_east,x_10,y_10,l_${watermarkPublicId}/v1/${publicId}`;
     }
   };
 
