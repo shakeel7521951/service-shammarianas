@@ -4,6 +4,7 @@ import svg from "../../../src/assets/loginImage.jpg";
 import { useNavigate } from "react-router-dom";
 import "./LoginCss.css";
 import { useSignInMutation } from "../../features/usersApi";
+import { ToastContainer, toast } from "react-toastify";
 
 function Login() {
   const navigate = useNavigate();
@@ -18,15 +19,15 @@ function Login() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent form refresh
+    e.preventDefault();
     try {
-      console.log("Submitting data:", user); // ✅ Log user input
-      const response = await signIn(user).unwrap(); // ✅ Ensure correct API call
-      console.log("Login successful", response);
+      const response = await signIn(user).unwrap();
 
+      toast.success(response.message || "Login successful!");
       navigate("/");
     } catch (err) {
-      console.error("Login failed", err?.data?.message || err.message);
+      toast.error(err?.data?.message || "Login failed. Please try again.");
+      console.error("Login failed:", err?.data?.message || err.message || err);
     }
   };
 
@@ -40,6 +41,7 @@ function Login() {
         backgroundRepeat: "no-repeat",
       }}
     >
+      <ToastContainer />
       <div className="p-6 rounded-3xl shadowBG shadow-[15px_15px_30px_rgb(25,25,25),-15px_-15px_30px_rgb(60,60,60)] bg-[#212121]/40 max-w-5xl w-full">
         <div className="grid md:grid-cols-2 items-center gap-6">
           {/* Login Form */}

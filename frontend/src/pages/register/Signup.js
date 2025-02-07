@@ -4,6 +4,7 @@ import svg from "../../../src/assets/loginImage.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import "./LoginCss.css";
 import { useSignUpMutation } from "../../features/usersApi";
+import { ToastContainer, toast } from "react-toastify";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -21,11 +22,22 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let res = await signUp(user);
-      console.log(res.data);
-      navigate("/log-in");
-    } catch (e) {
-      console.log(e);
+      const res = await signUp(user);
+
+      if (res.error) {
+        if (res.error.data?.message === "User already exists") {
+          toast.error("User already exists. Please log in.");
+        } else {
+          toast.error(
+            res.error.data?.message || "An error occurred. Please try again."
+          );
+        }
+      } else if (res.data) {
+        toast.success("Signup successful! Redirecting to login...");
+        navigate("/log-in");
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Please try again.");
     }
   };
 
@@ -39,6 +51,7 @@ const Signup = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
+      <ToastContainer />
       <div className="p-6 mx-auto md:mx-4 sm:mx-1 shadowBG rounded-3xl shadow-[15px_15px_30px_rgb(25,25,25),-15px_-15px_30px_rgb(60,60,60)] bg-[#212121]/40 max-w-5xl w-full">
         <div className="grid md:grid-cols-2 items-center gap-6">
           {/* Signup Form */}
@@ -99,7 +112,7 @@ const Signup = () => {
               <button
                 type="submit"
                 onClick={() =>
-                  console.log(user.username, user.password, user.email)
+                  console.log(user.fullName, user.password, user.email)
                 }
                 className="w-full py-2.5 px-4 text-sm rounded-lg bg-blue-500 text-white focus:outline-none shadow-lg hover:bg-blue-600"
               >

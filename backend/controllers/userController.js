@@ -58,10 +58,10 @@ export const signin = async (req, res) => {
     const token = jwt.sign(payload, secret, { expiresIn: "1d" });
 
     res.cookie("auth_token", token, {
-      httpOnly: true,
       maxAge: 3600000 * 24,
+      httpOnly: true,
       secure: false,
-      sameSite: "None",
+      sameSite: "Lax",
     });
 
     return res.status(200).json({
